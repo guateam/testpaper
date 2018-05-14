@@ -3,3 +3,4 @@ composer.lock
 *.log
 thinkphp
 application.api.model
+.vscode
