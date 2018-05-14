@@ -2,5 +2,6 @@
 composer.lock
 *.log
 thinkphp
-application.api.model
+application/api/model
+application/database.php
 .vscode
