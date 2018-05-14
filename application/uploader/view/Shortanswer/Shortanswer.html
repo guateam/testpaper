@@ -62,8 +62,8 @@
                         <div class="row">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>简答题
-                                        <small>6/10</small>
+                                    <h2>{$data.name}
+                                        <small id = "now-num">1</small><small>/{$data.number}</small>
                                     </h2>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
@@ -77,9 +77,9 @@
                                             <label for="exampleInputEmail1">题干</label>
                                             <textarea class="form-control" id="name" style="height: 150px;"></textarea>
                                         </div>
-                                        <div class="form-group well">
+                                        <div class="form-group well" id = "single">
                                             <label class="col-sm-1 control-label">本题分值</label>
-                                            <input type = "number" name = "score" min = "1" value = "1">
+                                            <input class = "form-control" type = "number" name = "score" min = "1" value = "1">
                                         </div>
                                         <div class="well">
                                             <a id="new-ans" href="#switch-type" role="button" class="btn" data-toggle="modal">
@@ -153,11 +153,15 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">题干</label>
-                                                                    <textarea class="form-control" id="small-titile" style="height: 150px;"></textarea>
+                                                                    <textarea class="form-control" id="small-title" style="height: 150px;"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                         <label for="exampleInputEmail1">答案</label>
                                                                         <textarea class="form-control" id="small-answer" style="height: 150px;"></textarea>
+                                                                </div>
+                                                                <div class="form-group well">
+                                                                    <label class="col-sm-1 control-label">分值</label>
+                                                                    <input class = "form-control" type = "number" name = "small-score" min = "0"  value = "0">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -181,9 +185,12 @@
         </div>
     </div>
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src="__STATIC__/js/addshortanswer.js"></script>
+
 </body>
 
 </html>

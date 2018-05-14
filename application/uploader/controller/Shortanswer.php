@@ -5,9 +5,14 @@ use \app\api\model\User as UserModel;
 class Shortanswer extends Controller{
     public function index($belong,$belongid){
         if(isset($_COOKIE['userid'])){
-            setcookie("belong",$belong);
-            setcookie("belongid",$belongid);
-            return $this->fetch('Shortanswer');
+            $testpaper=new \app\api\controller\Testpaper();
+            $data=$testpaper->getTitle($belong,$belongid);
+            if($data){
+                setcookie("belong",$belong);
+                setcookie("belongid",$belongid);
+                $this->assign('data',$data);
+                return $this->fetch('Shortanswer');
+            }
         }
         return $this->error('请先登录');
     }

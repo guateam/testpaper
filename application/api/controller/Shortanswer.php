@@ -16,8 +16,30 @@
                 'Belong'=>$belong,
                 'BelongTitle'=>$belongid,
                 'Score'=>(int)$score,
-                'child'=>$child
+                'Children'=>$child
             ]);
-            $select->save();
+            if($shortans->save())return 1;
+            else return 0;
+            
+        }
+        public function addchild($smallData,$belong,$belongid)
+        {
+            $childid = [];
+            for($i = 0;$i<count($smallData);$i++)
+            {
+                $shortans=new \app\api\model\Shortanswer();
+                $shortans->data([
+                    'Name'=>$smallData[$i]["name"],
+                    'Answer'=>$smallData[$i]["answer"],
+                    'Belong'=>$belong,
+                    'BelongTitle'=>$belongid,
+                    'Score'=>(int)$smallData[$i]["score"],
+                    'Children'=>0
+                ]);
+                $shortans->save();
+                $newdata = \app\api\model\Shortanswer::get(['Name'=>$smallData[$i]["name"]]);
+                array_push($childid,$newdata["ID"]);
+            }
+            return $childid;
         }
     }
