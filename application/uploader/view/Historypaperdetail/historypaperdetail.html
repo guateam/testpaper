@@ -68,7 +68,7 @@
                 <!--这里是试卷详情-->
                 <div>
                     {volist name = "paper" id = "items"}
-                    <div class="page-header">
+                    <div class="jumbotron">
                         <h1 align = "center">
                             {$items.Name}
                         </h1>
@@ -78,35 +78,54 @@
                     </div>
                     {/volist}
                     {volist name = "paper[0]['HeadQuestion']" id = "onebigquestion"}
-                        <span style = "font-size: 30px">{$key+1}.</span>
-                        {switch name ="onebigquestion.name"}
+                        
+                        {switch name ="onebigquestion.ID"}
                             {case value = "1"}
-                                <span style = "font-size: 30px">选择题</span style = "font-size: 30px">
+                            <div class = "panel panel-default">
+                                <div class = "panel-heading">
+                                        <span style = "font-size: 30px">{$key+1}.</span>
+                                        <span style = "font-size: 30px">选择题</span style = "font-size: 30px">
+                                </div>
+                                <div class = "panel-body">
                                 {volist name = "select" id = "sel"}
                                     <h4>{$key+1}.{$sel.Name} ({$sel.Score}分)</h4>
-
                                     {volist name = "sel.Option" id = "ansoption"}
                                         <h5 style = "margin-left:20px">{$ansoption}</h5>
                                     {/volist}
-
                                     <h5>答案:{$sel.Answer}</h5>
-                                    <br>
+                                    <br><hr>
                                 {/volist}
+                                </div>
+                            </div>
                             {/case}
                             {case value = "2"}
-                                <span style = "font-size: 30px">填空题</span style = "font-size: 30px">
+                            <div class = "panel panel-default">
+                                <div class = 'panel-heading'>
+                                        <span style = "font-size: 30px">{$key+1}.</span>
+                                        <span style = "font-size: 30px">填空题</span style = "font-size: 30px">
+                                </div>
+                                <div class = "panel-body">
                                 {volist name = "fill" id = "fil"}
                                     <h4>{$key+1}.{$fil.Name} ({$fil.Score}分)</h4>
-                                    <br>
+                                    <br><hr>
                                 {/volist}
+                                </div>
+                            </div>
                             {/case}
                             {case value = "3"}
-                                <span style = "font-size: 30px">简答题</span style = "font-size: 30px">
-                                {volist name = "answer" id = "ans"}
-                                    <h4>{$key+1}.{$ans.Name} ({$ans.Score}分)</h4>
-                                    <h5>答案:{$ans.Answer}</h5>
-                                    <br>
-                                {/volist}
+                            <div class = "panel panel-default">
+                                <div class = "panel-heading">
+                                        <span style = "font-size: 30px">{$key+1}.</span>
+                                        <span style = "font-size: 30px">简答题</span style = "font-size: 30px">
+                                </div>
+                                <div class = "panel-body">
+                                    {volist name = "answer" id = "ans"}
+                                        <h4>{$key+1}.{$ans.Name} ({$ans.Score}分)</h4>
+                                        <h5>答案:{$ans.Answer}</h5>
+                                        <br><hr>
+                                    {/volist}
+                                </div>
+                            </div>
                             {/case}
                         {/switch}
                         <br>
