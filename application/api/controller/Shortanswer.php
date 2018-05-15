@@ -42,7 +42,54 @@
             }
             return $childid;
         }
+        public function getDatabyid($id)
+        {
+            $item=\app\api\model\Shortanswer::get(['ID'=>$id]);
+            if($item)return $item;
+            else return null;
+        }
         public function getdata($id,$belongid){
-            return [];
+            $list=\app\api\model\Shortanswer::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
+            $data=[];
+            foreach($list as $value){
+                $item = [];
+                if($value->Children !="")
+                {
+                    //保存子题目的数组信息
+                    $childDataList = [];
+                    //保存子题目的id
+                    $childid = explode(",",$value->Children);
+                    foreach($childid as $id)
+                    {
+                        //保存子题目对象
+                        $child = self::getDatabyid($id);
+                        //赋值
+                        $childData = [
+                        "name"=>$child->Name,
+                        "answer"=>$child->Answer,
+                        "score"=>$child->Score,
+                        "child"=>[]
+                        ];
+                        //添加到子题目数组信息
+                        array_push($childDataList,$childData);
+                    }
+                    $item = [
+                        "name"=>$value->Name,
+                        "answer"=>$value->Answer,
+                        "score"=>$value->Score,
+                        "child"=>$childDataList
+                    ];
+                }
+                else{
+                    $item = [
+                        "name"=>$value->Name,
+                        "answer"=>$value->Answer,
+                        "score"=>$value->Score,
+                        "child"=>[]
+                    ];
+                }
+                array_push($data,$item);
+            }
+            return $data;
         }
     }
