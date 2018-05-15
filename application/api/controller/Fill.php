@@ -25,4 +25,18 @@
             ]);
             $select->save();
         }
+        public function getdata($id,$belongid){
+            $list=\app\api\model\Fill::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
+            $data=[];
+            foreach($list as $value){
+                $item=[
+                    'name'=>\json_decode($value->Name,true),
+                    'answer'=>\json_decode($value->Answer,true),
+                    'score'=>$value->Score,
+                    'end'=>count(json_decode($value->Name,true))
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
     }

@@ -34,4 +34,19 @@ class Historypaperdetail extends Controller{
         $this->assign("answer",$answer);
         return $this->fetch("historypaperdetail");
     }
+    /**
+     * 新的历史记录登录
+     */
+    public function nindex($id){
+        if(isset($_COOKIE['userid'])){
+            $testpaper=new \app\api\controller\Testpaper();
+            $data=$testpaper->gettestpaper($id);
+            if($data){
+                $this->assign('data',$data);
+                return $this->fetch('nindex');
+            }
+            return $this->error('未知的试卷');
+        }
+        return $this->error('请先登录');
+    }
 }

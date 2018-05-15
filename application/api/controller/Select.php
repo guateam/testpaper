@@ -34,4 +34,23 @@
             ]);
             $select->save();
         }
+        public function getdata($id,$belongid){
+            $list=\app\api\model\Select::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
+            $data=[];
+            foreach($list as $value){
+                $answer=json_decode($value->Answer,true);
+                $answerlist=[];
+                foreach($answer as $v){
+                    array_push($answerlist,chr(ord('A')+$v));
+                }
+                $item=[
+                    'name'=>$value->Name,
+                    'answer'=>$answerlist,
+                    'option'=>\json_decode($value->Option,true),
+                    'score'=>$value->Score
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
     }
