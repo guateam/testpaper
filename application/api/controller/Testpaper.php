@@ -10,7 +10,7 @@
             $testpaper=new \app\api\model\Testpaper();
             $testpaper->data([
                 "Name"=>$name,
-                "Uploader"=>$uploader,
+                "Uploader"=>(int)$uploader,
                 "Class"=>$class,
                 "Subject"=>$subject,
                 'School'=>$school,
@@ -67,5 +67,20 @@
                     'number'=>$list[$belongid-1]->number
                 ];
             }
+        }
+        public function getworkingtestpaper($userid){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid]);
+            $data=[];
+            foreach ($list as $value) {
+                $item=[
+                    "id"=>$value->ID,
+                    "name"=>$value->Name,
+                    'class'=>$value->Class,
+                    'subject'=>$value->Subject,
+                    'school'=>$value->School
+                ];
+                array_push($data,$item);
+            }
+            return $data;
         }
     }
