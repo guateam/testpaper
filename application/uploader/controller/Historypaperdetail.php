@@ -11,7 +11,7 @@ class Historypaperdetail extends Controller{
     /**
      * 新的历史记录登录
      */
-    public function nindex($id){
+    public function index($id){
         if(isset($_COOKIE['userid'])){
             $testpaper=new \app\api\controller\Testpaper();
             $data=$testpaper->gettestpaper($id);
