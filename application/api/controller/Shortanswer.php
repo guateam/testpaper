@@ -20,4 +20,7 @@
             ]);
             $select->save();
         }
+        public function getdata($id,$belongid){
+            return [];
+        }
     }

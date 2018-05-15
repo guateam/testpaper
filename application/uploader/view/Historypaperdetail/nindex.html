@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>录入人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container" style="width: 95%">
+        <div class="row">
+            <div class="col-md-12 column">
+                <!--这里是标题部分-->
+                <div class="page-header">
+                    <h1>
+                        试题录入
+                        <small>试卷详情</small>
+                    </h1>
+                </div>
+                <!--这里是导航栏部分-->
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/testpaper/public/index.php/uploader/index">
+                            <strong>试题录入</strong>
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="/testpaper/public/index.php/uploader/index">主页</a>
+                            </li>
+                            <li id="paper-nav">
+                                <a href="/testpaper/public/index.php/uploader/historypaper">历史完成</a>
+                            </li>
+                            <li class="active">
+                                <a href="">试卷详情</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
+                                    <strong class="caret"></strong>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/testpaper/public/index.php/uploader/index">返回主页</a>
+                                    </li>
+                                    <li class="divider">
+                                    </li>
+                                    <li>
+                                        <a href="#">退出</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--这里是试卷详情-->
+                <div>
+                    <div class="jumbotron">
+                        <h1 align="center">
+                            {$data.name}
+                        </h1>
+                        <h4 align="center">
+                            {$data.class} {$data.subject} {$data.school}
+                        </h4>
+                    </div>
+                    {volist name = "data.children" id = "vo" key='key'} {switch name ="vo.type"} {case value = "选择题"}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="font-size: 30px">{$key+1}.</span>
+                            <span style="font-size: 30px">{$vo.name}
+                                <small>{$vo.type}</small>
+                            </span style="font-size: 30px">
+                        </div>
+                        <div class="panel-body">
+                            {volist name = "vo.children" id = "sel" key='k'}
+                            <h4>{$k+1}.{$sel.name} ({$sel.score}分)</h4>
+                            <ol type="A">
+                            {volist name = "sel.option" id = "ansoption"}
+                            <li><h5 style="margin-left:20px">{$ansoption}</h5></li>
+                            {/volist}
+                            </ol>
+                            <h5>答案:{volist name='sel.answer' id='answer'}{$answer}&nbsp;{/volist}</h5>
+                            <br>
+                            <hr> {/volist}
+                        </div>
+                    </div>
+                    {/case} {case value = "填空题"}
+                    <div class="panel panel-default">
+                        <div class='panel-heading'>
+                            <span style="font-size: 30px">{$key+1}.</span>
+                            <span style="font-size: 30px">{$vo.name}
+                                <small>{$vo.type}</small>
+                            </span style="font-size: 30px">
+                        </div>
+                        <div class="panel-body">
+                            {volist name = "vo.children" id = "fill"}
+                            <h4>{$key+1}.{volist name='fill.name' id='name' key='b'}{$name}{if condition="$b!=$fill.end-1"}&nbsp;
+                                {else /} _________
+                                {/if}{/volist} ({$fill.score}分)</h4>
+                            <br>
+                            <h5>答案:{volist name='fill.answer' id='answer'}{$answer}&nbsp;{/volist}</h5>
+                            <hr> {/volist}
+                        </div>
+                    </div>
+                    {/case} {case value = "简答题"}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="font-size: 30px">{$key+1}.</span>
+                            <span style="font-size: 30px">简答题</span style="font-size: 30px">
+                        </div>
+                        <div class="panel-body">
+                            
+                        </div>
+                    </div>
+                    {/case} {/switch}
+                    <br> {/volist}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/js/history.js"></script>
+</body>
+
+</html>
