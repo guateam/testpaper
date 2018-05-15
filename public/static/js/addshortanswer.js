@@ -60,6 +60,7 @@ $(document).ready(function () {
                 if (result == 0) swal("错误", "添加失败", "error");
                 else {
                     now_num = now_num + 1;
+                    $("#bar").css("width",(now_num/max_num)*100+"%")
                     if (now_num > max_num) {
                         swal("完成", "已完成本大题的录入", "success").then((ok) => {
                             if (ok) {
@@ -126,6 +127,7 @@ function init() {
         belongid: belongid
     }).done(function (result) {
         max_num = result["number"]
+        $("#bar").css("width","0%")
     })
 }
 function allClear(){

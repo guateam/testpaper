@@ -31,7 +31,7 @@
                 $shortans->data([
                     'Name'=>$smallData[$i]["name"],
                     'Answer'=>$smallData[$i]["answer"],
-                    'Belong'=>$belong,
+                    'Belong'=>0,
                     'BelongTitle'=>$belongid,
                     'Score'=>(int)$smallData[$i]["score"],
                     'Children'=>0
@@ -53,7 +53,7 @@
             $data=[];
             foreach($list as $value){
                 $item = [];
-                if($value->Children !="")
+                if($value->Children !=0)
                 {
                     //保存子题目的数组信息
                     $childDataList = [];
@@ -64,14 +64,17 @@
                         //保存子题目对象
                         $child = self::getDatabyid($id);
                         //赋值
-                        $childData = [
-                        "name"=>$child->Name,
-                        "answer"=>$child->Answer,
-                        "score"=>$child->Score,
-                        "child"=>[]
-                        ];
-                        //添加到子题目数组信息
-                        array_push($childDataList,$childData);
+                        if($child)
+                        {
+                            $childData = [
+                            "name"=>$child->Name,
+                            "answer"=>$child->Answer,
+                            "score"=>$child->Score,
+                            "child"=>null
+                            ];
+                            //添加到子题目数组信息
+                            array_push($childDataList,$childData);
+                        }
                     }
                     $item = [
                         "name"=>$value->Name,
@@ -85,7 +88,7 @@
                         "name"=>$value->Name,
                         "answer"=>$value->Answer,
                         "score"=>$value->Score,
-                        "child"=>[]
+                        "child"=>null
                     ];
                 }
                 array_push($data,$item);

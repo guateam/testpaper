@@ -121,7 +121,19 @@
                             <span style="font-size: 30px">简答题</span style="font-size: 30px">
                         </div>
                         <div class="panel-body">
-                            
+                            {volist name = "vo.children" id = "short"}
+                            <h4>{$key+1}.
+                                {$short.name}
+                                ({$short.score}分)</h4>
+                            <br>
+                            {volist name = "short.child" id = "childData"}
+                               <b>[{$key+1}]&nbsp;{$childData.name}({$childData.score}分)</b>
+                                <br>
+                                &nbsp;&nbsp;答案:{$childData.answer}
+                                <br>
+                            {/volist}
+                            <h5>{if condition = "$short.child == null"}答案:{$short.answer}{/if}</h5>
+                            <hr> {/volist}
                         </div>
                     </div>
                     {/case} {/switch}
