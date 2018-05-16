@@ -158,7 +158,9 @@ function init() {
                 })
             }
             else{
+                now_num++;
                 $("#bar").css("width",now_num/max_num*100+"%");
+                swal.close();
             }
         });
 
