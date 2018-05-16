@@ -214,6 +214,8 @@
                 'State'=>2
             ]);
             $testpaper->save();
+            $user=new \app\api\controller\User();
+            $user->addnum($testpaper->Uploader);
         }
         public function cancel($id,$auditorid){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
