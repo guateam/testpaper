@@ -22,6 +22,10 @@
             else return 0;
             
         }
+        public function count($belong){
+            $list=\app\api\model\Shortanswer::all(['Belong'=>$belong]);
+            return count($list);
+        }
         public function addchild($smallData,$belong,$belongid)
         {
             $childid = [];
