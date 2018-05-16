@@ -100,8 +100,7 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/city/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            正在创建
-                                            <span class="label label-success">2</span>
+                                            正在创建 {if condition="$working>0 "}<span class="label label-success">{$working}</span>{else /}{/if}
                                         </h3>
                                         <p>
                                             还没完全创建完毕的试卷
@@ -118,9 +117,7 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/city/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            暂未通过审核
-                                            <span class="label label-warning">2</span>
-                                            <span class="label label-danger">1</span>
+                                            暂未通过审核 {if condition="$waiting>0 "}<span class="label label-warning">{$waiting}</span>{else /}{/if} {if condition="$error>0 "}<span class="label label-danger">{$error}</span>{else /}{/if}
                                         </h3>
                                         <p>
                                             待审核试卷或被退回的试卷页面

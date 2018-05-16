@@ -10,11 +10,9 @@ class Workingproject extends Controller{
             $userid=$user->checkuser($_COOKIE['userid']);
             if($userid){
                 $data=$testpaper->getworkingtestpaper($userid);
-                if($data){
                     $this->assign('data',$data);
+                    $this->assign('empty','<h1 class="text-center success">没有正在录入的试卷<h1>');
                     return $this->fetch('workingproject');
-                }
-                return $this->error('未找到试卷');
             }
         }
         return $this->error('请先登录');

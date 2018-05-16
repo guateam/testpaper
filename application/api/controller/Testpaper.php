@@ -14,7 +14,8 @@
                 "Class"=>$class,
                 "Subject"=>$subject,
                 'School'=>$school,
-                'HeadQuestion'=>json_encode($headquestion)
+                'HeadQuestion'=>json_encode($headquestion),
+                'State'=>0
             ]);
             $testpaper->save();
             return $testpaper->ID;
@@ -69,7 +70,7 @@
             }
         }
         public function getworkingtestpaper($userid){
-            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid]);
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>0]);
             $data=[];
             foreach ($list as $value) {
                 $item=[
@@ -120,5 +121,25 @@
                     'children'=>$data
                 ];
             }
+        }
+        public function commit($id){
+            $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
+            $testpaper->data([
+                'Uploaddate'=>date('y-M-d H:s'),
+                'State'=>1
+            ]);
+            $testpaper->save();
+        }
+        public function getworkingtestpapernumber($userid){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>0]);
+            return count($list);
+        }
+        public function getwaitingtestpapernumber($userid){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>1]);
+            return count($list);
+        }
+        public function geterrortestpapernumber($userid){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>3]);
+            return count($list);
         }
     }

@@ -16,4 +16,9 @@ class Addtestpaper extends Controller{
         }
         return $this->error('请先登录');
     }
+    public function commit($id){
+        $testpaper=new \app\api\controller\Testpaper();
+        $testpaper->commit($id);
+        return json(['status'=>1]);
+    }
 }
