@@ -1,5 +1,5 @@
 <?php
-namespace app\uploader\controller;
+namespace app\auditor\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
 class Index extends Controller{
