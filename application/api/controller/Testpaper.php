@@ -175,7 +175,7 @@
             }
             return $data;
         }
-        public function getbackpaper($upid){
+        public function getpasspaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>2]);
             $data = [];
             foreach ($list as $value) {
@@ -191,7 +191,7 @@
             return $data;
         }
 
-        public function getpasspaper($upid){
+        public function getbackpaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>3]);
             $data = [];
             foreach ($list as $value) {

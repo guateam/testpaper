@@ -12,7 +12,7 @@
             $option=[];
             $shortans->data([
                 'Name'=>$name,
-                'Answer'=>json_encode($ans),
+                'Answer'=>$ans,
                 'Belong'=>$belong,
                 'BelongTitle'=>$belongid,
                 'Score'=>(int)$score,
