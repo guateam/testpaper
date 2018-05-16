@@ -84,6 +84,23 @@
             }
             return $data;
         }
+        public function getwaitingtestpaper($userid){
+            $list=\think\Db::query("select * from testpaper where Auditorlist like '%,".$userid.",%'");
+            $data=[];
+            foreach($list as $value){
+                if($value['State']==1){
+                    $item=[
+                        "id"=>$value['ID'],
+                        "name"=>$value['Name'],
+                        'class'=>$value['Class'],
+                        'subject'=>$value['Subject'],
+                        'school'=>$value['School']
+                    ];
+                    array_push($data,$item);
+                }
+            }
+            return $data;
+        }
         public function gettestpaper($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             if($testpaper){
@@ -125,7 +142,7 @@
         public function commit($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
-                'Uploaddate'=>date('y-M-d H:s'),
+                'Uploaddate'=>date('Y-m-d H:s'),
                 'State'=>1
             ]);
             $testpaper->save();
@@ -188,5 +205,23 @@
                 array_push($data,$item);
             }
             return $data;
+        }
+        public function confirm($id,$auditorid){
+            $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
+            $testpaper->data([
+                'Auditor'=>$auditorid,
+                'Audittime'=>date('Y-m-d H:s'),
+                'State'=>2
+            ]);
+            $testpaper->save();
+        }
+        public function cancel($id,$auditorid){
+            $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
+            $testpaper->data([
+                'Auditor'=>$auditorid,
+                'Audittime'=>date('Y-m-d H:s'),
+                'State'=>3
+            ]);
+            $testpaper->save();
         }
     }
