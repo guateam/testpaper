@@ -70,7 +70,51 @@
                         <b>待审核试卷</b>
                     </div>
                     <div class = "panel-body">
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        试卷名
+                                    </th>
+                                    <th>
+                                        科目
+                                    </th>
+                                    <th>
+                                        学院
+                                    </th>
+                                    <th>
+                                        学校
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name = "$wait" id = "it"}
+                                <tr>
+                                    <td>
+                                        {$it.name}
+                                    </td>
+                                    <td>
+                                        {$it.class}
+                                    </td>
+                                    <td>
+                                        {$it.subject}
+                                    </td>
+                                    <td>
+                                        {$it.school}
+                                    </td>
+                                    <td>
+                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_detail(this.value)">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            查看
+                                        </button>
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!--这里是被退回试卷部分-->
@@ -79,7 +123,51 @@
                         <b>被退回试卷</b>
                     </div>
                     <div class = "panel-body">
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        试卷名
+                                    </th>
+                                    <th>
+                                        科目
+                                    </th>
+                                    <th>
+                                        学院
+                                    </th>
+                                    <th>
+                                        学校
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name = "$danger" id = "it"}
+                                <tr>
+                                    <td>
+                                        {$it.name}
+                                    </td>
+                                    <td>
+                                        {$it.class}
+                                    </td>
+                                    <td>
+                                        {$it.subject}
+                                    </td>
+                                    <td>
+                                        {$it.school}
+                                    </td>
+                                    <td>
+                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_detail(this.value)">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            查看
+                                        </button>
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
