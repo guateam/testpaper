@@ -17,6 +17,10 @@ var max_num = 0;
 
 $(document).ready(function () {
     init();
+    $("#quit").on("click",function(){
+        $.cookie("userid", "", { expires: -1 ,path: '/'});
+        window.location.href = "/testpaper/public/index.php/index";
+    });
     $("input:radio[name='type']").on("click", function () {
         var value = $("input:radio[name='type']:checked").val()
         switch_button.attr("href", "#" + which_case(value));

@@ -56,7 +56,7 @@
                                     <li class="divider">
                                     </li>
                                     <li>
-                                        <a href="#">退出</a>
+                                        <a id = "quit" href="">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -106,7 +106,7 @@
                                         {$it.school}
                                     </td>
                                     <td>
-                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_detail(this.value)">
+                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_wait_detail(this.value)">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                             查看
                                         </button>
@@ -174,7 +174,9 @@
         </div>
     </div>
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/js/notpassyet.js"></script>
 </body>
 
 </html>

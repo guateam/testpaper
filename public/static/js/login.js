@@ -24,7 +24,7 @@ $(document).ready(function() {
                     })
                     if (result.type == 1) {
                         swal("成功", "登录成功!", "success").then((ok) => {
-                            window.location.href = "/testpaper/public/index.php/admin"
+                            window.location.href = "/testpaper/public/index.php/auditor"
                         })
                     } else {
                         swal("成功", "登录成功!", "success").then((ok) => {
