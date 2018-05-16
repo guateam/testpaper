@@ -8,9 +8,10 @@ class Historypaper extends Controller{
     public function index(){
         $user=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
         if($user){
+            $paper=new \app\api\controller\Testpaper();
+            $pass = $paper->getpasspaper($user->ID);
             $this->assign("user",$user);
-            $paper = Db::query("select * from testpaper where Uploader = $user->ID");
-            $this->assign("paper",$paper);
+            $this->assign("paper",$pass);
             return $this->fetch("historypaper");
         }
         return $this->error('请先登录');
