@@ -9,6 +9,10 @@ function removetitle(number) {
         }
     }
 }
+$("#quit").on("click",function(){
+    $.cookie("userid", "", { expires: -1 ,path: '/'});
+    window.location.href = "/testpaper/public/index.php/index";
+});
 
 function updateprogress() {
     $.get("/testpaper/public/index.php/uploader/select/getprogress", {
@@ -26,6 +30,7 @@ function updateprogress() {
         }
     })
 }
+
 updateprogress();
 $("#next").click(() => {
     $.post('/testpaper/public/index.php/uploader/select/add', {

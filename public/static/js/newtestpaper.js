@@ -9,6 +9,10 @@ function removetitle(number) {
         }
     }
 }
+$("#quit").on("click",function(){
+    $.cookie("userid", "", { expires: -1 ,path: '/'});
+    window.location.href = "/testpaper/public/index.php/index";
+});
 $('#add').click(function () {
     name = $("input[name='titlename']").val();
     type = $("#titletype").val();

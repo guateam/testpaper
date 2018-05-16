@@ -1,6 +1,10 @@
 $(document).ready(function(){
     page_init();
-    
+    $("#quit").on("click",function(){
+        $.cookie("userid", "", { expires: -1 ,path: '/'});
+        window.location.href = "/testpaper/public/index.php/index";
+
+    });
 })
 
 //改变导航栏元素的选中情况
