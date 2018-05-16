@@ -66,7 +66,10 @@ $(document).ready(function () {
                     now_num = now_num + 1;
                     $("#bar").css("width",(now_num/max_num)*100+"%")
                     if (now_num > max_num) {
-                        swal("完成", "已完成本大题的录入", "success").then((ok) => {
+                        swal("完成", "已完成本大题的录入", "success",{
+                            closeOnClickOutside: false,
+                            closeOnEsc: false,
+                        }).then((ok) => {
                             if (ok) {
                                 window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + belong;
                             }
@@ -96,7 +99,10 @@ $(document).ready(function () {
                     else {
                         now_num++;
                         if (now_num > max_num) {
-                            swal("完成", "已完成本大题的录入", "success").then((ok) => {
+                            swal("完成", "已完成本大题的录入", "success",{
+                                closeOnClickOutside: false,
+                                closeOnEsc: false,
+                            }).then((ok) => {
                                 if (ok) {
                                     window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + belong;
                                 }
@@ -126,12 +132,38 @@ function small_is_empty() {
 }
 
 function init() {
+    swal("等待","正在初始化页面","info",{
+        button:false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
     $.post("/testpaper/public/index.php/api/Testpaper/getTitle", {
         id: belong,
         belongid: belongid
     }).done(function (result) {
         max_num = result["number"]
-        $("#bar").css("width","0%")
+        $.post("/testpaper/public/index.php/api/shortanswer/count",{
+            belong:belong
+        }).done(function(num){
+            now_num = num;
+            if(now_num==max_num)
+            {
+                swal("完成", "已完成本大题的录入", "success",{
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                }).then((ok) => {
+                    if (ok) {
+                        window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + belong;
+                    }
+                })
+            }
+            else{
+                now_num++;
+                $("#bar").css("width",now_num/max_num*100+"%");
+                swal.close();
+            }
+        });
+
     })
 }
 function allClear(){
