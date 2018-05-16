@@ -72,4 +72,11 @@
                 }else return json(['status'=>0]);
             }else return json(['status'=>-1]);
         }
+        public function addnum($id){
+            $user=UserModel::get(['ID'=>$id]);
+            if($user){
+                $user->Num++;
+                $user->save();
+            }
+        }
     }
