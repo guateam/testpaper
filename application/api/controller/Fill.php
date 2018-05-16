@@ -33,7 +33,8 @@
                     'name'=>\json_decode($value->Name,true),
                     'answer'=>\json_decode($value->Answer,true),
                     'score'=>$value->Score,
-                    'end'=>count(json_decode($value->Name,true))
+                    'end'=>count(json_decode($value->Name,true)),
+                    'id'=>$value->ID
                 ];
                 array_push($data,$item);
             }

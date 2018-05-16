@@ -47,7 +47,8 @@
                     'name'=>$value->Name,
                     'answer'=>$answerlist,
                     'option'=>\json_decode($value->Option,true),
-                    'score'=>$value->Score
+                    'score'=>$value->Score,
+                    'id'=>$value->ID
                 ];
                 array_push($data,$item);
             }

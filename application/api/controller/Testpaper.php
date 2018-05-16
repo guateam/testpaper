@@ -135,7 +135,8 @@
                     'class'=>$testpaper->Class,
                     'subject'=>$testpaper->Subject,
                     'school'=>$testpaper->School,
-                    'children'=>$data
+                    'children'=>$data,
+                    'state'=>$testpaper->State
                 ];
             }
         }

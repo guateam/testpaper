@@ -37,10 +37,10 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li >
+                            <li>
                                 <a href="/testpaper/public/index.php/uploader/index">主页</a>
                             </li>
-                            <li  class="active">
+                            <li class="active">
                                 <a href="#">暂未通过</a>
                             </li>
                         </ul>
@@ -56,7 +56,7 @@
                                     <li class="divider">
                                     </li>
                                     <li>
-                                        <a id = "quit" href="">退出</a>
+                                        <a id="quit" href="">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -65,11 +65,11 @@
 
                 </nav>
                 <!--这里时待审核试卷部分-->
-                <div class = "panel panel-warning">
-                    <div class = "panel-heading">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
                         <b>待审核试卷</b>
                     </div>
-                    <div class = "panel-body">
+                    <div class="panel-body">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -106,10 +106,9 @@
                                         {$it.school}
                                     </td>
                                     <td>
-                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_wait_detail(this.value)">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                            查看
-                                        </button>
+                                        <a class="btn btn-default" href="/testpaper/public/index.php/uploader/overview/index/id/{$it.id}">
+                                            <span class="glyphicon glyphicon-pencil"></span> 查看
+                                        </a>
                                     </td>
                                 </tr>
                                 {/volist}
@@ -118,11 +117,11 @@
                     </div>
                 </div>
                 <!--这里是被退回试卷部分-->
-                <div class = "panel panel-danger">
-                    <div class = "panel-heading">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
                         <b>被退回试卷</b>
                     </div>
-                    <div class = "panel-body">
+                    <div class="panel-body">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -159,10 +158,9 @@
                                         {$it.school}
                                     </td>
                                     <td>
-                                        <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_detail(this.value)">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                            查看
-                                        </button>
+                                        <a class="btn btn-default" href="/testpaper/public/index.php/uploader/overview/index/id/{$it.id}">
+                                            <span class="glyphicon glyphicon-pencil"></span> 查看
+                                        </a>
                                     </td>
                                 </tr>
                                 {/volist}

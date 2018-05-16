@@ -70,7 +70,8 @@
                             "name"=>$child->Name,
                             "answer"=>$child->Answer,
                             "score"=>$child->Score,
-                            "child"=>null
+                            "child"=>null,
+                            'id'=>$value->ID
                             ];
                             //添加到子题目数组信息
                             array_push($childDataList,$childData);
@@ -80,7 +81,8 @@
                         "name"=>$value->Name,
                         "answer"=>$value->Answer,
                         "score"=>$value->Score,
-                        "child"=>$childDataList
+                        "child"=>$childDataList,
+                        'id'=>$value->ID
                     ];
                 }
                 else{
@@ -88,7 +90,8 @@
                         "name"=>$value->Name,
                         "answer"=>$value->Answer,
                         "score"=>$value->Score,
-                        "child"=>null
+                        "child"=>null,
+                        'id'=>$value->ID
                     ];
                 }
                 array_push($data,$item);
