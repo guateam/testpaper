@@ -5,15 +5,18 @@ use \app\api\model\User as UserModel;
 class Auditdetail extends Controller{
     public function index($id){
         if(isset($_COOKIE['userid'])){
-            $testpaper=new \app\api\controller\Testpaper();
-            $data=$testpaper->gettestpaper($id);
-            if($data){
-                $this->assign('id',$id);
-                $this->assign('data',$data);
-                return $this->fetch('auditdetail');
+            $user=new \app\api\controller\User();
+            if($user->checkuser($_COOKIE['userid'])){
+                $testpaper=new \app\api\controller\Testpaper();
+                $data=$testpaper->gettestpaper($id);
+                if($data){
+                    $this->assign('id',$id);
+                    $this->assign('data',$data);
+                    return $this->fetch('auditdetail');
+                }
             }
         }
-        return $this->error('请先登录');
+        return $this->error('请先登录','index/index/index');
     }
     public function confirm($id,$auditorid){
         $testpaper=new \app\api\controller\Testpaper();

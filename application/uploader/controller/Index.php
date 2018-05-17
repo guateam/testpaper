@@ -18,6 +18,6 @@ class Index extends Controller{
                 return $this->fetch();
             }
         }
-        return $this->error('请先登录');
+        return $this->error('请先登录','index/index/index');
     }
 }

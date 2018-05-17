@@ -8,12 +8,12 @@ class Notpassyet extends Controller{
         if($user)
         {
             $paper=new \app\api\controller\Testpaper();
-        $wait = $paper->getwaitingpaper($user->ID);
-        $danger = $paper->getbackpaper($user->ID);
-        $this->assign("wait",$wait);
-        $this->assign("danger",$danger);
-        return $this->fetch("notpassyet");
+            $wait = $paper->getwaitingpaper($user->ID);
+            $danger = $paper->getbackpaper($user->ID);
+            $this->assign("wait",$wait);
+            $this->assign("danger",$danger);
+            return $this->fetch("notpassyet");
         }
-        else return $this->error('请先登录');
+        else return $this->error('请先登录','index/index/index');
     }
 }
