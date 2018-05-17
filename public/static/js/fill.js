@@ -1,3 +1,7 @@
+function replace(string) {
+    return string.replace(/\n/g, "<br>")
+}
+
 function updateprogress() {
     $.get("/testpaper/public/index.php/uploader/fill/getprogress", {
         belong: $.cookie('belong'),
@@ -16,7 +20,7 @@ function updateprogress() {
 }
 updateprogress()
 $('#next').click(() => {
-    name = $("textarea[name='name']").val()
+    name = replace($("textarea[name='name']").val())
     score = $("input[name='score']").val()
     if (name != '' && score != '') {
         list = name.split('__')
@@ -46,7 +50,7 @@ $('#next').click(() => {
         })
     }
 })
-$("#quit").on("click",function(){
-    $.cookie("userid", "", { expires: -1 ,path: '/'});
+$("#quit").on("click", function() {
+    $.cookie("userid", "", { expires: -1, path: '/' });
     window.location.href = "/testpaper/public/index.php/index";
 });

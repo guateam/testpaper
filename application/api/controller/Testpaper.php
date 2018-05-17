@@ -109,16 +109,16 @@
                 $select=new \app\api\controller\Select();
                 $fill=new \app\api\controller\Fill();
                 $shortanswer=new \app\api\controller\Shortanswer();
-                foreach($list as $value){
+                foreach($list as $key=>$value){
                     switch($value['type']){
                         case '选择题':
-                            $child=$select->getdata($id,$value['ID']);
+                            $child=$select->getdata($id,$key+1);
                             break;
                         case '填空题':
-                            $child=$fill->getdata($id,$value['ID']);
+                            $child=$fill->getdata($id,$key+1);
                             break;
                         case '简答题':
-                            $child=$shortanswer->getdata($id,$value['ID']);
+                            $child=$shortanswer->getdata($id,$key+1);
                             break;
                         default:
                             $child=[];

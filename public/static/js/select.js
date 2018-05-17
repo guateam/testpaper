@@ -1,6 +1,10 @@
 var titlenum = 1;
 var titlelist = [];
 
+function replace(string) {
+    return string.replace(/\n/g, "<br>")
+}
+
 function removetitle(number) {
     for (i = 0; i < titlelist.length; i++) {
         if (titlelist[i]["ID"] == number) {
@@ -9,8 +13,8 @@ function removetitle(number) {
         }
     }
 }
-$("#quit").on("click",function(){
-    $.cookie("userid", "", { expires: -1 ,path: '/'});
+$("#quit").on("click", function() {
+    $.cookie("userid", "", { expires: -1, path: '/' });
     window.location.href = "/testpaper/public/index.php/index";
 });
 
@@ -36,7 +40,7 @@ $("#next").click(() => {
     $.post('/testpaper/public/index.php/uploader/select/add', {
         belong: $.cookie('belong'),
         belongid: $.cookie('belongid'),
-        name: $("textarea[name='name']").val(),
+        name: replace($("textarea[name='name']").val()),
         answerlist: titlelist,
         score: $("input[name='score']").val(),
     }).done((data) => {
@@ -55,7 +59,7 @@ $("#next").click(() => {
 
 $('#add').click(() => {
     if ($("textarea[name='answer']").val() != '') {
-        titlelist.push({ "ID": titlenum, "answer": $("textarea[name='answer']").val(), "type": $("#toggle").bootstrapSwitch('state') });
+        titlelist.push({ "ID": titlenum, "answer": replace($("textarea[name='answer']").val()), "type": $("#toggle").bootstrapSwitch('state') });
         if ($("#toggle").bootstrapSwitch('state')) {
             type = "是"
         } else {

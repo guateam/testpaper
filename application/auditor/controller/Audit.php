@@ -17,24 +17,4 @@ class Audit extends Controller{
         }
         return $this->error('请先登录');
     }
-    public function confirm($id,$auditorid){
-        $testpaper=new \app\api\controller\Testpaper();
-        $user=new \app\api\controller\User();
-        $userid=$user->checkuser($auditorid);
-        if($userid){
-            $testpaper->confirm($id,$userid);
-            return json(['status'=>1]);
-        }
-        return json(['status'=>0]);
-    }
-    public function cancel($id,$auditorid){
-        $testpaper=new \app\api\controller\Testpaper();
-        $user=new \app\api\controller\User();
-        $userid=$user->checkuser($auditorid);
-        if($userid){
-            $testpaper->cancel($id,$userid);
-            return json(['status'=>1]);
-        }
-        return json(['status'=>0]);
-    }
 }
