@@ -13,6 +13,7 @@
     <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
 </head>
 <!--试试看改变-->
+
 <body>
     <div class="container" style="width: 95%">
         <div class="row">
@@ -49,7 +50,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a id = "quit" href="">退出</a>
+                                        <a id="quit" href="">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -62,43 +63,38 @@
                         <div class="row">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    
+
                                 </div>
                                 <div class="panel-body">
                                     <form role="form">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">题干</label>
-                                            <textarea class="form-control" id="name" style="height: 150px;" >{$data.Name}</textarea>
+                                            <textarea class="form-control" id="name" style="height: 150px;">{$data.Name}</textarea>
                                         </div>
                                         <div class="well">
-                                           {if condition = "$data.Children == 0"}
-                                           <div class="form-group well" id = "single">
-                                                <input style = "display:none"  id = "big-id"  class = "form-control" type = "number" name = "score" min = "1" value = {$data.ID}>
+                                            {if condition = "$data.Children == 0"}
+                                            <div class="form-group well" id="single">
+                                                <input style="display:none" id="big-id" class="form-control" type="number" name="score" min="1" value='{$data.ID}'>
                                                 <label class="col-sm-1 control-label">本题分值</label>
-                                                <input id = "big-score" class = "form-control" type = "number" name = "score" min = "1" value = {$data.Score}>
+                                                <input id="big-score" class="form-control" type="number" name="score" min="1" value='{$data.Score}'>
                                             </div>
-                                           <textarea class="form-control" id="name" style="height: 150px;" id = "big-answer" >
+                                            <textarea class="form-control" id="name" style="height: 150px;" id="big-answer">
                                                {$data.Answer}
-                                           </textarea>
-                                           {else /}
-                                            {volist name = "$childrendata" id = "it"}
+                                           </textarea> {else /} {volist name = "$childrendata" id = "it"}
                                             <div class="form-group well">
-                                                    <input style = "display:none"  id = "id-{$key}"  class = "form-control" type = "number" name = "score" min = "1" value = {$it.ID}>
-                                                    <label >小题干{$key+1}</label>
-                                                    <textarea id = "small-name-{$key}" class="form-control" id="name" style="height: 150px;" >{$it.Name}</textarea>
-                                                    <label class="col-sm-1 control-label">本题分值</label>
-                                                    <input id = "small-score-{$key}"  class = "form-control" type = "number" name = "score" min = "1" value = {$it.Score}>
-                                                    <label >小题答案</label>
-                                                    <textarea id = "small-answer-{$key}" class="form-control" id="name" style="height: 150px;" >
-                                                            {$it.Answer}
-                                                    </textarea>
+                                                <input style="display:none" id="id-{$key}" class="form-control" type="number" name="score" min="1" value='{$it.ID}'>
+                                                <label>小题干{$key+1}</label>
+                                                <textarea id="small-name-{$key}" class="form-control" id="name" style="height: 150px;">{$it.Name}</textarea>
+                                                <label class="col-sm-1 control-label">本题分值</label>
+                                                <input id="small-score-{$key}" class="form-control" type="number" name="score" min="1" value='{$it.Score}'>
+                                                <label>小题答案</label>
+                                                <textarea id="small-answer-{$key}" class="form-control" id="name" style="height: 150px;">{$it.Answer}</textarea>
                                             </div>
-                                            {/volist}
-                                           {/if}
+                                            {/volist} {/if}
 
                                         </div>
                                         <div class="clearfix"></div>
-                                        <button type="button" class="btn btn-success" id="send" onclick = "send_child_number({$childrennumber})">完成修改</button>
+                                        <button type="button" class="btn btn-success" id="send" onclick="send_child_number({$childrennumber})">完成修改</button>
                                     </form>
                                 </div>
                             </div>
