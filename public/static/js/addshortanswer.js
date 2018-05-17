@@ -11,6 +11,7 @@ var single = true;
 var belong = $.cookie('belong');
 var belongid = $.cookie('belongid');
 //目前录了几题了
+//初始化函数会初始化该变量
 var now_num = 1;
 //总共多少题目
 var max_num = 0;
@@ -98,6 +99,7 @@ $(document).ready(function () {
                     if (result == 0) swal("错误", "添加失败", "error");
                     else {
                         now_num++;
+                        $("#bar").css("width",(now_num/max_num)*100+"%")
                         if (now_num > max_num) {
                             swal("完成", "已完成本大题的录入", "success",{
                                 closeOnClickOutside: false,
@@ -143,7 +145,8 @@ function init() {
     }).done(function (result) {
         max_num = result["number"]
         $.post("/testpaper/public/index.php/api/shortanswer/count",{
-            belong:belong
+            belong:belong,
+            belongid:belongid
         }).done(function(num){
             now_num = num;
             if(now_num==max_num)
@@ -162,6 +165,7 @@ function init() {
                 $("#bar").css("width",now_num/max_num*100+"%");
                 swal.close();
             }
+            $('#now-num').html(now_num);
         });
 
     })

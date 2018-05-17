@@ -22,9 +22,17 @@
             else return 0;
             
         }
-        public function count($belong){
-            $list=\app\api\model\Shortanswer::all(['Belong'=>$belong]);
+        public function count($belong,$belongid){
+            $list=\app\api\model\Shortanswer::all(['Belong'=>$belong,"belongTitle"=>$belongid]);
             return count($list);
+        }
+        public function update($id,$name,$answer,$score)
+        {
+            $shortans=\app\api\model\Shortanswer::get(['ID'=>$id]);
+            $shortans->Name = $name;
+            $shortans->Answer = $answer;
+            $shortans->Score = $score;
+            $shortans->save();
         }
         public function addchild($smallData,$belong,$belongid)
         {
