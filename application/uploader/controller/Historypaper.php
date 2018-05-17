@@ -14,6 +14,6 @@ class Historypaper extends Controller{
             $this->assign("paper",$pass);
             return $this->fetch("historypaper");
         }
-        return $this->error('请先登录');
+        return $this->error('请先登录','index/index/index');
     }
 }

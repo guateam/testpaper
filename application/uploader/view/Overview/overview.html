@@ -37,7 +37,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="/testpaper/public/index.php/uploader/index">主页</a>
+                                {if condition="$data.state==0"}<a href="/testpaper/public/index.php/uploader/addtestpaper/index/id/{$id}">新建</a>{else /}<a href="/testpaper/public/index.php/uploader/index">主页</a>{/if}
                             </li>
                             <li class="active">
                                 <a href="">预览</a>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="panel-body">
                             {volist name = "vo.children" id = "fill" key='k'}
-                            <h4>{$k}.{volist name='fill.name' id='name' key='b'}{$name}{if condition="$b!=$fill.end-1"}&nbsp;
+                            <h4>{$k}.{volist name='fill.name' id='name' key='b'}{$name}{if condition="$b==$fill.end"}&nbsp;
                                 {else /} _________
                                 {/if}{/volist} ({$fill.score}分)</h4>
                             <br>
@@ -148,6 +148,7 @@
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src='__STATIC__/js/addtestpaper.js'></script>
 </body>
 

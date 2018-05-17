@@ -41,7 +41,12 @@
                 $answer=json_decode($value->Answer,true);
                 $answerlist=[];
                 foreach($answer as $v){
-                    array_push($answerlist,chr(ord('A')+$v));
+                    if($v<26){
+                        array_push($answerlist,chr(ord('A')+$v));
+                    }else{
+                        array_push($answerlist,'第'.($v+1).'项');
+                    }
+                    
                 }
                 $item=[
                     'name'=>$value->Name,
