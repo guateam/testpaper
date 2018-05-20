@@ -16,10 +16,12 @@ var now_num = 1;
 //总共多少题目
 var max_num = 0;
 
-$(document).ready(function() {
+
+$(document).ready(function () {
     init();
-    $("#quit").on("click", function() {
-        $.cookie("userid", "", { expires: -1, path: '/' });
+
+    $("#quit").on("click",function(){
+        $.cookie("userid", "", { expires: -1 ,path: '/'});
         window.location.href = "/testpaper/public/index.php/index";
     });
     $("input:radio[name='type']").on("click", function() {
@@ -142,6 +144,9 @@ function init() {
         closeOnClickOutside: false,
         closeOnEsc: false,
     });
+
+    initFileInput("imgupload","/../img");
+    
     $.post("/testpaper/public/index.php/api/Testpaper/getTitle", {
         id: belong,
         belongid: belongid
@@ -171,8 +176,20 @@ function init() {
 
     })
 }
+function initFileInput(ctrlName, uploadUrl) {    
+    var control = $('#' + ctrlName); 
 
-function allClear() {
+    control.fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: uploadUrl, //上传的地址
+        allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+        showUpload: false, //是否显示上传按钮
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式             
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>", 
+    });
+}
+function allClear(){
     single = true;
     $("#single").show();
     $('#flag').html("");
