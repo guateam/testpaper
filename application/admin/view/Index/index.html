@@ -45,20 +45,10 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
-                                    <strong class="caret"></strong>
+                            <li>
+                                <a href="#">退出
+                                    
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="">设置</a>
-                                    </li>
-                                    <li class="divider">
-                                    </li>
-                                    <li>
-                                        <a id="quit">退出</a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -75,13 +65,13 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/people/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            审核试卷
+                                            试卷分配
                                         </h3>
                                         <p>
-                                            点击前往审核页面
+                                            点击前往分配页面
                                         </p>
                                         <p>
-                                            <a class="btn btn-primary" href="/testpaper/public/index.php/auditor/audit">前往</a>
+                                            <a class="btn btn-primary" href="/testpaper/public/index.php/admin/">前往</a>
                                         </p>
                                     </div>
                                 </div>
@@ -92,10 +82,10 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/sports/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            历史审核记录
+                                            人员情况
                                         </h3>
                                         <p>
-                                            曾经审核的试卷
+                                            上传人工作情况
                                         </p>
                                         <p>
                                             <a class="btn btn-primary" href="">前往</a>
@@ -131,14 +121,6 @@
                                     {switch name="user.Type"}{case value="0"}上传者{/case}{case value="1"}审核者{/case}{/switch}
                                 </p>
                             </div>
-                            <div class="list-group-item">
-                                <h5 class="list-group-item-heading">
-                                    审核试卷数量
-                                </h5>
-                                <p class="list-group-item-text">
-                                    {$user.Num}
-                                </p>
-                            </div>
                             <div class="list-group-item ">
                                 <a class="btn btn-default" id="help-button" href="#help-page" data-toggle="modal">
                                     帮助
@@ -156,10 +138,10 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div>
-                                                    <h2>什么是 审核者 ？</h2>
+                                                    <h2>什么是 管理员 ？</h2>
                                                     <p>
-                                                        审核者是该试题录入系统下的一个用户身份，表示试卷的
-                                                        <b>审核</b>者
+                                                        管理员是该试题录入系统下的一个用户身份，表示试卷的
+                                                        <b>管理</b>者
                                                     </p>
                                                     <hr>
                                                     <br>
@@ -168,24 +150,17 @@
                                                     <h2>我能做什么 ?</h2>
                                                     <p>
                                                         在
-                                                        <b>主页</b> 界面中，您能对所有已完成编辑的试卷进行审核，也可查看曾经审核过的试卷。
+                                                        <b>主页</b> 界面中，您能对所有提交的试卷分配审核员，也可以查看各个上传人的工作情况
                                                     </p>
                                                     <hr>
                                                     <br>
                                                 </div>
                                                 <div>
-                                                    <h2>如何审核一张试卷 ？</h2>
+                                                    <h2>如何分配一张试卷 ？</h2>
                                                     <p>
                                                         您可以在
                                                         <b>主页</b> 的
-                                                        <b>审核试卷</b>板块进行试卷的审核，按下相应的按钮:
-                                                        <div>
-                                                            <button type="button" class="btn btn-success">通过</button>
-                                                            <button type="button" class="btn btn-danger">打回</button>
-                                                        </div>
-                                                        <br> 对试卷进行
-                                                        <b>通过</b>、
-                                                        <b>打回</b>的操作
+                                                        <b>分配试卷</b>板块进行试卷的分配
                                                     </p>
                                                     <hr>
                                                     <br>
