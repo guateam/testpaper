@@ -57,7 +57,18 @@
         public function getDatabyid($id)
         {
             $item=\app\api\model\Shortanswer::get(['ID'=>$id]);
-            if($item)return $item;
+            if($item)
+            {
+                $item->Name = str_replace('<br>',"\n",$item->Name);
+                return $item;
+            }
+            else return null;
+        }
+        public function getchildstring($id){
+            $item=\app\api\model\Shortanswer::get(['ID'=>$id]);
+            if($item){
+                return $item->Children;
+            }
             else return null;
         }
         public function getdata($id,$belongid){
@@ -79,7 +90,7 @@
                         if($child)
                         {
                             $childData = [
-                            "name"=>$child->Name,
+                            "name"=>str_replace('<br>',"\n",$child->Name),
                             "answer"=>$child->Answer,
                             "score"=>$child->Score,
                             "child"=>null,
@@ -90,7 +101,7 @@
                         }
                     }
                     $item = [
-                        "name"=>$value->Name,
+                        "name"=>str_replace('<br>',"\n",$value->Name),
                         "answer"=>$value->Answer,
                         "score"=>$value->Score,
                         "child"=>$childDataList,
@@ -99,7 +110,7 @@
                 }
                 else{
                     $item = [
-                        "name"=>$value->Name,
+                        "name"=>str_replace('<br>',"\n",$value->Name),
                         "answer"=>$value->Answer,
                         "score"=>$value->Score,
                         "child"=>null,

@@ -57,7 +57,7 @@ $(document).ready(function () {
             $.post("/testpaper/public/index.php/api/shortanswer/add", {
                 belong: belong,
                 belongid: belongid,
-                name: $("#name").val(),
+                name: replace($("#name").val()),
                 ans: $("#answer").val(),
                 score: $("input[name='score']").val(),
                 child: 0,
@@ -91,7 +91,7 @@ $(document).ready(function () {
                 $.post("/testpaper/public/index.php/api/shortanswer/add", {
                     belong: belong,
                     belongid: belongid,
-                    name: $("#name").val(),
+                    name: replace($("#name").val()),
                     ans: $("#answer").val(),
                     score: total_score,
                     child: small_id.join(","),
@@ -132,7 +132,9 @@ function small_is_empty() {
         return false;
     }
 }
-
+function replace(string) {
+    return string.replace(/\n/g, "<br>")
+}
 function init() {
     swal("等待","正在初始化页面","info",{
         button:false,

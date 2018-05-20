@@ -72,7 +72,6 @@
                                             <textarea class="form-control" id="big-name" style="height: 150px;">{$data.Name}</textarea>
                                         </div>
                                         <div class="well">
-                                            <input style = "display:none"  id="big-id" class="form-control" type="number" name="score" min="1" value='{$data.ID}'>
                                             {if condition = "$data.Children == 0"}
                                             <div class="form-group well" id="single">
                                                 <label class="col-sm-1 control-label">本题分值</label>
@@ -81,7 +80,6 @@
                                             <textarea class="form-control" id="big-answer" style="height: 150px;" id="big-answer">{$data.Answer}</textarea> 
                                            {else /} {volist name = "$childrendata" id = "it"}
                                             <div class="form-group well">
-                                                <input style="display:none" id="id-{$key}" class="form-control" type="number" name="score" min="1" value='{$it.ID}'>
                                                 <label>小题干{$key+1}</label>
                                                 <textarea id="small-name-{$key}" class="form-control" id="name" style="height: 150px;">{$it.Name}</textarea>
                                                 <label class="col-sm-1 control-label">本题分值</label>
@@ -93,7 +91,7 @@
 
                                         </div>
                                         <div class="clearfix"></div>
-                                        <button type="button" class="btn btn-success" id="send" onclick="send_child_number({$childrennumber},{$data.Belong})">完成修改</button>
+                                        <button type="button" class="btn btn-success" id="send" onclick="send_child_number({$childrennumber},'{$data.Belong}')">完成修改</button>
                                     </form>
                                 </div>
                             </div>
