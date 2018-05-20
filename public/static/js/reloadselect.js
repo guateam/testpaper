@@ -17,7 +17,8 @@ $.post('/testpaper/public/index.php/uploader/reloadselect/getoption/id/' + $.coo
 })
 
 function replace(string) {
-    return string.replace(/\n/g, "<br>")
+    string = string.replace(/\n/g, "<br>")
+    return string.replace(/\s/g, '&nbsp;')
 }
 
 function removetitle(number) {

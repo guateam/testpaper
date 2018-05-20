@@ -1,5 +1,6 @@
 function replace(string) {
-    return string.replace(/\n/g, "<br>")
+    string = string.replace(/\n/g, "<br>")
+    return string.replace(/\s/g, '&nbsp;')
 }
 
 function updateprogress() {
