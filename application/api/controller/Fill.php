@@ -15,15 +15,15 @@
             return ['progress'=>round(((count($list)+1)/$number)*100),'now'=>count($list)+1];
         }
         public function add($belong,$belongid,$name,$answerlist,$score){
-            $select=new \app\api\model\Fill();
-            $select->data([
+            $fill=new \app\api\model\Fill();
+            $fill->data([
                 'Name'=>json_encode($name),
                 'Answer'=>json_encode($answerlist),
                 'Belong'=>$belong,
                 'BelongTitle'=>$belongid,
                 'Score'=>(int)$score
             ]);
-            $select->save();
+            $fill->save();
         }
         public function getdata($id,$belongid){
             $list=\app\api\model\Fill::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
@@ -39,5 +39,39 @@
                 array_push($data,$item);
             }
             return $data;
+        }
+        public function getreloaddata($id){
+            $fill=\app\api\model\Fill::get(['ID'=>$id]);
+            if($fill){
+                $option=json_decode($fill->Name,true);
+                $answer=json_decode($fill->Answer,true);
+                $k=0;
+                $i=0;
+                $name='';
+                while($k<count($answer)){
+                    $name.=$option[$i].'__'.$answer[$k].'__';
+                    $i++;
+                    $k++;
+                }
+                if($i<count($option)){
+                    $name.=$option[$i];
+                }
+                $data=[
+                    'name'=>str_replace('<br>',"\n",$name),
+                    'score'=>$fill->Score
+                ];
+                return $data;
+            }
+        }
+        public function edit($name,$answerlist,$score,$id){
+            $fill=\app\api\model\Fill::get(['ID'=>$id]);
+            if($fill){
+                $fill->data([
+                    'Name'=>json_encode($name),
+                    'Answer'=>json_encode($answerlist),
+                    'Score'=>(int)$score
+                ]);
+                $fill->save();
+            }
         }
     }

@@ -59,4 +59,49 @@
             }
             return $data;
         }
+        public function getreloaddata($id){
+            $select=\app\api\model\Select::get(['ID'=>$id]);
+            if($select){
+                $data=[
+                    'name'=>str_replace('<br>',"\n",$select->Name),
+                    'score'=>$select->Score
+                ];
+                return $data;
+            }
+        }
+        public function getoptiondata($id){
+            $select=\app\api\model\Select::get(['ID'=>$id]);
+            if($select){
+                $option=\json_decode($select->Option,true);
+                $answer=\json_decode($select->Answer,true);
+                $list=[];
+                foreach($option as $key=>$value){
+                    $item=[
+                        "ID"=>$key,
+                        'answer'=>$value,
+                        'type'=>in_array($key,$option)
+                    ];
+                    array_push($list,$item);
+                }
+                return $list;
+            }
+        }
+        public function edit($name,$answerlist,$score,$id){
+            $select=\app\api\model\Select::get(['ID'=>$id]);
+            $answer=[];
+            $option=[];
+            foreach ($answerlist as $key=>$value) {
+                array_push($option,$value['answer']);
+                if($value['type']=="true"){
+                    array_push($answer,$key);
+                }  
+            }
+            $select->data([
+                'Name'=>$name,
+                'Answer'=>json_encode($answer),
+                'Option'=>json_encode($option),
+                'Score'=>(int)$score
+            ]);
+            $select->save();
+        }
     }
