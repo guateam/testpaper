@@ -1,5 +1,6 @@
 var childnum = 0;
 var childidlist = [];
+
 function send_child_number(data, belongpaper) {
     var new_score = 0;
     childnum = data;
@@ -13,11 +14,11 @@ function send_child_number(data, belongpaper) {
         name: replace($("#big-name").val()),
         answer: childnum > 0 ? "" : $("#big-answer").val(),
         score: childnum > 0 ? new_score : $("#big-score").val()
-    }).done(function () {
+    }).done(function() {
         if (childnum > 0) {
             $.post("/testpaper/public/index.php/api/Shortanswer/getchildstring", {
                 id: getQueryString("id")
-            }).done(function (str) {
+            }).done(function(str) {
                 str = str.split(",");
                 for (i = 0; i < childnum; i++) {
                     var now_i = i;
@@ -26,13 +27,12 @@ function send_child_number(data, belongpaper) {
                         name: replace($("#small-name-" + i).val()),
                         answer: $("#small-answer-" + i).val(),
                         score: $("#small-score-" + i).val()
-                    }).done(function () {
+                    }).done(function() {
                         swal("完成", "修改成功", "success");
                     });
                 }
             })
-        }
-        else swal("完成", "修改成功", "success");
+        } else swal("完成", "修改成功", "success");
     });
 
 }
@@ -50,6 +50,8 @@ function getQueryString(name) {
         return null;
     }
 }
+
 function replace(string) {
-    return string.replace(/\n/g, "<br>")
+    string = string.replace(/\n/g, "<br>")
+    return string.replace(/\s/g, '&nbsp;')
 }
