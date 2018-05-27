@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
     <link href="https://unpkg.com/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
-
+    <link href="__STATIC__/vendor/wangEditor-3.1.1/release/wangEditor.css" rel="stylesheet">
 
     <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
 </head>
@@ -66,10 +66,14 @@
                                 <div class="panel-body">
                                     <form role="form">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">题干</label><textarea class="form-control" id="name" style="height: 150px;" name='name'></textarea>
+                                            <label for="exampleInputEmail1">题干</label>
+                                            <div id="editor1">
+                                                <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+                                            </div>
+                                            <textarea class="form-control" id="name" style="display:none" name='name' hidden></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">分值</label><input class="form-control" id="name" type="number" name='score' />
+                                            <label for="exampleInputEmail1">分值</label><input class="form-control" type="number" name='score' />
                                         </div>
                                         <div id="title">
                                             <label for="exampleInputEmail1">答案目录</label>
@@ -124,6 +128,7 @@
     <script src="https://unpkg.com/bootstrap-switch"></script>
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
+    <script src="__STATIC__/vendor/wangEditor-3.1.1/release/wangEditor.js"></script>
     <script>
         $('input[type="checkbox"]').bootstrapSwitch({
             onText: '是',

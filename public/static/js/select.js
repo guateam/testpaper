@@ -1,10 +1,21 @@
 var titlenum = 1;
 var titlelist = [];
+var E = window.wangEditor
+var editor = new E('#editor1')
+var $text1 = $("#name")
+editor.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text1.val(html)
+}
+editor.customConfig.uploadImgShowBase64 = true
+editor.create()
+    // 初始化 textarea 的值
+$text1.val(editor.txt.html())
 
-function replace(string) {
+/*function replace(string) {
     string = string.replace(/\n/g, "<br>")
     return string.replace(/\s/g, '&nbsp;')
-}
+}*/
 
 function removetitle(number) {
     for (i = 0; i < titlelist.length; i++) {
@@ -41,7 +52,7 @@ $("#next").click(() => {
     $.post('/testpaper/public/index.php/uploader/select/add', {
         belong: $.cookie('belong'),
         belongid: $.cookie('belongid'),
-        name: replace($("textarea[name='name']").val()),
+        name: $("textarea[name='name']").val(),
         answerlist: titlelist,
         score: $("input[name='score']").val(),
     }).done((data) => {
@@ -49,6 +60,7 @@ $("#next").click(() => {
             updateprogress()
             $("textarea[name='name']").val("")
             $("input[name='score']").val("")
+            editor.txt.html("")
             titlelist.forEach(element => {
                 $("#" + element["ID"]).remove()
             });
@@ -60,7 +72,7 @@ $("#next").click(() => {
 
 $('#add').click(() => {
     if ($("textarea[name='answer']").val() != '') {
-        titlelist.push({ "ID": titlenum, "answer": replace($("textarea[name='answer']").val()), "type": $("#toggle").bootstrapSwitch('state') });
+        titlelist.push({ "ID": titlenum, "answer": $("textarea[name='answer']").val(), "type": $("#toggle").bootstrapSwitch('state') });
         if ($("#toggle").bootstrapSwitch('state')) {
             type = "是"
         } else {

@@ -63,7 +63,7 @@
             $select=\app\api\model\Select::get(['ID'=>$id]);
             if($select){
                 $data=[
-                    'name'=>str_replace('<br>',"\n",$select->Name),
+                    'name'=>$select->Name,
                     'score'=>$select->Score
                 ];
                 return $data;

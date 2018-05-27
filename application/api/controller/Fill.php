@@ -57,7 +57,7 @@
                     $name.=$option[$i];
                 }
                 $data=[
-                    'name'=>str_replace('<br>',"\n",$name),
+                    'name'=>$name,
                     'score'=>$fill->Score
                 ];
                 return $data;
