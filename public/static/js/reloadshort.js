@@ -1,6 +1,7 @@
 var childnum = 0;
 var childidlist = [];
-
+var editor = null;
+initkindEditor();
 function send_child_number(data, belongpaper) {
     var new_score = 0;
     childnum = data;
@@ -52,6 +53,43 @@ function getQueryString(name) {
 }
 
 function replace(string) {
-    string = string.replace(/\n/g, "<br>")
-    return string.replace(/\s/g, '&nbsp;')
+    //string = string.replace(/\n/g, "<br>")
+    //return string.replace(/\s/g, '&nbsp;')
+    return string;
+}
+
+function initkindEditor() {
+    
+    editor = KindEditor.create('#big-name', {
+       themeType: "simple",
+       uploadJson: '/testpaper/public/static/vendor/kindeditor/php/upload_json.php',
+       resizeType: 1,
+       pasteType: 2,
+       syncType: "",
+       filterMode: true,
+       allowPreviewEmoticons: false,
+       items: [
+              'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
+              'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
+              'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
+              'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
+              'unlink', 'emoticons'
+          ],//, 'baidumap'
+       afterCreate: function () {
+           this.sync();
+       },
+       afterBlur: function () {
+           this.sync();
+       },
+       afterChange: function () {
+          //富文本输入区域的改变事件，一般用来编写统计字数等判断
+       },
+       afterUpload:function(url){
+         //上传图片后的代码
+       },
+       allowFileManager: false,
+       allowFlashUpload: false,
+       allowMediaUpload: false,
+       allowFileUpload: false
+   });
 }

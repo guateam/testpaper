@@ -3,6 +3,7 @@ $(document).ready(function() {
     var repassword = $("#repassword");
     var username = $("#username");
     var register = $("#register-button");
+    var phonenumber = $("#phonenumber");
     var back = $("#back-button");
     register.on("click", function() {
         if (username.val() == '') {
@@ -20,15 +21,22 @@ $(document).ready(function() {
                 error_item("form-repassword")
             } else pass_item("form-repassword");
         }
+        if(phonenumber.val()==''){
+            swal("错误", "手机号不能为空", "error");
+                error_item("form-phonenumber")
+        }else{
+            pass_item("form-phonenumber");
+        }
 
         if ($("input:radio[name='type']:checked").val() == null) {
             swal("错误", "请选择注册的身份", "error");
             error_item("form-type");
         } else pass_item("form-type");
-        if (password.val() != '' && username.val() != '' && $("input[name='type']:checked").val() != '') {
+        if (password.val() != '' && username.val() != '' && phonenumber.val()!='' && $("input[name='type']:checked").val() != '') {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
                 Password: password.val(),
+                PhoneNumber:phonenumber.val(),
                 Type: $("input[name='type']:checked").val(),
                 Num: 0
             }).done(function(result) {

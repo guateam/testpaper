@@ -123,9 +123,7 @@
                         </div>
                         <div class="panel-body">
                             {volist name = "vo.children" id = "short" key='k'}
-                            <h4>{$k}.
-                                {$short.name}
-                                ({$short.score}分)</h4>
+                            <h4>{$k}.{$short.name}({$short.score}分)</h4>
                             <br>
                             {volist name = "short.child" id = "childData" key='k1'}
                                <b>[{$key+1}]&nbsp;{$childData.name}({$childData.score}分)</b>
@@ -150,6 +148,7 @@
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src='__STATIC__/js/addtestpaper.js'></script>
+    <script src="__STATIC__/js/quit.js"></script>
 </body>
 
 </html>

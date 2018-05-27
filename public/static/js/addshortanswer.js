@@ -15,15 +15,12 @@ var belongid = $.cookie('belongid');
 var now_num = 1;
 //总共多少题目
 var max_num = 0;
+var editor = null;
 
 
 $(document).ready(function () {
     init();
 
-    $("#quit").on("click",function(){
-        $.cookie("userid", "", { expires: -1 ,path: '/'});
-        window.location.href = "/testpaper/public/index.php/index";
-    });
     $("input:radio[name='type']").on("click", function() {
         var value = $("input:radio[name='type']:checked").val()
         switch_button.attr("href", "#" + which_case(value));
@@ -55,7 +52,9 @@ $(document).ready(function () {
             $("#single").hide();
         }
     })
-
+    $("#show-text").on("click",function(){
+        alert($("#name").val());
+    })
     $("#send").on("click", function() {
         if (single) {
             $.post("/testpaper/public/index.php/api/shortanswer/add", {
@@ -114,10 +113,12 @@ $(document).ready(function () {
                         } else $('#now-num').html(now_num);
                     }
                     allClear();
+                    editor.html('');
                 })
             })
         }
     })
+   
 });
 
 function which_case(cs) {
@@ -134,8 +135,9 @@ function small_is_empty() {
 }
 
 function replace(string) {
-    string = string.replace(/\n/g, "<br>")
-    return string.replace(/\s/g, '&nbsp;')
+    //string = string.replace(/\n/g, "<br>")
+    //return string.replace(/\s/g, '&nbsp;')
+    return string
 }
 
 function init() {
@@ -144,9 +146,7 @@ function init() {
         closeOnClickOutside: false,
         closeOnEsc: false,
     });
-
-    initFileInput("imgupload","/../img");
-    
+    initkindEditor();
     $.post("/testpaper/public/index.php/api/Testpaper/getTitle", {
         id: belong,
         belongid: belongid
@@ -189,6 +189,7 @@ function initFileInput(ctrlName, uploadUrl) {
         previewFileIcon: "<i class='glyphicon glyphicon-king'></i>", 
     });
 }
+
 function allClear(){
     single = true;
     $("#single").show();
@@ -198,4 +199,40 @@ function allClear(){
     $('#small-answer').val("");
     $('#answer').val("");
     $('#name').val("");
+}
+
+function initkindEditor() {
+    
+         editor = KindEditor.create('#name', {
+            themeType: "simple",
+            uploadJson: '/testpaper/public/static/vendor/kindeditor/php/upload_json.php',
+            resizeType: 1,
+            pasteType: 2,
+            syncType: "",
+            filterMode: true,
+            allowPreviewEmoticons: false,
+            items: [
+                   'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
+                   'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
+                   'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
+                   'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
+                   'unlink', 'emoticons'
+               ],//, 'baidumap'
+            afterCreate: function () {
+                this.sync();
+            },
+            afterBlur: function () {
+                this.sync();
+            },
+            afterChange: function () {
+               //富文本输入区域的改变事件，一般用来编写统计字数等判断
+            },
+            afterUpload:function(url){
+              //上传图片后的代码
+            },
+            allowFileManager: false,
+            allowFlashUpload: false,
+            allowMediaUpload: false,
+            allowFileUpload: false
+        });
 }
