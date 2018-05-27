@@ -28,12 +28,12 @@ class Auditdetail extends Controller{
         }
         return json(['status'=>0]);
     }
-    public function cancel($id,$auditorid){
+    public function cancel($id,$auditorid,$note){
         $testpaper=new \app\api\controller\Testpaper();
         $user=new \app\api\controller\User();
         $userid=$user->checkuser($auditorid);
         if($userid){
-            $testpaper->cancel($id,$userid);
+            $testpaper->cancel($id,$userid,$note);
             return json(['status'=>1]);
         }
         return json(['status'=>0]);

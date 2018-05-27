@@ -201,7 +201,8 @@
                     "name"=>$value->Name,
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
-                    'school'=>$value->School
+                    'school'=>$value->School,
+                    'note'=>$value->Note
                 ];
                 array_push($data,$item);
             }
@@ -218,13 +219,38 @@
             $user=new \app\api\controller\User();
             $user->addnum($testpaper->Uploader);
         }
-        public function cancel($id,$auditorid){
+        public function cancel($id,$auditorid,$note){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
                 'Auditor'=>$auditorid,
                 'Audittime'=>date('Y-m-d H:s'),
-                'State'=>3
+                'State'=>3,
+                'Note'=>$note
             ]);
             $testpaper->save();
+        }
+        public function getwaitingauditordata(){
+            $testpaper=\app\api\model\Testpaper::all(['Auditorlist'=>'','State'=>1]);
+            $data=[];
+            foreach($testpaper as $value){
+                $item=[
+                    "id"=>$value->ID,
+                    "name"=>$value->Name,
+                    'class'=>$value->Class,
+                    'subject'=>$value->Subject,
+                    'school'=>$value->School
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
+        public function setauditor($id,$auditorlist){
+            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
+            if($testpaper){
+                $testpaper->data([
+                    'Auditorlist'=>$auditorlist
+                ]);
+                $testpaper->save();
+            }
         }
     }

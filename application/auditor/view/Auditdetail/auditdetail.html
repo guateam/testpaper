@@ -136,14 +136,38 @@
                     {/case} {/switch}
                     <br> {/volist}
                     <div class="panel panel-primary">
-                        <div class="panel-body">
-                            <div class="text-right"><button class="btn btn-danger" onclick="cancel({$id})">审核不通过</button> <button class="btn btn-success" onclick="confirm({$id})">审核通过</button></div>
-                        </div>
-                    </div>
+                        <div class="panel-body text-right">
+                            <a id="modal-708198" href="#modal-container-708198" role="button" class="btn btn-danger" data-toggle="modal">审核不通过</a>
+                            <!--遮罩窗体-->
+                            <div class="modal fade" id="modal-container-708198" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog text-left">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                打回原因
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>不通过原因</label><textarea type="text" class="form-control" name="reason" id="answer"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-danger" id="add" data-dismiss="modal" onclick="cancel({$id})">审核不通过</button>
+                                        </div>
+                                    </div>
 
+                                </div>
+
+                            </div>
+                            <button class="btn btn-success" onclick="confirm({$id})">审核通过</button></div>
+                    </div>
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>

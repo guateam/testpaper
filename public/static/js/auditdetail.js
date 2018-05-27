@@ -43,7 +43,11 @@ function cancel(id) {
         closeOnEsc: false,
     }).then((ok) => {
         if (ok) {
-            $.post('/testpaper/public/index.php/auditor/auditdetail/cancel/id/' + id + '/auditorid/' + $.cookie('userid')).done((data) => {
+            $.post('/testpaper/public/index.php/auditor/auditdetail/cancel/', {
+                id: id,
+                auditorid: $.cookie('userid'),
+                note: $("textarea[name='reason']").val()
+            }).done((data) => {
                 if (data.status == 1) {
                     swal('成功', '退回成功', 'success').then((ok) => {
                         window.location.href = '/testpaper/public/index.php/auditor/audit/'

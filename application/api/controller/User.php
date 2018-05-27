@@ -79,4 +79,38 @@
                 $user->save();
             }
         }
+        public function getauditorlist(){
+            $list=UserModel::all(["Type"=>1]);
+            $data=[];
+            foreach($list as $value){
+                $item=[
+                    'name'=>$value->Username,
+                    'id'=>$value->ID,
+                    'phonenumber'=>$value->PhoneNumber
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
+        public function getuserlist(){
+            $list=UserModel::all(["Type"=>0]);
+            $data=[];
+            $testpaper=new \app\api\controller\Testpaper();
+            foreach($list as $value){
+                $waiting=$testpaper->getwaitingtestpapernumber($value->ID);
+                $working=$testpaper->getworkingtestpapernumber($value->ID);
+                $error=$testpaper->geterrortestpapernumber($value->ID);
+                $item=[
+                    'name'=>$value->Username,
+                    'id'=>$value->ID,
+                    'phonenumber'=>$value->PhoneNumber,
+                    'num'=>$value->Num,
+                    'waitingnum'=>$waiting,
+                    'workingnum'=>$working,
+                    'errornum'=>$error
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
     }

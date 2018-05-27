@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var password = $("#password");
     var username = $("#username");
@@ -27,9 +26,13 @@ $(document).ready(function() {
                         swal("成功", "登录成功!", "success").then((ok) => {
                             window.location.href = "/testpaper/public/index.php/auditor"
                         })
-                    } else {
+                    } else if (result.type == 0) {
                         swal("成功", "登录成功!", "success").then((ok) => {
                             window.location.href = "/testpaper/public/index.php/uploader"
+                        })
+                    } else {
+                        swal("成功", "登录成功!", "success").then((ok) => {
+                            window.location.href = "/testpaper/public/index.php/admin"
                         })
                     }
                 } else if (result.status == 0) {
