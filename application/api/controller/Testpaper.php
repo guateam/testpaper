@@ -210,14 +210,14 @@
         }
         public function confirm($id,$auditorid){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
+            $user=new \app\api\controller\User();
+            $user->addnum($testpaper->Uploader);
             $testpaper->data([
                 'Auditor'=>$auditorid,
                 'Audittime'=>date('Y-m-d H:s'),
                 'State'=>2
             ]);
             $testpaper->save();
-            $user=new \app\api\controller\User();
-            $user->addnum($testpaper->Uploader);
         }
         public function cancel($id,$auditorid,$note){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
