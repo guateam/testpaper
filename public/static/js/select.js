@@ -1,16 +1,43 @@
 var titlenum = 1;
 var titlelist = [];
 var E = window.wangEditor
-var editor = new E('#editor1')
+var editor1 = new E('#editor1')
 var $text1 = $("#name")
-editor.customConfig.onchange = function(html) {
+editor1.customConfig.onchange = function(html) {
     // 监控变化，同步更新到 textarea
     $text1.val(html)
 }
-editor.customConfig.uploadImgShowBase64 = true
-editor.create()
+editor1.customConfig.uploadImgShowBase64 = true
+editor1.customConfig.zIndex = 1
+editor1.create()
     // 初始化 textarea 的值
-$text1.val(editor.txt.html())
+$text1.val(editor1.txt.html())
+var editor2 = new E('#editor2')
+var $text2 = $("#answer")
+editor2.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text2.val(html)
+}
+editor2.customConfig.uploadImgShowBase64 = true
+editor2.customConfig.menus = [
+    'head', // 标题
+    'bold', // 粗体
+    'fontSize', // 字号
+    'fontName', // 字体
+    'italic', // 斜体
+    'underline', // 下划线
+    'strikeThrough', // 删除线
+    'foreColor', // 文字颜色
+    'link', // 插入链接
+    'quote', // 引用
+    'image', // 插入图片
+    'table', // 表格
+    'video', // 插入视频
+    'code', // 插入代码
+]
+editor2.create()
+    // 初始化 textarea 的值
+$text2.val(editor2.txt.html())
 
 /*function replace(string) {
     string = string.replace(/\n/g, "<br>")
@@ -60,7 +87,7 @@ $("#next").click(() => {
             updateprogress()
             $("textarea[name='name']").val("")
             $("input[name='score']").val("")
-            editor.txt.html("")
+            editor1.txt.html("")
             titlelist.forEach(element => {
                 $("#" + element["ID"]).remove()
             });
@@ -82,5 +109,6 @@ $('#add').click(() => {
         titlenum++;
     }
     $("textarea[name='answer']").val("")
+    editor2.txt.html("")
     $("#toggle").bootstrapSwitch('state', false)
 })

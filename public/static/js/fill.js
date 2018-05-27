@@ -1,7 +1,15 @@
-function replace(string) {
-    string = string.replace(/\n/g, "<br>")
-    return string.replace(/\s/g, '&nbsp;')
+var E = window.wangEditor
+var editor1 = new E('#editor1')
+var $text1 = $("textarea[name='name']")
+editor1.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text1.val(html)
 }
+editor1.customConfig.uploadImgShowBase64 = true
+editor1.customConfig.zIndex = 1
+editor1.create()
+    // 初始化 textarea 的值
+$text1.val(editor1.txt.html())
 
 function updateprogress() {
     $.get("/testpaper/public/index.php/uploader/fill/getprogress", {
@@ -21,7 +29,7 @@ function updateprogress() {
 }
 updateprogress()
 $('#next').click(() => {
-    name = replace($("textarea[name='name']").val())
+    name = $("textarea[name='name']").val()
     score = $("input[name='score']").val()
     if (name != '' && score != '') {
         list = name.split('__')
@@ -45,6 +53,7 @@ $('#next').click(() => {
                 updateprogress()
                 $("textarea[name='name']").val("")
                 $("input[name='score']").val("")
+                editor1.txt.html("")
                 answer = [];
                 namelist = [];
             }
