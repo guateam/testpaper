@@ -16,6 +16,13 @@ class Newtestpaper extends Controller{
         $uploaderid=$user->checkuser($uploader);
         if($uploaderid){
             $testpaper=new \app\api\controller\Testpaper();
+            $paperlist1 = \app\api\model\Testpaper::all(['Name'=>$name]);
+            $paperlist2 = \app\api\model\Testpaper::all(['Class'=>$class]);
+            $paperlist3 = \app\api\model\Testpaper::all(['Subject'=>$subject]);
+            $paperlist4 = \app\api\model\Testpaper::all(['School'=>$school]);
+            if($paperlist1){
+                return json(['status'=>-1]);
+            }
             $id=$testpaper->add($name,$class,$subject,$school,$uploaderid,$headquestion);
             return json(['status'=>1,'id'=>$id]);
         }

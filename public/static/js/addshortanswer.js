@@ -16,8 +16,9 @@ var now_num = 1;
 //总共多少题目
 var max_num = 0;
 var editor = null;
-
-
+var small_editor = null;
+var answer_editor = null;
+var small_answer_editor = null;
 $(document).ready(function () {
     init();
 
@@ -37,10 +38,11 @@ $(document).ready(function () {
             Mysmall.push({
                 "belong": $.cookie('belong'),
                 "belongid": $.cookie('belongid'),
-                "name": $('#small-title').val(),
+                "name": small_editor.txt.html(),
                 "answer": $('#small-answer').val(),
                 "score": $("input[name='small-score']").val()
             });
+            small_editor.txt.clear();
             total_score += parseInt($("input[name='small-score']").val());
             var txt = "<p>小题：" + $('#small-title').val() + "  分值:" + $("input[name='small-score']").val() + "分</p>"
             $('#flag').html($('#flag').html() + txt);
@@ -207,4 +209,21 @@ function initkindEditor() {
     editor.customConfig.zIndex = 1;
     editor.customConfig.uploadImgShowBase64 = true
     editor.create();
+
+    answer_editor = new E("#name");
+    answer_editor.customConfig.zIndex = 1;
+    answer_editor.customConfig.uploadImgShowBase64 = true
+    answer_editor.create();
+
+    small_answer_editor = new E("#name");
+    small_answer_editor.customConfig.zIndex = 1;
+    small_answer_editor.customConfig.uploadImgShowBase64 = true
+    small_answer_editor.create();
+
+    small_editor = new E("#small-title");
+    small_editor.customConfig.zIndex = 1;
+    small_editor.customConfig.uploadImgShowBase64 = true
+    small_editor.create();
+
+
 }

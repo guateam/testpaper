@@ -50,6 +50,8 @@ $('#send').click(function () {
                 swal('成功', '添加成功！', 'success').then((ok) => {
                     window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + data.id
                 })
+            }else if(data.status == -1){
+                swal("错误","试卷已经存在",'error');
             }
         })
     }
