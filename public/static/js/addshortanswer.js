@@ -60,7 +60,7 @@ $(document).ready(function () {
             $.post("/testpaper/public/index.php/api/shortanswer/add", {
                 belong: belong,
                 belongid: belongid,
-                name: replace($("#name").val()),
+                name: editor.txt.html(),
                 ans: $("#answer").val(),
                 score: $("input[name='score']").val(),
                 child: 0,
@@ -92,7 +92,7 @@ $(document).ready(function () {
                 $.post("/testpaper/public/index.php/api/shortanswer/add", {
                     belong: belong,
                     belongid: belongid,
-                    name: replace($("#name").val()),
+                    name: editor.txt.html(),
                     ans: $("#answer").val(),
                     score: total_score,
                     child: small_id.join(","),
@@ -113,7 +113,7 @@ $(document).ready(function () {
                         } else $('#now-num').html(now_num);
                     }
                     allClear();
-                    editor.html('');
+                    editor.txt.clear();
                 })
             })
         }
@@ -202,37 +202,9 @@ function allClear(){
 }
 
 function initkindEditor() {
-    
-         editor = KindEditor.create('#name', {
-            themeType: "simple",
-            uploadJson: '/testpaper/public/static/vendor/kindeditor/php/upload_json.php',
-            resizeType: 1,
-            pasteType: 2,
-            syncType: "",
-            filterMode: true,
-            allowPreviewEmoticons: false,
-            items: [
-                   'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
-                   'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
-                   'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
-                   'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
-                   'unlink', 'emoticons'
-               ],//, 'baidumap'
-            afterCreate: function () {
-                this.sync();
-            },
-            afterBlur: function () {
-                this.sync();
-            },
-            afterChange: function () {
-               //富文本输入区域的改变事件，一般用来编写统计字数等判断
-            },
-            afterUpload:function(url){
-              //上传图片后的代码
-            },
-            allowFileManager: false,
-            allowFlashUpload: false,
-            allowMediaUpload: false,
-            allowFileUpload: false
-        });
+    var E = window.wangEditor;
+    editor = new E("#name");
+    editor.customConfig.zIndex = 1;
+    editor.customConfig.uploadImgShowBase64 = true
+    editor.create();
 }

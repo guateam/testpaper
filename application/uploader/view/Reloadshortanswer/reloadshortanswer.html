@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel='stylesheet' type="text/css" href="__STATIC__/vendor/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/kindeditor/themes/default/default.css" />
+    <link href="__STATIC__/vendor/wangEditor-3.1.1/release/wangEditor.css" rel="stylesheet">
 
     <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
 </head>
@@ -69,7 +69,9 @@
                                     <form role="form">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">题干</label>
-                                            <textarea class="form-control" id="big-name" style="height: 150px;">{$data.Name}</textarea>
+                                            <div id = "big-name">
+                                                <p>{$data.Name}</p>
+                                            </div>
                                         </div>
                                         <div class="well">
                                             {if condition = "$data.Children == 0"}
@@ -106,8 +108,7 @@
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
     <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
-    <script src="__STATIC__/vendor/kindeditor/kindeditor-all-min.js"></script>
-    <script src="__STATIC__/vendor/kindeditor/lang/zh-CN.js"></script>
+    <script src="__STATIC__/vendor/wangEditor-3.1.1/release/wangEditor.js"></script>
     <script src="__STATIC__/js/reloadshort.js"></script>
     <script src="__STATIC__/js/quit.js"></script>
 </body>

@@ -12,7 +12,7 @@ function send_child_number(data, belongpaper) {
 
     $.post("/testpaper/public/index.php/api/Shortanswer/update", {
         id: getQueryString("id"),
-        name: replace($("#big-name").val()),
+        name: editor.txt.html(),
         answer: childnum > 0 ? "" : $("#big-answer").val(),
         score: childnum > 0 ? new_score : $("#big-score").val()
     }).done(function() {
@@ -29,11 +29,24 @@ function send_child_number(data, belongpaper) {
                         answer: $("#small-answer-" + i).val(),
                         score: $("#small-score-" + i).val()
                     }).done(function() {
-                        swal("完成", "修改成功", "success");
+                        swal("完成", "修改成功", "success").then((ok)=>{
+                            if(ok){
+                                editor.txt.clear();
+                                history.back(-1);
+                            }
+                        });
                     });
                 }
             })
-        } else swal("完成", "修改成功", "success");
+        } else {
+            swal("完成", "修改成功", "success").then((ok)=>{
+                if(ok){
+                    editor.txt.clear();
+                    self.location = document.referrer;
+                }
+            });
+        }
+
     });
 
 }
@@ -59,37 +72,9 @@ function replace(string) {
 }
 
 function initkindEditor() {
-    
-    editor = KindEditor.create('#big-name', {
-       themeType: "simple",
-       uploadJson: '/testpaper/public/static/vendor/kindeditor/php/upload_json.php',
-       resizeType: 1,
-       pasteType: 2,
-       syncType: "",
-       filterMode: true,
-       allowPreviewEmoticons: false,
-       items: [
-              'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
-              'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
-              'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
-              'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
-              'unlink', 'emoticons'
-          ],//, 'baidumap'
-       afterCreate: function () {
-           this.sync();
-       },
-       afterBlur: function () {
-           this.sync();
-       },
-       afterChange: function () {
-          //富文本输入区域的改变事件，一般用来编写统计字数等判断
-       },
-       afterUpload:function(url){
-         //上传图片后的代码
-       },
-       allowFileManager: false,
-       allowFlashUpload: false,
-       allowMediaUpload: false,
-       allowFileUpload: false
-   });
+    var E = window.wangEditor;
+    editor = new E("#big-name");
+    editor.customConfig.uploadImgShowBase64 = true
+    editor.customConfig.zIndex = 1;
+    editor.create();
 }
