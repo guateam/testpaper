@@ -1,9 +1,18 @@
-function replace(string) {
-    string = string.replace(/\n/g, "<br>")
-    return string.replace(/\s/g, '&nbsp;')
+var E = window.wangEditor
+var editor1 = new E('#editor1')
+var $text1 = $("textarea[name='name']")
+editor1.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text1.val(html)
 }
+editor1.customConfig.uploadImgShowBase64 = true
+editor1.customConfig.zIndex = 1
+editor1.create()
+    // 初始化 textarea 的值
+$text1.val(editor1.txt.html())
+
 $('#next').click(() => {
-    name = replace($("textarea[name='name']").val())
+    name = $("textarea[name='name']").val()
     score = $("input[name='score']").val()
     if (name != '' && score != '') {
         list = name.split('__')

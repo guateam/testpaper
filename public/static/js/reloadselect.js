@@ -1,5 +1,43 @@
 var titlenum = 1;
 var titlelist = [];
+var E = window.wangEditor
+var editor1 = new E('#editor1')
+var $text1 = $("#name")
+editor1.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text1.val(html)
+}
+editor1.customConfig.uploadImgShowBase64 = true
+editor1.customConfig.zIndex = 1
+editor1.create()
+    // 初始化 textarea 的值
+$text1.val(editor1.txt.html())
+var editor2 = new E('#editor2')
+var $text2 = $("#answer")
+editor2.customConfig.onchange = function(html) {
+    // 监控变化，同步更新到 textarea
+    $text2.val(html)
+}
+editor2.customConfig.uploadImgShowBase64 = true
+editor2.customConfig.menus = [
+    'head', // 标题
+    'bold', // 粗体
+    'fontSize', // 字号
+    'fontName', // 字体
+    'italic', // 斜体
+    'underline', // 下划线
+    'strikeThrough', // 删除线
+    'foreColor', // 文字颜色
+    'link', // 插入链接
+    'quote', // 引用
+    'image', // 插入图片
+    'table', // 表格
+    'video', // 插入视频
+    'code', // 插入代码
+]
+editor2.create()
+    // 初始化 textarea 的值
+$text2.val(editor2.txt.html())
 
 $.post('/testpaper/public/index.php/uploader/reloadselect/getoption/id/' + $.cookie('reloadselectid')).done((data) => {
     if (data.status == 1) {
@@ -16,11 +54,6 @@ $.post('/testpaper/public/index.php/uploader/reloadselect/getoption/id/' + $.coo
     }
 })
 
-function replace(string) {
-    string = string.replace(/\n/g, "<br>")
-    return string.replace(/\s/g, '&nbsp;')
-}
-
 function removetitle(number) {
     for (i = 0; i < titlelist.length; i++) {
         if (titlelist[i]["ID"] == number) {
@@ -35,7 +68,7 @@ $("#quit").on("click", function() {
 });
 $("#next").click(() => {
     $.post('/testpaper/public/index.php/uploader/reloadselect/edit', {
-        name: replace($("textarea[name='name']").val()),
+        name: $("textarea[name='name']").val(),
         answerlist: titlelist,
         score: $("input[name='score']").val(),
         id: $.cookie('reloadselectid')
@@ -50,7 +83,7 @@ $("#next").click(() => {
 
 $('#add').click(() => {
     if ($("textarea[name='answer']").val() != '') {
-        titlelist.push({ "ID": titlenum, "answer": replace($("textarea[name='answer']").val()), "type": $("#toggle").bootstrapSwitch('state') });
+        titlelist.push({ "ID": titlenum, "answer": $("textarea[name='answer']").val(), "type": $("#toggle").bootstrapSwitch('state') });
         if ($("#toggle").bootstrapSwitch('state')) {
             type = "是"
         } else {
@@ -60,5 +93,6 @@ $('#add').click(() => {
         titlenum++;
     }
     $("textarea[name='answer']").val("")
+    editor2.txt.html("")
     $("#toggle").bootstrapSwitch('state', false)
 })
