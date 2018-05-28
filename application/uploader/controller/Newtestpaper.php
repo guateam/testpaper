@@ -16,16 +16,23 @@ class Newtestpaper extends Controller{
         $uploaderid=$user->checkuser($uploader);
         if($uploaderid){
             $testpaper=new \app\api\controller\Testpaper();
-            $paperlist1 = \app\api\model\Testpaper::get(['Name'=>$name]);
-            $paperlist2 = \app\api\model\Testpaper::get(['Class'=>$class]);
-            $paperlist3 = \app\api\model\Testpaper::get(['Subject'=>$subject]);
-            $paperlist4 = \app\api\model\Testpaper::get(['School'=>$school]);
-            if($paperlist1 || $paperlist2 || $paperlist3 || $paperlist4){
+            if(!check_paper_reupload($name,$class,$subject,$school)){
                 return json(['status'=>-1]);
             }
             $id=$testpaper->add($name,$class,$subject,$school,$uploaderid,$headquestion,$score);
             return json(['status'=>1,'id'=>$id]);
         }
         return json(['status'=>0]);
+    }
+
+    //检测试卷是否重复
+    public function check_paper_reupload($name,$class,$subject,$school){
+        $paperlist1 = \app\api\model\Testpaper::get(['Name'=>$name]);
+            $paperlist2 = \app\api\model\Testpaper::get(['Class'=>$class]);
+            $paperlist3 = \app\api\model\Testpaper::get(['Subject'=>$subject]);
+            $paperlist4 = \app\api\model\Testpaper::get(['School'=>$school]);
+            if($paperlist1 || $paperlist2 || $paperlist3 || $paperlist4){
+                return 0;
+            }else return 1;
     }
 }

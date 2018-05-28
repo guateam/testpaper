@@ -22,7 +22,7 @@ var small_answer_editor = null;
 $(document).ready(function () {
     init();
 
-    $("input:radio[name='type']").on("click", function() {
+    $("input:radio[name='type']").on("ifChanged", function() {
         var value = $("input:radio[name='type']:checked").val()
         switch_button.attr("href", "#" + which_case(value));
     });
