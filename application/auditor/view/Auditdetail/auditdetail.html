@@ -69,7 +69,7 @@
                             {$data.name}
                         </h1>
                         <h4 align="center">
-                            {$data.class} {$data.subject} {$data.school}
+                            {$data.class} {$data.subject} {$data.school} 总分：{$data.score}
                         </h4>
                     </div>
                     {volist name = "data.children" id = "vo" key='key'} {switch name ="vo.type"} {case value = "选择题"}

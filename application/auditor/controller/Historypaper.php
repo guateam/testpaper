@@ -1,5 +1,5 @@
 <?php
-namespace app\uploader\controller;
+namespace app\auditor\controller;
 use think\Controller;
 use think\Db;
 use \app\api\model\User as UserModel;
@@ -10,7 +10,7 @@ class Historypaper extends Controller{
             $user=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
             if($user){
                 $paper=new \app\api\controller\Testpaper();
-                $pass = $paper->getpasspaper($user->ID);
+                $pass = $paper->getpasspaperforauditor($user->ID);
                 $this->assign("user",$user);
                 $this->assign("paper",$pass);
                 return $this->fetch("historypaper");

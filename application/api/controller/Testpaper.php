@@ -193,7 +193,21 @@
             }
             return $data;
         }
-
+        public function getpasspaperforauditor($auditorid){
+            $list=\app\api\model\Testpaper::all(['Auditor'=>$auditorid,"State"=>2]);
+            $data = [];
+            foreach ($list as $value) {
+                $item=[
+                    "id"=>$value->ID,
+                    "name"=>$value->Name,
+                    'class'=>$value->Class,
+                    'subject'=>$value->Subject,
+                    'school'=>$value->School
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
         public function getbackpaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>3]);
             $data = [];
