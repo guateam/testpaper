@@ -32,6 +32,7 @@ $(document).ready(function() {
             swal("错误", "请选择注册的身份", "error");
             error_item("form-type");
         } else pass_item("form-type");
+        
         if (password.val() != '' && username.val() != '' && phonenumber.val()!='' && $("input[name='type']:checked").val() != '') {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
@@ -46,8 +47,10 @@ $(document).ready(function() {
                             window.location.href = "/testpaper/public/index.php/index/Index/index";
                         }
                     })
-                } else {
-                    swal("失败", "注册失败!", "error");
+                } else if(result.status == -1){
+                    swal("注册失败", "该用户名或手机号码已经被注册", "error");
+                } else{
+                    swal("注册失败", "未知原因", "error");
                 }
             });
         }

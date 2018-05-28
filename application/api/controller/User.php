@@ -51,6 +51,10 @@
         public function register(){
             $data=new UserModel($_POST);
             try{
+               if(UserModel::get(['PhoneNumber'=>$data->PhoneNumber]) || UserModel::get(['Username'=>$data->Username]) )
+               {
+                   return json(['status'=>-1]);
+               } 
                 $data->allowField(true)->save();
                 return json(['status'=>1]);
             }catch(Exception $e){

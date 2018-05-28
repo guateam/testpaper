@@ -32,7 +32,7 @@ $('#next').click(() => {
             score: score
         }).done((data) => {
             if (data.status == 1) {
-                swal('成功', '修改成功！', 'success').then((ok) => {
+                swal('成功', '该道填空题修改成功！', 'success').then((ok) => {
                     self.location = document.referrer;
                 })
             }

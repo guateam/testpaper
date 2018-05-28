@@ -1,5 +1,5 @@
 function commit(id) {
-    swal('提示', '是否确认？', 'info', {
+    swal('提示', '是否确认提交试卷？', 'info', {
         buttons: {
             yes: {
                 text: "是",
@@ -16,11 +16,11 @@ function commit(id) {
         if (ok) {
             $.post('/testpaper/public/index.php/uploader/addtestpaper/commit/id/' + id).done((data) => {
                 if (data.status == 1) {
-                    swal('成功', '提交成功，等待审核。', 'success').then((ok) => {
+                    swal('成功', '提交试卷成功，等待审核。', 'success').then((ok) => {
                         self.location = document.referrer;
                     })
                 } else {
-                    swal('错误', '提交失败', 'error')
+                    swal('错误', '提交试卷失败', 'error')
                 }
             })
         }
