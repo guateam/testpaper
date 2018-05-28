@@ -42,6 +42,10 @@
                             <li class="active">
                                 <a href="">预览</a>
                             </li>
+                            {if condition="$data.state!=0 && $flag!=1"}
+                            <li>
+                                <a href="/testpaper/public/index.php/uploader/addtestpaper/index/id/{$id}">补充录入</a>
+                            </li>{else /}{/if}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
