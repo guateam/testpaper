@@ -137,7 +137,8 @@
                     'subject'=>$testpaper->Subject,
                     'school'=>$testpaper->School,
                     'children'=>$data,
-                    'state'=>$testpaper->State
+                    'state'=>$testpaper->State,
+                    'score'=>$testpaper->Score
                 ];
             }
         }
@@ -254,5 +255,46 @@
                 ]);
                 $testpaper->save();
             }
+        }
+        /**
+         * 判断试卷是否录入完全的函数
+         * 0未知试卷，1完成录入，-1录入不完全，-2录入总分不一致
+         */
+        public function iscomplete($id){
+            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
+            if($testpaper){
+                $list=json_decode($testpaper->HeadQuestion,true);
+                $select=new \app\api\controller\Select();
+                $fill=new \app\api\controller\Fill();
+                $shortanswer=new \app\api\controller\Shortanswer();
+                $score=0;
+                foreach($list as $key=>$value){
+                    switch($value['type']){
+                        case '选择题':
+                            $child=$select->getdata($id,$key+1);
+                            break;
+                        case '填空题':
+                            $child=$fill->getdata($id,$key+1);
+                            break;
+                        case '简答题':
+                            $child=$shortanswer->getdata($id,$key+1);
+                            break;
+                        default:
+                            $child=[];
+                    }
+                    if(count($child)!=$value['number']){
+                        return -1;
+                    }
+                    foreach($child as $value){
+                        $score+=$value['score'];
+                    }
+                }
+            }
+            if($score==$testpaper->Score){
+                return 1;
+            }else{
+                return -2;
+            }
+            return 0;
         }
     }

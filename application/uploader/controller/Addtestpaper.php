@@ -12,6 +12,7 @@ class Addtestpaper extends Controller{
                 if($data){
                     $this->assign('id',$id);
                     $this->assign('data',$data);
+                    setcookie('iscomplete',$testpaper->iscomplete($id));
                     return $this->fetch('addtestpaper');
                 }
                 return $this->error('未知的试卷');
