@@ -14,7 +14,9 @@ class Overview extends Controller{
                 if($data){
                     $this->assign('id',$id);
                     $this->assign('data',$data);
-                    setcookie('iscomplete',$testpaper->iscomplete($id));
+                    $flag=$testpaper->iscomplete($id);
+                    setcookie('iscomplete',$flag);
+                    $this->assign('flag',$flag);
                     return $this->fetch('overview');
                 }
             }
