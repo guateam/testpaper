@@ -10,6 +10,9 @@ editor1.customConfig.zIndex = 1
 editor1.create()
     // 初始化 textarea 的值
 $text1.val(editor1.txt.html())
+$("#addunderline").click(() => {
+    editor1.cmd.do('insertHTML', '__');
+})
 
 function updateprogress() {
     $.get("/testpaper/public/index.php/uploader/fill/getprogress", {
