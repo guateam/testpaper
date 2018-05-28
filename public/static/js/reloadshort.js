@@ -29,7 +29,7 @@ function send_child_number(data, belongpaper) {
                         answer: $("#small-answer-" + i).val(),
                         score: $("#small-score-" + i).val()
                     }).done(function() {
-                        swal("完成", "修改成功", "success").then((ok)=>{
+                        swal("完成", "该道简答题修改成功", "success").then((ok)=>{
                             if(ok){
                                 editor.txt.clear();
                                 history.back(-1);
@@ -39,7 +39,7 @@ function send_child_number(data, belongpaper) {
                 }
             })
         } else {
-            swal("完成", "修改成功", "success").then((ok)=>{
+            swal("完成", "该道简答题修改成功", "success").then((ok)=>{
                 if(ok){
                     editor.txt.clear();
                     self.location = document.referrer;

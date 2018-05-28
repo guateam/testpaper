@@ -67,12 +67,12 @@ $(document).ready(function () {
                 score: $("input[name='score']").val(),
                 child: 0,
             }).done(function(result) {
-                if (result == 0) swal("错误", "添加失败", "error");
+                if (result == 0) swal("添加失败", "由于未知原因，该道简答题添加失败", "error");
                 else {
                     now_num = now_num + 1;
                     $("#bar").css("width", (now_num / max_num) * 100 + "%")
                     if (now_num > max_num) {
-                        swal("完成", "已完成本大题的录入", "success", {
+                        swal("录入完成", "已完成本大题的录入", "success", {
                             closeOnClickOutside: false,
                             closeOnEsc: false,
                         }).then((ok) => {
@@ -99,12 +99,12 @@ $(document).ready(function () {
                     score: total_score,
                     child: small_id.join(","),
                 }).done(function(result) {
-                    if (result == 0) swal("错误", "添加失败", "error");
+                    if (result == 0) swal("添加失败", "由于未知原因，该道简答题添加失败", "error");
                     else {
                         now_num++;
                         $("#bar").css("width", (now_num / max_num) * 100 + "%")
                         if (now_num > max_num) {
-                            swal("完成", "已完成本大题的录入", "success", {
+                            swal("录入完成", "已完成本大题的录入", "success", {
                                 closeOnClickOutside: false,
                                 closeOnEsc: false,
                             }).then((ok) => {
@@ -210,20 +210,61 @@ function initkindEditor() {
     editor.customConfig.uploadImgShowBase64 = true
     editor.create();
 
-    answer_editor = new E("#name");
+    answer_editor = new E("#answer");
     answer_editor.customConfig.zIndex = 1;
     answer_editor.customConfig.uploadImgShowBase64 = true
+    answer_editor.customConfig.menus = [
+        'head', // 标题
+        'bold', // 粗体
+        'fontSize', // 字号
+        'fontName', // 字体
+        'italic', // 斜体
+        'underline', // 下划线
+        'foreColor', // 文字颜色
+        'link', // 插入链接
+        'quote', // 引用
+        'image', // 插入图片
+        'table', // 表格
+        'code', // 插入代码
+    ]
     answer_editor.create();
 
-    small_answer_editor = new E("#name");
+    small_answer_editor = new E("#small-answer");
     small_answer_editor.customConfig.zIndex = 1;
     small_answer_editor.customConfig.uploadImgShowBase64 = true
+    small_answer_editor.customConfig.menus = [
+        'head', // 标题
+        'bold', // 粗体
+        'fontSize', // 字号
+        'fontName', // 字体
+        'italic', // 斜体
+        'underline', // 下划线
+        'foreColor', // 文字颜色
+        'link', // 插入链接
+        'quote', // 引用
+        'image', // 插入图片
+        'table', // 表格
+        'code', // 插入代码
+    ]
     small_answer_editor.create();
 
     small_editor = new E("#small-title");
     small_editor.customConfig.zIndex = 1;
     small_editor.customConfig.uploadImgShowBase64 = true
+    small_editor.customConfig.menus = [
+        'head', // 标题
+        'bold', // 粗体
+        'fontSize', // 字号
+        'fontName', // 字体
+        'italic', // 斜体
+        'underline', // 下划线
+        'foreColor', // 文字颜色
+        'link', // 插入链接
+        'quote', // 引用
+        'image', // 插入图片
+        'table', // 表格
+        'code', // 插入代码
+    ]
     small_editor.create();
-
 
 }

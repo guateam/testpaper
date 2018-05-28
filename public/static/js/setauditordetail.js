@@ -1,5 +1,5 @@
 $('#add').click(() => {
-    swal('提示', '是否确认添加？', 'info', {
+    swal('提示', '是否确认由这些审核人员审核该份试卷？', 'info', {
         buttons: {
             yes: {
                 text: "是",
@@ -27,15 +27,15 @@ $('#add').click(() => {
                     auditorlist: list
                 }).done((data) => {
                     if (data.status == 1) {
-                        swal('成功', '添加成功！', 'success').then((ok) => {
+                        swal('成功', '确认审核人员成功！', 'success').then((ok) => {
                             self.location = document.referrer;
                         })
                     } else {
-                        swal('错误', '添加失败！', 'error')
+                        swal('失败', '由于未知原因，确认审核人员失败！', 'error')
                     }
                 })
             } else {
-                swal('错误', '未选择添加的审核员', 'error')
+                swal('错误', '未选择审核员，请至少选择一位审核人员', 'error')
             }
         }
     })
