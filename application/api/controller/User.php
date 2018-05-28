@@ -86,7 +86,8 @@
                 $item=[
                     'name'=>$value->Username,
                     'id'=>$value->ID,
-                    'phonenumber'=>$value->PhoneNumber
+                    'phonenumber'=>$value->PhoneNumber,
+                    'num'=>$value->Num
                 ];
                 array_push($data,$item);
             }

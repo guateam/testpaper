@@ -11,19 +11,19 @@ class Newtestpaper extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
-    public function add($name,$class,$subject,$school,$uploader,$headquestion){
+    public function add($name,$class,$subject,$school,$uploader,$headquestion,$score){
         $user=new \app\api\controller\User();
         $uploaderid=$user->checkuser($uploader);
         if($uploaderid){
             $testpaper=new \app\api\controller\Testpaper();
-            $paperlist1 = \app\api\model\Testpaper::all(['Name'=>$name]);
-            $paperlist2 = \app\api\model\Testpaper::all(['Class'=>$class]);
-            $paperlist3 = \app\api\model\Testpaper::all(['Subject'=>$subject]);
-            $paperlist4 = \app\api\model\Testpaper::all(['School'=>$school]);
-            if($paperlist1){
+            $paperlist1 = \app\api\model\Testpaper::get(['Name'=>$name]);
+            $paperlist2 = \app\api\model\Testpaper::get(['Class'=>$class]);
+            $paperlist3 = \app\api\model\Testpaper::get(['Subject'=>$subject]);
+            $paperlist4 = \app\api\model\Testpaper::get(['School'=>$school]);
+            if($paperlist1 || $paperlist2 || $paperlist3 || $paperlist4){
                 return json(['status'=>-1]);
             }
-            $id=$testpaper->add($name,$class,$subject,$school,$uploaderid,$headquestion);
+            $id=$testpaper->add($name,$class,$subject,$school,$uploaderid,$headquestion,$score);
             return json(['status'=>1,'id'=>$id]);
         }
         return json(['status'=>0]);

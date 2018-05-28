@@ -6,7 +6,7 @@
      * 
      */
     class Testpaper extends Controller{
-        public function add($name,$class,$subject,$school,$uploader,$headquestion){
+        public function add($name,$class,$subject,$school,$uploader,$headquestion,$score){
             $testpaper=new \app\api\model\Testpaper();
             $testpaper->data([
                 "Name"=>$name,
@@ -15,7 +15,8 @@
                 "Subject"=>$subject,
                 'School'=>$school,
                 'HeadQuestion'=>json_encode($headquestion),
-                'State'=>0
+                'State'=>0,
+                'Score'=>$score
             ]);
             $testpaper->save();
             return $testpaper->ID;
@@ -212,6 +213,7 @@
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $user=new \app\api\controller\User();
             $user->addnum($testpaper->Uploader);
+            $user->addnum($auditorid);
             $testpaper->data([
                 'Auditor'=>$auditorid,
                 'Audittime'=>date('Y-m-d H:s'),
