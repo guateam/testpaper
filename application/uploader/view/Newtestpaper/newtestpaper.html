@@ -68,12 +68,12 @@
                                         <label class="control-label">来源学校</label><input type="text" class="form-control" id="school" />
                                     </div>
                                     <div class="form-group" id="form-score">
-                                        <label class="control-label">试卷总分</label><input type="number" class="form-control" id="score" />
+                                        <label class="control-label">试卷总分</label><input type="number" class="form-control" id="score" value="100">
                                     </div>
                                     <div id="title">
                                         <label class="control-label">大题目录</label>
 
-                                        <a id="new-question" href="#modal-container-708198" role="button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>新建</a>
+                                        <a id="new-question" href="#modal-container-708198" role="button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>添加大题</a>
                                         <!--遮罩窗体-->
                                         <div class="modal fade" id="modal-container-708198" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -85,20 +85,21 @@
                                                         </h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label>大题名称</label><input type="text" class="form-control" name="titlename" />
-                                                        </div>
+
                                                         <div class="form-group">
                                                             <label>大题种类</label>
                                                             <select class="form-control" id="titletype">
                                                                 <option value="选择题">选择题</option>
                                                                 <option value="填空题">填空题</option>
                                                                 <option value="简答题">简答题</option>
-                                                                <option value="其他">其他</option>
+                                                                <option value="其它题型">其它题型</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>题目数量</label><input type="number" class="form-control" name="titlenumber" />
+                                                            <label>大题名称(*不能为空)</label><input type="text" class="form-control" name="titlename" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>题目数量(*不能为空)</label><input type="number" class="form-control" name="titlenumber" />
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

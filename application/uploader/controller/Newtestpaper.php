@@ -27,12 +27,12 @@ class Newtestpaper extends Controller{
 
     //检测试卷是否重复
     public function check_paper_reupload($name,$class,$subject,$school){
-        $paperlist1 = \app\api\model\Testpaper::get(['Name'=>$name]);
-            $paperlist2 = \app\api\model\Testpaper::get(['Class'=>$class]);
-            $paperlist3 = \app\api\model\Testpaper::get(['Subject'=>$subject]);
-            $paperlist4 = \app\api\model\Testpaper::get(['School'=>$school]);
-            if($paperlist1 || $paperlist2 || $paperlist3 || $paperlist4){
+        $paper= \app\api\model\Testpaper::get(['Name'=>$name]);
+        if($paper){
+            if($paper->Class==$class && $paper->Subject==$subject && $paper->School==$school){
                 return 0;
-            }else return 1;
+            }
+        }
+        return 1;
     }
 }
