@@ -37,7 +37,7 @@
                             break;
                         case '简答题':
                             $link='shortanswer';
-                            $break;
+                            break;
                         default:
                             $link='shortanswer';
                     }
@@ -142,6 +142,7 @@
                     'score'=>$testpaper->Score,
                     'uploader'=>$user->getname($testpaper->Uploader),
                     'auditor'=>$user->getname($testpaper->Auditor),
+                    'unexpectscore'=>$this->getunexpectscore($id)
                 ];
             }
         }
@@ -332,4 +333,39 @@
             }
             return 0;
         }
+        public function getunexpectscore($id){
+            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
+            if($testpaper){
+                $list=json_decode($testpaper->HeadQuestion,true);
+                $select=new \app\api\controller\Select();
+                $fill=new \app\api\controller\Fill();
+                $shortanswer=new \app\api\controller\Shortanswer();
+                $score=0;
+                foreach($list as $key=>$value){
+                    switch($value['type']){
+                        case '选择题':
+                            $child=$select->getdata($id,$key+1);
+                            break;
+                        case '填空题':
+                            $child=$fill->getdata($id,$key+1);
+                            break;
+                        case '简答题':
+                            $child=$shortanswer->getdata($id,$key+1);
+                            break;
+                        default:
+                            $child=[];
+                    }
+                    foreach($child as $value){
+                        $score+=$value['score'];
+                    }
+                }
+            }
+            if($score==$testpaper->Score){
+                return 0;
+            }else{
+                return $score-$testpaper->Score;
+            }
+            return 0;
+        }
+        
     }
