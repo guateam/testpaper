@@ -118,4 +118,11 @@
             }
             return $data;
         }
+        public function getname($userid){
+            $user=UserModel::get(['ID'=>$userid]);
+            if($user){
+                return $user->Username;
+            }
+            return "未知";
+        }
     }

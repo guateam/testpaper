@@ -131,6 +131,7 @@
                     ];
                     array_push($data,$item);
                 }
+                $user=new \app\api\controller\User();
                 return [
                     'name'=>$testpaper->Name,
                     'class'=>$testpaper->Class,
@@ -138,7 +139,9 @@
                     'school'=>$testpaper->School,
                     'children'=>$data,
                     'state'=>$testpaper->State,
-                    'score'=>$testpaper->Score
+                    'score'=>$testpaper->Score,
+                    'uploader'=>$user->getname($testpaper->Uploader),
+                    'auditor'=>$user->getname($testpaper->Auditor),
                 ];
             }
         }
@@ -203,6 +206,24 @@
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
                     'school'=>$value->School
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
+        public function getpasspaperforadmin(){
+            $list=\app\api\model\Testpaper::all(["State"=>2]);
+            $data = [];
+            $user=new \app\api\controller\User();
+            foreach ($list as $value) {
+                $item=[
+                    "id"=>$value->ID,
+                    "name"=>$value->Name,
+                    'class'=>$value->Class,
+                    'subject'=>$value->Subject,
+                    'school'=>$value->School,
+                    'uploader'=>$user->getname($value->Uploader),
+                    'auditor'=>$user->getname($value->Auditor),
                 ];
                 array_push($data,$item);
             }
