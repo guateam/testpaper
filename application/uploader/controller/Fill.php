@@ -20,6 +20,7 @@ class Fill extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
+    
     public function add($belong,$belongid,$name,$answer,$score){
         $fill=new \app\api\controller\Fill();
         $fill->add($belong,$belongid,$name,$answer,$score);
