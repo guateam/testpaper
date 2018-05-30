@@ -22,6 +22,7 @@
                     <h1>
                         试题录入
                         <small>修改</small>
+                        {include file="../application/common/QQ.html" /}
                     </h1>
                 </div>
                 <nav class="navbar navbar-default" role="navigation">
@@ -69,7 +70,7 @@
                                     <form role="form">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">题干</label>
-                                            <div id = "big-name">
+                                            <div id="big-name">
                                                 <p>{$data.Name}</p>
                                             </div>
                                         </div>
@@ -79,18 +80,25 @@
                                                 <label class="col-sm-1 control-label">本题分值</label>
                                                 <input id="big-score" class="form-control" type="number" name="score" min="1" value='{$data.Score}'>
                                             </div>
-                                            <textarea class="form-control" id="big-answer" style="height: 150px;" id="big-answer">{$data.Answer}</textarea> 
-                                           {else /} {volist name = "$childrendata" id = "it"}
+                                            <div id="big-answer">
+                                                <p>{$data.Answer}</p>
+                                            </div>
+                                             {else /} {volist name = "$childrendata" id = "it"}
                                             <div class="form-group well">
                                                 <label>小题干{$key+1}</label>
-                                                <textarea id="small-name-{$key}" class="form-control" id="name" style="height: 150px;">{$it.Name}</textarea>
+                                                <div id="small-name-{$key}">
+                                                    <p>{$it.Name}</p>
+                                                </div>
+
                                                 <label class="col-sm-1 control-label">本题分值</label>
                                                 <input id="small-score-{$key}" class="form-control" type="number" name="score" min="1" value='{$it.Score}'>
                                                 <label>小题答案</label>
-                                                <textarea id="small-answer-{$key}" class="form-control" id="name" style="height: 150px;">{$it.Answer}</textarea>
+                                                <div id="small-answer-{$key}">
+                                                    <p>{$it.Answer}</p>
+                                                </div>
+
                                             </div>
                                             {/volist} {/if}
-
                                         </div>
                                         <div class="clearfix"></div>
                                         <button type="button" class="btn btn-success" id="send" onclick="send_child_number({$childrennumber},'{$data.Belong}')">完成修改</button>

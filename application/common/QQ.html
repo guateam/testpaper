@@ -1,0 +1,7 @@
+<small style = "float:right" id = 'QQ' >客服QQ:</small>
+<script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+<script>
+$.post("/testpaper/public/index.php/api/Qq/getQQnumber").done((result)=>{
+    $("#QQ").html('客服QQ:'+result);
+})
+</script>

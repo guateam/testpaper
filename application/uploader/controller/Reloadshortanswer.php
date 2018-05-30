@@ -21,6 +21,7 @@ class Reloadshortanswer extends Controller{
                         array_push($childrendata,$child);
                     }
                 }
+                setcookie("childrennumber",count($childrendata));
                 $this->assign("childrennumber",count($childrendata));
                 $this->assign('childrendata',$childrendata);
                 return $this->fetch('reloadshortanswer');

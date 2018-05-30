@@ -28,7 +28,7 @@ $(document).ready(function () {
     });
     $('#confirm-answer').on('click', function() {
         $("#new-ans").hide()
-        var txt = "<p>答案：" + $('textarea[id="answer"]').val() + "</p>"
+        var txt = "<p>答案：" +answer_editor.txt.html() + "</p>"
         $('#flag').append(txt);
     })
     $("#confirm-small").on("click", function() {
@@ -39,13 +39,14 @@ $(document).ready(function () {
                 "belong": $.cookie('belong'),
                 "belongid": $.cookie('belongid'),
                 "name": small_editor.txt.html(),
-                "answer": $('#small-answer').val(),
+                "answer": small_answer_editor.txt.html(),
                 "score": $("input[name='small-score']").val()
             });
-            small_editor.txt.clear();
+
             total_score += parseInt($("input[name='small-score']").val());
-            var txt = "<p>小题：" + $('#small-title').val() + "  分值:" + $("input[name='small-score']").val() + "分</p>"
+            var txt = "<p>小题：" + small_editor.txt.html() + "  分值:" + $("input[name='small-score']").val() + "分</p>"
             $('#flag').html($('#flag').html() + txt);
+            small_editor.txt.clear();
             //清空上次输入的内容
             $('#small-title').val("");
             $('#small-answer').val("");
@@ -63,7 +64,7 @@ $(document).ready(function () {
                 belong: belong,
                 belongid: belongid,
                 name: editor.txt.html(),
-                ans: $("#answer").val(),
+                ans: answer_editor.txt.html(),
                 score: $("input[name='score']").val(),
                 child: 0,
             }).done(function(result) {
@@ -95,7 +96,7 @@ $(document).ready(function () {
                     belong: belong,
                     belongid: belongid,
                     name: editor.txt.html(),
-                    ans: $("#answer").val(),
+                    ans: answer_editor.txt.html(),
                     score: total_score,
                     child: small_id.join(","),
                 }).done(function(result) {
@@ -130,7 +131,7 @@ function which_case(cs) {
 }
 
 function small_is_empty() {
-    if ($('#small-answer').val() == '' || $('#small-title').val() == '') return true;
+    if (small_answer_editor.txt.html() == '' || small_editor.txt.html()== '') return true;
     else {
         return false;
     }

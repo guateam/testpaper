@@ -1,0 +1,9 @@
+$("#QQbutton").on('click',function(){
+    if($("#QQnumber").val()!=''){
+        $.post("/testpaper/public/index.php/api/Qq/setQQnumber",{
+            qqnumber:$("#QQnumber").val()
+        }).done((result)=>{
+            swal('成功',"成功更新客服QQ号","success");
+        })
+    }
+})
