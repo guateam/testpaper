@@ -163,12 +163,18 @@
       }
 
       let originX, originY, trail = [], isMouseDown = false
+
+      //魔改内容，判断是否已经完成验证
+      let isComplete = false;
+
       this.slider.addEventListener('mousedown', function (e) {
         originX = e.x, originY = e.y
         isMouseDown = true
       })
+
+      //添加鼠标监听，判断拖动滑块
       document.addEventListener('mousemove', (e) => {
-        if (!isMouseDown) return false
+        if (!isMouseDown || isComplete) return false
         const moveX = e.x - originX
         const moveY = e.y - originY
         if (moveX < 0 || moveX + 38 >= w) return false
@@ -181,7 +187,7 @@
         trail.push(moveY)
       })
       document.addEventListener('mouseup', (e) => {
-        if (!isMouseDown) return false
+        if (!isMouseDown || isComplete) return false
         isMouseDown = false
         if (e.x == originX) return false
         removeClass(this.sliderContainer, 'sliderContainer_active')
@@ -191,6 +197,7 @@
           if (TuringTest) {
             addClass(this.sliderContainer, 'sliderContainer_success')
             this.success && this.success()
+            isComplete = true;
           } else {
             addClass(this.sliderContainer, 'sliderContainer_fail')
             this.text.innerHTML = '再试一次'
