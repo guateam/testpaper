@@ -3,7 +3,11 @@ $(document).ready(function() {
     var username = $("#username");
     var login = $("#login-button");
     var register = $("#register-button");
-
+    var captcha = false
+    jigsaw.init(document.getElementById('captcha'), function() {
+        captcha = true
+    })
+    $('.refreshIcon').addClass('text-right')
     login.on("click", function() {
         if (password.val() == '') {
             swal("错误", "密码不能为空", "error");
@@ -13,36 +17,40 @@ $(document).ready(function() {
             swal("错误", "用户名不能为空", "error");
             error_username();
         } else pass_username();
-        if (password.val() != '' || username.val() != '') {
-            $.post("/testpaper/public/index.php/api/User/login", {
-                Username: username.val(),
-                Password: password.val()
-            }).done(function(result) {
-                if (result.status == 1) {
-                    $.cookie("userid", result.cookie, {
-                        path: '/'
-                    })
-                    if (result.type == 1) {
-                        swal("成功", "登录成功!", "success").then((ok) => {
-                            window.location.href = "/testpaper/public/index.php/auditor"
+        if (captcha) {
+            if (password.val() != '' || username.val() != '') {
+                $.post("/testpaper/public/index.php/api/User/login", {
+                    Username: username.val(),
+                    Password: password.val()
+                }).done(function(result) {
+                    if (result.status == 1) {
+                        $.cookie("userid", result.cookie, {
+                            path: '/'
                         })
-                    } else if (result.type == 0) {
-                        swal("成功", "登录成功!", "success").then((ok) => {
-                            window.location.href = "/testpaper/public/index.php/uploader"
-                        })
-                    } else {
-                        swal("成功", "登录成功!", "success").then((ok) => {
-                            window.location.href = "/testpaper/public/index.php/admin"
-                        })
+                        if (result.type == 1) {
+                            swal("成功", "登录成功!", "success").then((ok) => {
+                                window.location.href = "/testpaper/public/index.php/auditor"
+                            })
+                        } else if (result.type == 0) {
+                            swal("成功", "登录成功!", "success").then((ok) => {
+                                window.location.href = "/testpaper/public/index.php/uploader"
+                            })
+                        } else {
+                            swal("成功", "登录成功!", "success").then((ok) => {
+                                window.location.href = "/testpaper/public/index.php/admin"
+                            })
+                        }
+                    } else if (result.status == 0) {
+                        swal("错误", "密码错误!", "error");
+                        error_password();
+                    } else if (result.status == -1) {
+                        swal("错误", "用户名不存在", "error");
+                        error_username();
                     }
-                } else if (result.status == 0) {
-                    swal("错误", "密码错误!", "error");
-                    error_password();
-                } else if (result.status == -1) {
-                    swal("错误", "用户名不存在", "error");
-                    error_username();
-                }
-            });
+                });
+            }
+        } else {
+            swal('错误', '请先验证验证码', 'error')
         }
     })
     register.on('click', function() {

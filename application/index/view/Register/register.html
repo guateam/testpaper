@@ -15,6 +15,7 @@
         }
     </style>
     <link href="__STATIC__/vendor/icheck-1.x/skins/flat/blue.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/jigsaw/jigsaw.css" />
 </head>
 
 <body>
@@ -63,6 +64,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-md-3"></div>
+                <div class="col-md-8">
+                    <div id='captcha' style="position: relative;"></div>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <button type="button" class="btn btn-default" id="register-button">注册</button>
 
@@ -77,6 +84,7 @@
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src="__STATIC__/vendor/icheck-1.x/icheck.js"></script>
+    <script src="__STATIC__/vendor/jigsaw/jigsaw.js"></script>
     <script>
         $('input[type="radio"]').iCheck({
             checkboxClass: 'icheckbox_flat-blue',

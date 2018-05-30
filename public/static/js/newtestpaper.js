@@ -22,29 +22,29 @@ $("#new-question").on('click', () => {
             class: $("#subject").val(),
             subject: $("#institute").val(),
             school: $("#school").val(),
-        }).done((data)=>{
-            if(data == 0){
-                swal("错误", "相同信息的试卷已经存在，请重新输入", 'error',{
+        }).done((data) => {
+            if (data == 0) {
+                swal("错误", "相同信息的试卷已经存在，请重新输入", 'error', {
                     closeOnClickOutside: false,
                     closeOnEsc: false,
-                }).then((ok)=>{
-                    if(ok){
+                }).then((ok) => {
+                    if (ok) {
                         location.reload();
                     }
                 });
             }
         })
-    }else{
+    } else {
         swal("错误", "试卷基础信息还未填写完毕，请先填写试卷基础信息", 'error');
     }
 
 })
 
-$("#quit").on("click", function () {
+$("#quit").on("click", function() {
     $.cookie("userid", "", { expires: -1, path: '/' });
     window.location.href = "/testpaper/public/index.php/index";
 });
-$('#add').click(function () {
+$('#add').click(function() {
     name = $("input[name='titlename']").val();
     type = $("#titletype").val();
     number = $("input[name='titlenumber']").val()
@@ -61,31 +61,31 @@ $('#add').click(function () {
     $("input[name='titlenumber']").val("")
 })
 
-$('#send').click(function () {
-    var state = check_all_fill()
-    if (state == -1) swal('添加试卷失败', '请添加至少一道大题', 'error');
-    else if (state == 0) swal('添加试卷失败', '请填写完整试卷信息', 'error');
-    else {
-        $.post("/testpaper/public/index.php/uploader/newtestpaper/add", {
-            name: $("#name").val(),
-            class: $("#subject").val(),
-            subject: $("#institute").val(),
-            school: $("#school").val(),
-            uploader: $.cookie("userid"),
-            headquestion: titlelist,
-            score: $("#score").val()
-        }).done(function (data) {
-            if (data.status == 1) {
-                swal('成功', '试卷新建成功，请继续完善该份试卷！', 'success').then((ok) => {
-                    window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + data.id
-                })
-            } else if (data.status == -1) {
-                swal("错误", "相同信息的试卷已经存在", 'error');
-            }
-        })
-    }
-})
-//检测所有元素是否被填写
+$('#send').click(function() {
+        var state = check_all_fill()
+        if (state == -1) swal('添加试卷失败', '请添加至少一道大题', 'error');
+        else if (state == 0) swal('添加试卷失败', '请填写完整试卷信息', 'error');
+        else {
+            $.post("/testpaper/public/index.php/uploader/newtestpaper/add", {
+                name: $("#name").val(),
+                class: $("#subject").val(),
+                subject: $("#institute").val(),
+                school: $("#school").val(),
+                uploader: $.cookie("userid"),
+                headquestion: titlelist,
+                score: $("#score").val()
+            }).done(function(data) {
+                if (data.status == 1) {
+                    swal('成功', '试卷新建成功，请继续完善该份试卷！', 'success').then((ok) => {
+                        window.location.href = '/testpaper/public/index.php/uploader/addtestpaper/index/id/' + data.id
+                    })
+                } else if (data.status == -1) {
+                    swal("错误", "相同信息的试卷已经存在", 'error');
+                }
+            })
+        }
+    })
+    //检测所有元素是否被填写
 function check_all_fill() {
     fill_complete = true;
     for (i = 0; i < input_id_group.length; i++) {
@@ -103,11 +103,10 @@ function check_all_fill() {
             return 1;
         }
 
-    }
-    else return 0;
+    } else return 0;
 }
 //检测基础试卷信息是否填写完整
-function check_base_fill(){
+function check_base_fill() {
     fill_complete = true;
     for (i = 0; i < input_id_group.length; i++) {
         if ($("#" + input_id_group[i]).val() == '') {
@@ -117,8 +116,9 @@ function check_base_fill(){
     }
     if (fill_complete) {
         return 1;
-    }else return 0;
+    } else return 0;
 }
+
 function error_item(str) {
     $("#form-" + str).addClass("has-error");
 }
