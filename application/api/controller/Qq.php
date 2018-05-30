@@ -22,10 +22,12 @@
         
         //重新设置客服qq
         public function setQQnumber($qqnumber){
-            $data = QQModel::get(1);
-            if($data){
-               $data->Number = $qqnumber;
-               $data->save();
+            $data = QQModel::all();
+            if(count($data)>0){
+               $data[0]->Number = $qqnumber;
+               $data[0]->save();
+            }else{
+                self::addQQnumber($qqnumber);
             }
             return 1;
         }
