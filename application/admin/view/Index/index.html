@@ -16,11 +16,10 @@
             <div class="col-md-12 column">
                 <!--这里是标题部分-->
                 <div class="page-header">
-                        <h1>
-                            管理员
-                            <small>主页</small>
-                            {include file="../application/common/QQ.html" /}
-                        </h1>
+                    <h1>
+                        管理员
+                        <small>主页</small> {include file="../application/common/QQ.html" /}
+                    </h1>
                 </div>
                 <!--这里是导航栏部分-->
                 <nav class="navbar navbar-default" role="navigation">
@@ -146,7 +145,7 @@
                                 </a>
                                 <a class="btn btn-default" id="QQ" href="#QQ-page" data-toggle="modal">
                                     修改客服QQ
-                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                    <span class="glyphicon glyphicon-phone"></span>
                                 </a>
                                 <!--这里是弹出的帮助页面-->
                                 <div class="modal fade" id="help-page" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -205,14 +204,17 @@
                                                 </h4>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal" role="form">
-                                                    <div class="form-group" id="form-QQ">
-                                                        <input type = "text" class="form-control col-md-6" id = "QQnumber">
-                                                    </div>
-                                                    <div class="form-group center" id="form-QQ">
-                                                        <button type = "button" class = "btn btn-default" id = "QQbutton">确认修改</button>
-                                                    </div>
-                                                </form>
+                                                <div class="row">
+                                                    <form class="col-md-12" role="form">
+                                                        <div class="form-group" id="form-QQ">
+                                                            <input type="text" class="form-control col-md-6" id="QQnumber">
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-group center" id="form-QQ">
+                                                            <button type="button" class="btn btn-default" id="QQbutton">确认修改</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
