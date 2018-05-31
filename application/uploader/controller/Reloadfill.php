@@ -10,6 +10,8 @@ class Reloadfill extends Controller{
                 $select=new \app\api\controller\Fill();
                 $data=$select->getreloaddata($id);
                 if($data){
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                     $this->assign('data',$data);
                     setcookie('reloadfillid',$id);
                     return $this->fetch('reloadfill');

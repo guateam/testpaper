@@ -1,6 +1,7 @@
 <?php
 namespace app\uploader\controller;
 use think\Controller;
+use \app\api\model\User as UserModel;
 class Fill extends Controller{
     public function index($belong,$belongid){
         if(isset($_COOKIE['userid'])){
@@ -9,6 +10,8 @@ class Fill extends Controller{
                 $testpaper=new \app\api\controller\Testpaper();
                 $data=$testpaper->getTitle($belong,$belongid);
                 if($data){
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                     setcookie("belong",$belong);
                     setcookie("belongid",$belongid);
                     $this->assign('id',$belong);

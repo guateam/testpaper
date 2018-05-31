@@ -8,10 +8,11 @@ class Audit extends Controller{
             $user=new \app\api\controller\User();
             if($user->checkuser($_COOKIE['userid'])){
                 $testpaper=new \app\api\controller\Testpaper();
-                $user=new \app\api\controller\User();
+                $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
                 $userid=$user->checkuser($_COOKIE['userid']);
                 if($userid){
                     $data=$testpaper->getwaitingtestpaper($userid);
+                    $this->assign("user",$userdata);
                     $this->assign('data',$data);
                     $this->assign('empty','<h1 class="text-center success">没有等待审核的试卷<h1>');
                     return $this->fetch('audit');

@@ -38,13 +38,16 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href = "/testpaper/public/index.php/uploader/index">主页</a>
+                                <a href="/testpaper/public/index.php/uploader/index">主页</a>
                             </li>
                             <li id="paper-nav" class="active">
                                 <a href="">历史完成</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>录入员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
                                     <strong class="caret"></strong>
@@ -56,7 +59,7 @@
                                     <li class="divider">
                                     </li>
                                     <li>
-                                        <a id = "quit" href="">退出</a>
+                                        <a id="quit" href="">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -105,7 +108,7 @@
                                                 {$it.school}
                                             </td>
                                             <td>
-                                                <button value = {$it.id} type="button" class="btn btn-default col-sm-offset-1" onclick = "turn_to_detail(this.value)">
+                                                <button value={ $it.id} type="button" class="btn btn-default col-sm-offset-1" onclick="turn_to_detail(this.value)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                     查看
                                                 </button>

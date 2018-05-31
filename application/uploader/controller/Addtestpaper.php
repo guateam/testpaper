@@ -10,6 +10,8 @@ class Addtestpaper extends Controller{
                 $testpaper=new \app\api\controller\Testpaper();
                 $data=$testpaper->getheadquestion($id);
                 if($data){
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                     $this->assign('id',$id);
                     $this->assign('data',$data);
                     setcookie('iscomplete',$testpaper->iscomplete($id));

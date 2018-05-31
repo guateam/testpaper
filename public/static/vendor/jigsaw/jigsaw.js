@@ -5,6 +5,13 @@
     h = 155, // canvas高度
     PI = Math.PI
   const L = l + r * 2 // 滑块实际边长
+  //魔改内容，判断是否已经完成验证
+  let isComplete = false;
+  //是否是一次验证中的第一次点击，用来标记计时开始
+  let isFirstClick = true;
+  //是否超时
+  let isTimeUp = false;
+  let timer = null;
 
   function getRandomNumberByRange(start, end) {
     return Math.round(Math.random() * (end - start) + start)
@@ -27,7 +34,7 @@
     img.src = getRandomImg()
     return img
   }
-  
+
   function createElement(tagName) {
     return document.createElement(tagName)
   }
@@ -39,7 +46,7 @@
   function removeClass(tag, className) {
     tag.classList.remove(className)
   }
-  
+
   function getRandomImg() {
     return 'https://picsum.photos/300/150/?image=' + getRandomNumberByRange(0, 1084)
   }
@@ -74,10 +81,13 @@
   }
 
   class jigsaw {
-    constructor(el, success, fail) {
+    constructor(el, success, fail,limit) {
+      limit = typeof limit !== 'undefined' ?  limit : -1;
       this.el = el
       this.success = success
       this.fail = fail
+      //时限
+      this.timeLimit = limit
     }
 
     init() {
@@ -163,13 +173,22 @@
       }
 
       let originX, originY, trail = [], isMouseDown = false
+      let timeLimit = this.timeLimit
 
-      //魔改内容，判断是否已经完成验证
-      let isComplete = false;
+
 
       this.slider.addEventListener('mousedown', function (e) {
         originX = e.x, originY = e.y
         isMouseDown = true
+        if (isFirstClick && timeLimit >0) {
+          console.log("开启计时");
+          isFirstClick = false;
+           timer = setTimeout(() => {
+            isTimeUp = true;
+            console.log("超时");
+          }, timeLimit);
+        }
+
       })
 
       //添加鼠标监听，判断拖动滑块
@@ -192,20 +211,34 @@
         if (e.x == originX) return false
         removeClass(this.sliderContainer, 'sliderContainer_active')
         this.trail = trail
-        const {spliced, TuringTest} = this.verify()
+        const { spliced, TuringTest } = this.verify()
         if (spliced) {
           if (TuringTest) {
-            addClass(this.sliderContainer, 'sliderContainer_success')
-            this.success && this.success()
-            isComplete = true;
+            //判断对准但是超时的情况
+            if (isTimeUp) {
+              addClass(this.sliderContainer, 'sliderContainer_fail')
+              this.fail && this.fail()
+              this.text.innerHTML = '超时，再试一次'
+              setTimeout(() => {
+                this.reset()
+              }, 1000)
+            }
+            else {
+              addClass(this.sliderContainer, 'sliderContainer_success')
+              this.success && this.success()
+              isComplete = true;
+              clearTimeout(timer);
+            }
+
           } else {
             addClass(this.sliderContainer, 'sliderContainer_fail')
-            this.text.innerHTML = '再试一次'
+            this.text.innerHTML = '位置不准确,再试一次'
             this.reset()
           }
         } else {
           addClass(this.sliderContainer, 'sliderContainer_fail')
           this.fail && this.fail()
+          this.text.innerHTML = '位置不准确,再试一次';
           setTimeout(() => {
             this.reset()
           }, 1000)
@@ -226,6 +259,9 @@
     }
 
     reset() {
+      clearTimeout(timer);
+      isFirstClick = true;
+      isTimeUp = false;
       this.sliderContainer.className = 'sliderContainer'
       this.slider.style.left = 0
       this.block.style.left = 0
@@ -238,8 +274,8 @@
   }
 
   window.jigsaw = {
-    init: function (element, success, fail) {
-      new jigsaw(element, success, fail).init()
+    init: function (element, success,limit, fail) {
+      new jigsaw(element, success, fail,limit).init()
     }
   }
 }(window))

@@ -10,7 +10,8 @@ class Reloadshortanswer extends Controller{
             $childrendata = [];
             if($data){
                 $this->assign('data',$data);
-               
+                $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                $this->assign("user",$userdata);
                 if($data->Children != 0)
                 {
                     $childrenlist = explode(",",$data->Children);

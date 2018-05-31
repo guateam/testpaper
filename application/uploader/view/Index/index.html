@@ -46,6 +46,9 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>录入员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
                                     <strong class="caret"></strong>
@@ -93,7 +96,8 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/city/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            正在创建 {if condition="$working>0 "}<span class="label label-success">{$working}</span>{else /}{/if}
+                                            正在创建 {if condition="$working>0 "}
+                                            <span class="label label-success">{$working}</span>{else /}{/if}
                                         </h3>
                                         <p>
                                             还没完全创建完毕的试卷
@@ -110,7 +114,9 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/city/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            暂未通过审核 {if condition="$waiting>0 "}<span class="label label-warning">{$waiting}</span>{else /}{/if} {if condition="$error>0 "}<span class="label label-danger">{$error}</span>{else /}{/if}
+                                            暂未通过审核 {if condition="$waiting>0 "}
+                                            <span class="label label-warning">{$waiting}</span>{else /}{/if} {if condition="$error>0 "}
+                                            <span class="label label-danger">{$error}</span>{else /}{/if}
                                         </h3>
                                         <p>
                                             待审核试卷或被退回的试卷页面
@@ -175,9 +181,9 @@
                                 </p>
                             </div>
                             <div class="list-group-item ">
-                                <a class="btn btn-default" id="help-button" href="#help-page" data-toggle="modal">
-                                    帮助
+                                <a class="btn btn-danger" id="help-button" href="#help-page" data-toggle="modal">
                                     <span class="glyphicon glyphicon-question-sign"></span>
+                                    帮助
                                 </a>
                                 <!--这里是弹出的帮助页面-->
                                 <div class="modal fade" id="help-page" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -212,14 +218,16 @@
                                                 <div>
                                                     <h2>如何才算录用了我编写的试卷 ？</h2>
                                                     <p>
-                                                        试卷上传后将会由审核员进行审核，您可以在 <b>主页</b> 的
+                                                        试卷上传后将会由审核员进行审核，您可以在
+                                                        <b>主页</b> 的
                                                         <b>暂未通过审核</b>板块查阅正在进行审核的试卷，当有正在审核的试卷时， 该板块会有
                                                         <b style="color:#ffc64b">黄色</b>的标签显示正在审核的试卷 数量:
                                                         <h3>
                                                             <span class="label label-warning">1</span>
                                                         </h3>
                                                     </p>
-                                                    <hr><br>
+                                                    <hr>
+                                                    <br>
                                                 </div>
                                                 <div>
                                                     <h2>试卷被退回 ?</h2>
@@ -234,12 +242,14 @@
                                                         </div>
                                                         您可以在
                                                         <b>主页</b> 的
-                                                        <b>暂未通过审核</b> 板块查阅详细信息,有被退回的试卷时， 该 板块会有<b style="color:red">红色</b>标签显示被退回的试卷数量:
+                                                        <b>暂未通过审核</b> 板块查阅详细信息,有被退回的试卷时， 该 板块会有
+                                                        <b style="color:red">红色</b>标签显示被退回的试卷数量:
                                                         <h3>
                                                             <span class="label label-danger">2</span>
                                                         </h3>
                                                     </p>
-                                                    <hr><br>
+                                                    <hr>
+                                                    <br>
                                                 </div>
 
                                             </div>

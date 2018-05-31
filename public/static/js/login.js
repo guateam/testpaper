@@ -6,7 +6,7 @@ $(document).ready(function() {
     var captcha = false
     jigsaw.init(document.getElementById('captcha'), function() {
         captcha = true
-    })
+    },3000)
     $('.refreshIcon').addClass('text-right')
     login.on("click", function() {
         if (password.val() == '') {

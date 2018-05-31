@@ -19,14 +19,22 @@
             <div class="col-md-12 column">
                 <div class="page-header">
                     <h1>
-                        试题录入 <small>新建</small>
+                        试题录入
+                        <small>新建</small>
                         {include file="../application/common/QQ.html" /}
                     </h1>
                 </div>
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a class="navbar-brand" href="/testpaper/public/index.php/uploader/index"><strong>试题录入</strong></a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/testpaper/public/index.php/uploader/index">
+                            <strong>试题录入</strong>
+                        </a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,8 +47,13 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>录入员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多<strong class="caret"></strong></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
+                                    <strong class="caret"></strong>
+                                </a>
                                 <ul class="dropdown-menu">
                                     <li class="divider">
                                     </li>
@@ -58,27 +71,35 @@
                         <div class="row">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>{$data.name}<small><now id="now">6</now>/{$data.number}</small></h2>
+                                    <h2>{$data.name}
+                                        <small>
+                                            <now id="now">6</now>/{$data.number}</small>
+                                    </h2>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" id="progress">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                            style="width: 60%;" id="progress">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     <form role="form">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">题干(需要挖空处请使用 “__”双下划线标识,两个标识中间填写答案)</label><button class="btn btn-sm btn-default" type="button" id="addunderline">添加双下划线标识符__</button>
+                                            <label for="exampleInputEmail1">题干(需要挖空处请使用 “__”双下划线标识,两个标识中间填写答案)</label>
+                                            <button class="btn btn-sm btn-default"
+                                                type="button" id="addunderline">添加双下划线标识符__</button>
                                             <hr>
                                             <div id="editor1"></div>
                                             <textarea class="form-control" id="name" style="display: none" name='name'></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">分值</label><input class="form-control" id="name" type="number" name='score' />
+                                            <label for="exampleInputEmail1">分值</label>
+                                            <input class="form-control" id="name" type="number" name='score' />
                                         </div>
                                         <div id="title">
                                             <label for="exampleInputEmail1">帮助选项</label>
 
-                                            <a id="modal-708198" href="#modal-container-708198" role="button" class="btn btn-warning" data-toggle="modal"><span class="glyphicon glyphicon-question-sign"></span>帮助</a>
+                                            <a id="modal-708198" href="#modal-container-708198" role="button" class="btn btn-warning" data-toggle="modal">
+                                                <span class="glyphicon glyphicon-question-sign"></span>帮助</a>
                                             <!--遮罩窗体-->
                                             <div class="modal fade" id="modal-container-708198" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -90,7 +111,9 @@
                                                         <div class="modal-body">
 
                                                             <p>
-                                                                在题干中使用 __ 英文的双下划线写在填空的开始和结束处，在中间填入答案内容即可。如：<br/> "太阳系中最大的天体是__太阳__" <br/> 如例题所示，太阳即本空格答案。
+                                                                在题干中使用 __ 英文的双下划线写在填空的开始和结束处，在中间填入答案内容即可。如：
+                                                                <br/> "太阳系中最大的天体是__太阳__"
+                                                                <br/> 如例题所示，太阳即本空格答案。
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer">
