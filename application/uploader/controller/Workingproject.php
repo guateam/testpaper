@@ -12,6 +12,8 @@ class Workingproject extends Controller{
                 $userid=$user->checkuser($_COOKIE['userid']);
                 if($userid){
                     $data=$testpaper->getworkingtestpaper($userid);
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                         $this->assign('data',$data);
                         $this->assign('empty','<h1 class="text-center success">没有正在录入的试卷<h1>');
                         return $this->fetch('workingproject');

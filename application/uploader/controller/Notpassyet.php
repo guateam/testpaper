@@ -12,6 +12,8 @@ class Notpassyet extends Controller{
                 $paper=new \app\api\controller\Testpaper();
                 $wait = $paper->getwaitingpaper($user->ID);
                 $danger = $paper->getbackpaper($user->ID);
+                $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                $this->assign("user",$userdata);
                 $this->assign("wait",$wait);
                 $this->assign("danger",$danger);
                 return $this->fetch("notpassyet");

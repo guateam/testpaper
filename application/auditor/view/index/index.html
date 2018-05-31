@@ -45,6 +45,9 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>审核员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
                                     <strong class="caret"></strong>
@@ -137,9 +140,9 @@
                                 </p>
                             </div>
                             <div class="list-group-item ">
-                                <a class="btn btn-default" id="help-button" href="#help-page" data-toggle="modal">
-                                    帮助
+                                <a class="btn btn-warning" id="help-button" href="#help-page" data-toggle="modal">
                                     <span class="glyphicon glyphicon-question-sign"></span>
+                                    帮助
                                 </a>
                                 <!--这里是弹出的帮助页面-->
                                 <div class="modal fade" id="help-page" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

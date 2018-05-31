@@ -17,13 +17,21 @@
             <div class="col-md-12 column">
                 <div class="page-header">
                     <h1>
-                        试题录入 <small>新建</small> {include file="../application/common/QQ.html" /}
+                        试题录入
+                        <small>新建</small> {include file="../application/common/QQ.html" /}
                     </h1>
                 </div>
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a class="navbar-brand" href="/testpaper/public/index.php/uploader/index"><strong>试题录入</strong></a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/testpaper/public/index.php/uploader/index">
+                            <strong>试题录入</strong>
+                        </a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -33,8 +41,13 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>录入员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">更多<strong class="caret"></strong></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown">更多
+                                    <strong class="caret"></strong>
+                                </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="/testpaper/public/index.php/uploader/index">返回主页</a>
@@ -56,24 +69,30 @@
                             <div class="col-md-12 column well">
                                 <form role="form">
                                     <div class="form-group" id="form-name">
-                                        <label class="control-label">试题名</label><input type="text" class="form-control" id="name" />
+                                        <label class="control-label">试题名</label>
+                                        <input type="text" class="form-control" id="name" />
                                     </div>
                                     <div class="form-group" id="form-subject">
-                                        <label class="control-label">试卷科目</label><input type="text" class="form-control" id="subject" />
+                                        <label class="control-label">试卷科目</label>
+                                        <input type="text" class="form-control" id="subject" />
                                     </div>
                                     <div class="form-group" id="form-institute">
-                                        <label class="control-label">所属学院</label><input type="text" class="form-control" id="institute" />
+                                        <label class="control-label">所属学院</label>
+                                        <input type="text" class="form-control" id="institute" />
                                     </div>
                                     <div class="form-group" id="form-school">
-                                        <label class="control-label">来源学校</label><input type="text" class="form-control" id="school" />
+                                        <label class="control-label">来源学校</label>
+                                        <input type="text" class="form-control" id="school" />
                                     </div>
                                     <div class="form-group" id="form-score">
-                                        <label class="control-label">试卷总分</label><input type="number" class="form-control" id="score" value="100">
+                                        <label class="control-label">试卷总分</label>
+                                        <input type="number" class="form-control" id="score" value="100">
                                     </div>
                                     <div id="title">
                                         <label class="control-label">题型目录(可添加多个同类型题型）</label>
 
-                                        <a id="new-question" href="#modal-container-708198" role="button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>添加题型</a>
+                                        <a id="new-question" href="#modal-container-708198" role="button" class="btn" data-toggle="modal">
+                                            <span class="glyphicon glyphicon-plus"></span>添加题型</a>
                                         <!--遮罩窗体-->
                                         <div class="modal fade" id="modal-container-708198" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -96,14 +115,20 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>题型名称(*不能为空)</label><input type="text" class="form-control" name="titlename" />
+                                                            <label>题型名称(*不能为空)</label>
+                                                            <input type="text" class="form-control" name="titlename"
+                                                            />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>题目数量(*不能为空)</label><input type="number" class="form-control" name="titlenumber" />
+                                                            <label>题目数量(*不能为空)</label>
+                                                            <input type="number" class="form-control"
+                                                                name="titlenumber" />
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary" id="add" data-dismiss="modal">添加</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        <button type="button" class="btn btn-primary" id="add"
+                                                            data-dismiss="modal">添加</button>
                                                     </div>
                                                 </div>
 

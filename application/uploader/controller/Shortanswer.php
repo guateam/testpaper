@@ -10,6 +10,8 @@ class Shortanswer extends Controller{
                 $testpaper=new \app\api\controller\Testpaper();
                 $data=$testpaper->getTitle($belong,$belongid);
                 if($data){
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                     setcookie("belong",$belong);
                     setcookie("belongid",$belongid);
                     $this->assign('id',$belong);

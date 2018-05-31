@@ -52,6 +52,9 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>审核员: {$user.Username}</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多
                                     <strong class="caret"></strong>
@@ -92,9 +95,11 @@
                             {volist name = "vo.children" id = "sel" key='k'}
                             <h4>{$k}.{$sel.name} ({$sel.score}分)</h4>
                             <ol type="A">
-                            {volist name = "sel.option" id = "ansoption"}
-                            <li><h5 style="margin-left:20px">{$ansoption}</h5></li>
-                            {/volist}
+                                {volist name = "sel.option" id = "ansoption"}
+                                <li>
+                                    <h5 style="margin-left:20px">{$ansoption}</h5>
+                                </li>
+                                {/volist}
                             </ol>
                             <h5>答案:{volist name='sel.answer' id='answer'}{$answer}&nbsp;{/volist}</h5>
                             <br>
@@ -112,8 +117,7 @@
                         <div class="panel-body">
                             {volist name = "vo.children" id = "fill" key='k'}
                             <h4>{$k}.{volist name='fill.name' id='name' key='b'}{$name}{if condition="$b!=$fill.end-1"}&nbsp;
-                                {else /} _________
-                                {/if}{/volist} ({$fill.score}分)</h4>
+                                {else /} _________ {/if}{/volist} ({$fill.score}分)</h4>
                             <br>
                             <h5>答案:{volist name='fill.answer' id='answer'}{$answer}&nbsp;{/volist}</h5>
                             <hr> {/volist}
@@ -124,20 +128,17 @@
                         <div class="panel-heading">
                             <span style="font-size: 30px">{$key}.</span>
                             <span style="font-size: 30px">{$vo.name}
-                                    <small>{$vo.type}</small></span style="font-size: 30px">
+                                <small>{$vo.type}</small>
+                            </span style="font-size: 30px">
                         </div>
                         <div class="panel-body">
                             {volist name = "vo.children" id = "short" key='k'}
-                            <h4>{$k}.
-                                {$short.name}
-                                ({$short.score}分)</h4>
-                            <br>
-                            {volist name = "short.child" id = "childData" key='k1'}
-                               <b>[{$key+1}]&nbsp;{$childData.name}({$childData.score}分)</b>
-                                <br>
-                                &nbsp;&nbsp;答案:{$childData.answer}
-                                <br>
-                            {/volist}
+                            <h4>{$k}. {$short.name} ({$short.score}分)
+                            </h4>
+                            <br> {volist name = "short.child" id = "childData" key='k1'}
+                            <b>[{$key+1}]&nbsp;{$childData.name}({$childData.score}分)</b>
+                            <br> &nbsp;&nbsp;答案:{$childData.answer}
+                            <br> {/volist}
                             <h5>{if condition = "$short.child == null"}答案:{$short.answer}{/if}</h5>
                             <hr> {/volist}
                         </div>

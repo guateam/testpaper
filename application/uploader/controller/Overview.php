@@ -1,6 +1,7 @@
 <?php
 namespace app\uploader\controller;
 use think\Controller;
+use \app\api\model\User as UserModel;
 class Overview extends Controller{
     /**
      * 新的历史记录登录
@@ -12,6 +13,8 @@ class Overview extends Controller{
                 $testpaper=new \app\api\controller\Testpaper();
                 $data=$testpaper->gettestpaper($id);
                 if($data){
+                    $userdata=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+                    $this->assign("user",$userdata);
                     $this->assign('id',$id);
                     $this->assign('data',$data);
                     $flag=$testpaper->iscomplete($id);
