@@ -18,8 +18,7 @@
                 <div class="page-header">
                     <h1>
                         试题录入
-                        <small>暂未通过</small>
-                        {include file="../application/common/QQ.html" /}
+                        <small>暂未通过</small> {include file="../application/common/QQ.html" /}
                     </h1>
                 </div>
                 <!--这里是导航栏部分-->
@@ -110,6 +109,7 @@
                                         <a class="btn btn-default" href="/testpaper/public/index.php/uploader/overview/index/id/{$it.id}">
                                             <span class="glyphicon glyphicon-pencil"></span> 查看
                                         </a>
+                                        <button type="button" class="btn btn-default" onclick="warning('{$it.id}')">催单</button>
                                     </td>
                                 </tr>
                                 {/volist}
