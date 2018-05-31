@@ -13,6 +13,7 @@ class Setauditordetail extends Controller{
                     $userlist=$user->getauditorlist();
                     $this->assign('userlist',$userlist);
                     $this->assign("data",$data);
+                    $this->assign('empty','<h4 class="text-center">没有数据</h4>');
                     setcookie('paperid',$id);
                     return $this->fetch('setauditordetail');
                 }

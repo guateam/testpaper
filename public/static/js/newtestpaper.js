@@ -48,7 +48,7 @@ $('#add').click(function() {
     name = $("input[name='titlename']").val();
     type = $("#titletype").val();
     number = $("input[name='titlenumber']").val()
-    if (name != "" && number != "" && check_base_fill()) {
+    if (name != "" && number != "" && number > 0 && check_base_fill()) {
         titlelist.push({ "ID": titlenum, "name": name, "type": type, "number": number });
         $("#titlelist").append('<li class="col-md-12" id="' + titlenum + '"><span class="col-md-11"><h4>' + name + '<small>' + type + ' 共' + number + '题</small></h4></span><span class="col-md-1"><button type="button" class="btn btn-link" onclick="removetitle(' + titlenum + ')"><span class="glyphicon glyphicon-remove"></span>清除</button></span></li>');
         titlenum++;

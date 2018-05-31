@@ -9,7 +9,9 @@ class Index extends Controller{
             if($user->checkuser($_COOKIE['userid'])){
                 $data=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
                 if($data){
+                    $testpaper=new \app\api\controller\Testpaper();
                     $this->assign("user",$data);
+                    $this->assign('working',$testpaper->getwaitingtestpapernumberforauditor($data->ID));
                     return $this->fetch();
                 }
             }

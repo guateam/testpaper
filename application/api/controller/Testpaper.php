@@ -102,6 +102,9 @@
             }
             return $data;
         }
+        public function getwaitingtestpapernumberforauditor($userid){
+            return count($this->getwaitingauditordata($userid));
+        }
         public function gettestpaper($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             if($testpaper){
