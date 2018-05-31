@@ -11,7 +11,8 @@
   let isFirstClick = true;
   //是否超时
   let isTimeUp = false;
-  
+  let timer = null;
+
   function getRandomNumberByRange(start, end) {
     return Math.round(Math.random() * (end - start) + start)
   }
@@ -182,7 +183,7 @@
         if (isFirstClick && timeLimit >0) {
           console.log("开启计时");
           isFirstClick = false;
-          var timer = setTimeout(() => {
+           timer = setTimeout(() => {
             isTimeUp = true;
             console.log("超时");
           }, timeLimit);
@@ -226,6 +227,7 @@
               addClass(this.sliderContainer, 'sliderContainer_success')
               this.success && this.success()
               isComplete = true;
+              clearTimeout(timer);
             }
 
           } else {
@@ -257,6 +259,7 @@
     }
 
     reset() {
+      clearTimeout(timer);
       isFirstClick = true;
       isTimeUp = false;
       this.sliderContainer.className = 'sliderContainer'
