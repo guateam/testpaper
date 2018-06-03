@@ -19,7 +19,7 @@ class Newtestpaper extends Controller{
         $uploaderid=$user->checkuser($uploader);
         if($uploaderid){
             $testpaper=new \app\api\controller\Testpaper();
-            if(!check_paper_reupload($name,$class,$subject,$school)){
+            if(!self::check_paper_reupload($name,$class,$subject,$school)){
                 return json(['status'=>-1]);
             }
             $id=$testpaper->add($name,$class,$subject,$school,$uploaderid,$headquestion,$score);

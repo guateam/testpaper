@@ -8,6 +8,9 @@
     class Testpaper extends Controller{
         public function add($name,$class,$subject,$school,$uploader,$headquestion,$score){
             $testpaper=new \app\api\model\Testpaper();
+
+            $price = new  \app\api\controller\Defaultprice();
+            $defaultprice = $price->getdefaultprice();
             $testpaper->data([
                 "Name"=>$name,
                 "Uploader"=>(int)$uploader,
@@ -16,7 +19,8 @@
                 'School'=>$school,
                 'HeadQuestion'=>json_encode($headquestion),
                 'State'=>0,
-                'Score'=>$score
+                'Score'=>$score,
+                'Price'=>$defaultprice->Uploaderprice
             ]);
             $testpaper->save();
             \app\api\controller\Timetable::add('Newpaper');
