@@ -125,4 +125,15 @@
             }
             return "未知";
         }
+
+        public function addmoney($userid,$amount){
+            $user=UserModel::get(['ID'=>$userid]);
+            if($user){
+                $user->Wallet+=$amount;
+                $user->save();
+                return 1;
+            }else{
+                return "未知";
+            }
+        }
     }

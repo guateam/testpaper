@@ -156,6 +156,15 @@
                                     {switch name="user.Type"}{case value="0"}上传者{/case}{case value="1"}审核者{/case}{case value="2"}管理员{/case}{/switch}
                                 </p>
                             </div>
+                            <div class="list-group-item">
+                                    <h5 class="list-group-item-heading">
+                                        薪水情况
+                                    </h5>
+                                    <p class="list-group-item-text">
+                                        上传者每份试卷:<b>{$defaultprice['uploaderprice']}</b>元<br>
+                                        审核者每份试卷:<b>{$defaultprice['auditorprice']}</b>元
+                                    </p>
+                            </div>
                             <div class="list-group-item ">
                                 <a class="btn btn-warning" id="help-button" href="#help-page" data-toggle="modal">
                                     <span class="glyphicon glyphicon-question-sign"></span> 帮助

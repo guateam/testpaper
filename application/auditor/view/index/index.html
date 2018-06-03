@@ -75,7 +75,8 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/people/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            审核试卷 {if condition="$working>0 "}<span class="label label-success">{$working}</span>{else /}{/if}
+                                            审核试卷 {if condition="$working>0 "}
+                                            <span class="label label-success">{$working}</span>{else /}{/if}
                                         </h3>
                                         <p>
                                             点击前往审核页面
@@ -137,6 +138,14 @@
                                 </h5>
                                 <p class="list-group-item-text">
                                     {$user.Num}
+                                </p>
+                            </div>
+                            <div class="list-group-item">
+                                <h5 class="list-group-item-heading">
+                                    已赚取金额
+                                </h5>
+                                <p class="list-group-item-text">
+                                    <b>{$user.Wallet}</b>元
                                 </p>
                             </div>
                             <div class="list-group-item ">

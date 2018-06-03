@@ -10,9 +10,11 @@ class Index extends Controller{
                 $data=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
                 if($data){
                     $testpaper=new \app\api\controller\Testpaper();
+                    $price = new \app\api\controller\Defaultprice();
                     $working=$testpaper->getwaitingtestpapernumberforadmin();
                     $this->assign('working',$working);
                     $this->assign("user",$data);
+                    $this->assign('defaultprice',$price->getdefaultprice());
                     return $this->fetch();
                 }
             }
