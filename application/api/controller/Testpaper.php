@@ -19,6 +19,7 @@
                 'Score'=>$score
             ]);
             $testpaper->save();
+            \app\api\controller\Timetable::add('Newpaper');
             return $testpaper->ID;
         }
         public function getheadquestion($id){
@@ -160,6 +161,7 @@
                 'State'=>1
             ]);
             $testpaper->save();
+            \app\api\controller\Timetable::add('Upload');
         }
         public function getworkingtestpapernumber($userid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>0]);
@@ -285,6 +287,7 @@
                 'State'=>2
             ]);
             $testpaper->save();
+            \app\api\controller\Timetable::add('Access');
         }
         public function cancel($id,$auditorid,$note){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
@@ -295,6 +298,7 @@
                 'Note'=>$note
             ]);
             $testpaper->save();
+            \app\api\controller\Timetable::add('Back');
         }
         public function getwaitingauditordata(){
             $testpaper=\app\api\model\Testpaper::all(['Auditorlist'=>'','State'=>1]);
@@ -319,6 +323,7 @@
                     'Auditorlist'=>$auditorlist
                 ]);
                 $testpaper->save();
+                \app\api\controller\Timetable::add('Set');
             }
         }
         /**
@@ -413,5 +418,55 @@
             }else{
                 return $durlingtime.'分钟';
             }  
+        }
+        public function getallworkinglist(){
+            $list=\app\api\model\Testpaper::all();
+            $data=[];
+            $user=new User();
+            foreach($list as $value){
+                if($value->State!=2){
+                    $progress='';
+                    $uploadtime='';
+                    switch($value->State){
+                        case 0:
+                            $progress='正在录入';
+                            $uploadtime='未完成';
+                            break;
+                        case 1:
+                            if($value->Auditorlist==''){
+                                $progress='正在等待人员分配';
+                            }else{
+                                $progress='正在等待审核';
+                            }
+                            $uploadtime=$this->gettimebefore($value->Uploaddate);
+                            break;
+                        case 3:
+                            $progress='被打回';
+                            $uploadtime=$this->gettimebefore($value->Uploaddate);
+                            break;
+                        default:
+                    }
+                    $item=[
+                        "id"=>$value->ID,
+                        "name"=>$value->Name,
+                        'class'=>$value->Class,
+                        'subject'=>$value->Subject,
+                        'school'=>$value->School,
+                        'uploader'=>$user->getname($value->Uploader),
+                        'uploaddate'=>$value->Uploaddate,
+                        'progress'=>$progress,
+                        'uploadtime'=>$uploadtime
+                    ];
+                    array_push($data,$item);
+                }
+            }
+            return $data;
+        }
+        public function getpandata(){
+            $working=count(\app\api\model\Testpaper::all(['State'=>0]));
+            $waiting1=count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'']));
+            $waiting2=count(\app\api\model\Testpaper::all(['State'=>1]))-count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'']));
+            $back=count(\app\api\model\Testpaper::all(['State'=>3]));
+            return [['value'=>$working,'name'=>'正在录入'],['value'=>$waiting1,'name'=>'等待分配'],['value'=>$waiting2,'name'=>'等待审核'],['value'=>$back,'name'=>'被打回'],];
         }
     }

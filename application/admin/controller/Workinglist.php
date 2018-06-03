@@ -7,16 +7,22 @@ class Workinglist extends Controller{
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
             if($user->checkuser($_COOKIE['userid'])){
-                $data=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
-                if($data){
-                    $testpaper=new \app\api\controller\Testpaper();
-                    $working=$testpaper->getwaitingtestpapernumberforadmin();
-                    $this->assign('working',$working);
-                    $this->assign("user",$data);
-                    return $this->fetch();
-                }
+                $testpaper=new \app\api\controller\Testpaper();
+                $data=$testpaper->getallworkinglist();
+                    $this->assign('data',$data);
+                    return $this->fetch('workinglist');
             }
         }
         return $this->error('请先登录','index/index/index');
+    }
+    public function getlinedata(){
+        $timetable=new \app\api\controller\Timetable();
+        $data=$timetable->getlinedata();
+        return json(['status'=>1,'data'=>$data]);
+    }
+    public function getpandata(){
+        $testpaper=new \app\api\controller\Testpaper();
+        $data=$testpaper->getpandata();
+        return json(['status'=>1,'data'=>$data]);
     }
 }
