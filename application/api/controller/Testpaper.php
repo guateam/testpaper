@@ -473,4 +473,120 @@
             $back=count(\app\api\model\Testpaper::all(['State'=>3]));
             return [['value'=>$working,'name'=>'正在录入'],['value'=>$waiting1,'name'=>'等待分配'],['value'=>$waiting2,'name'=>'等待审核'],['value'=>$back,'name'=>'被打回'],];
         }
+        public function getworkinglist($id){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$id]);
+            $data=[];
+            $user=new User();
+            foreach($list as $value){
+                if($value->State!=2){
+                    $progress='';
+                    $uploadtime='';
+                    switch($value->State){
+                        case 0:
+                            $progress='正在录入';
+                            $uploadtime='未完成';
+                            break;
+                        case 1:
+                            if($value->Auditorlist==''){
+                                $progress='正在等待人员分配';
+                            }else{
+                                $progress='正在等待审核';
+                            }
+                            $uploadtime=$this->gettimebefore($value->Uploaddate);
+                            break;
+                        case 3:
+                            $progress='被打回';
+                            $uploadtime=$this->gettimebefore($value->Uploaddate);
+                            break;
+                        default:
+                    }
+                    $item=[
+                        "id"=>$value->ID,
+                        "name"=>$value->Name,
+                        'class'=>$value->Class,
+                        'subject'=>$value->Subject,
+                        'school'=>$value->School,
+                        'uploader'=>$user->getname($value->Uploader),
+                        'uploaddate'=>$value->Uploaddate,
+                        'progress'=>$progress,
+                        'uploadtime'=>$uploadtime
+                    ];
+                    array_push($data,$item);
+                }
+            }
+            return $data;
+        }
+        public function getpandataforuser($id){
+            $working=count(\app\api\model\Testpaper::all(['State'=>0,'Uploader'=>$id]));
+            $waiting1=count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'','Uploader'=>$id]));
+            $waiting2=count(\app\api\model\Testpaper::all(['State'=>1,'Uploader'=>$id]))-count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'','Uploader'=>$id]));
+            $back=count(\app\api\model\Testpaper::all(['State'=>3,'Uploader'=>$id]));
+            return [['value'=>$working,'name'=>'正在录入'],['value'=>$waiting1,'name'=>'等待分配'],['value'=>$waiting2,'name'=>'等待审核'],['value'=>$back,'name'=>'被打回'],];
+        }
+        public function getlinedataforuser($id){
+            $list=\app\api\model\Testpaper::all(['Uploader'=>$id]);
+            $x=[];
+            $upload=[];
+            $access=[];
+            foreach($list as $value){
+                if($value->Audittime!=''){
+                    $auditortime=\explode(' ',$value->Audittime)[0];
+                    if(in_array($auditortime,$x)){
+                        $key=array_keys($x,$auditortime)[0];
+                        $access[$key]++;
+                    }else{
+                        array_push($x,$auditortime);
+                        array_push($access,1);
+                        array_push($upload,0);
+                    }
+                }
+                if($value->Uploaddate!=''){
+                    $uploadtime=\explode(' ',$value->Uploaddate)[0];
+                    if(in_array($uploadtime,$x)){
+                        $key=array_keys($x,$uploadtime)[0];
+                        $upload[$key]++;
+                    }else{
+                        array_push($x,$uploadtime);
+                        array_push($upload,1);
+                        array_push($access,0);
+                    }
+                }
+            }
+            for($i=0;$i<count($x);$i++){
+                for($j=$i;$j<count($x);$j++){
+                    $k=$i;
+                    if($x[$k]>$x[$j]){
+                        $k=$j;
+                    }
+                }
+                if($k!=$i){
+                    $temp=$x[$i];
+                    $x[$i]=$x[$k];
+                    $x[$k]=$temp;
+
+                    $temp=$upload[$i];
+                    $upload[$i]=$upload[$k];
+                    $upload[$k]=$temp;
+
+                    $temp=$access[$i];
+                    $access[$i]=$access[$k];
+                    $access[$k]=$temp;
+                }
+            }
+            return [
+                'xAxis'=>[
+                    'data'=>$x
+                ],
+                'series'=>[
+                    [
+                        'name'=>'录入量',
+                        'data'=>$upload
+                    ],
+                    [
+                        'name'=>'通过量',
+                        'data'=>$access
+                    ],
+                ]
+            ];
+        }
     }

@@ -25,4 +25,28 @@ class Workinglist extends Controller{
         $data=$testpaper->getpandata();
         return json(['status'=>1,'data'=>$data]);
     }
+    public function getpandataforuser($id){
+        $testpaper=new \app\api\controller\Testpaper();
+        $data=$testpaper->getpandataforuser($id);
+        return json(['status'=>1,'data'=>$data]);
+    }
+    public function getlinedataforuser($id){
+        $testpaper=new \app\api\controller\Testpaper();
+        $data=$testpaper->getlinedataforuser($id);
+        return json(['status'=>1,'data'=>$data]);
+    }
+    public function user($id){
+        if(isset($_COOKIE['userid'])){
+            $user=new \app\api\controller\User();
+            if($user->checkuser($_COOKIE['userid'])){
+                $testpaper=new \app\api\controller\Testpaper();
+                $data=$testpaper->getworkinglist($id);
+                $this->assign('name',$user->getname($id));
+                $this->assign('data',$data);
+                setcookie('id',$id);
+                return $this->fetch('workinglistforuser');
+            }
+        }
+        return $this->error('请先登录','index/index/index');
+    }
 }
