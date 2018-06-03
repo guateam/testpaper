@@ -20,7 +20,7 @@
                 'HeadQuestion'=>json_encode($headquestion),
                 'State'=>0,
                 'Score'=>$score,
-                'Price'=>$defaultprice->Uploaderprice
+                'Price'=>$defaultprice['uploaderprice']
             ]);
             $testpaper->save();
             \app\api\controller\Timetable::add('Newpaper');
