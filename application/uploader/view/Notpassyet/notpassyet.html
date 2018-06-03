@@ -89,6 +89,9 @@
                                         学校
                                     </th>
                                     <th>
+                                        进度
+                                    </th>
+                                    <th>
                                         操作
                                     </th>
                                 </tr>
@@ -109,10 +112,14 @@
                                         {$it.school}
                                     </td>
                                     <td>
+                                        {$it.progress}
+                                    </td>
+                                    <td>
                                         <a class="btn btn-default" href="/testpaper/public/index.php/uploader/overview/index/id/{$it.id}">
                                             <span class="glyphicon glyphicon-pencil"></span> 查看
                                         </a>
-                                        <button type="button" class="btn btn-default" onclick="warning('{$it.id}')">催单</button>
+                                        {if condition="$it.state==0"}
+                                        <button type="button" class="btn btn-default" onclick="warning('{$it.id}')" id="{$it.id}">催单</button> {/if}
                                     </td>
                                 </tr>
                                 {/volist}
@@ -184,8 +191,11 @@
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src="__STATIC__/js/notpassyet.js"></script>
     <script src="__STATIC__/js/quit.js"></script>
+    <script src="__STATIC__/vendor/jnotify/notify.js"></script>
+    <script src="__STATIC__/js/notifyforauditor.js"></script>
 </body>
 
 </html>

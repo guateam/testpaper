@@ -95,7 +95,8 @@
                         "name"=>$value['Name'],
                         'class'=>$value['Class'],
                         'subject'=>$value['Subject'],
-                        'school'=>$value['School']
+                        'school'=>$value['School'],
+                        'time'=>$this->gettimebefore($value['Uploaddate'])
                     ];
                     array_push($data,$item);
                 }
@@ -174,12 +175,33 @@
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>1]);
             $data = [];
             foreach ($list as $value) {
+                $log=\app\api\model\Log::get(['Testpaper'=>$value->ID,'Name'=>'催单0']);
+                $log1=\app\api\model\Log::get(['Testpaper'=>$value->ID,'Name'=>'催单1']);
+                $progress='';
+                if($log1){
+                    $state=1;
+                }else if($log){
+                    if($value->Auditorlist==''){
+                        $state=1;
+                    }else{
+                        $state=0;
+                    }
+                }else{
+                    $state=0;
+                }
+                if($value->Auditorlist==''){
+                    $progress='等待分配人员';
+                }else{
+                    $progress='等待审核人审核';
+                }
                 $item=[
                     "id"=>$value->ID,
                     "name"=>$value->Name,
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
-                    'school'=>$value->School
+                    'school'=>$value->School,
+                    'state'=>$state,
+                    'progress'=>$progress
                 ];
                 array_push($data,$item);
             }
@@ -280,7 +302,8 @@
                     "name"=>$value->Name,
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
-                    'school'=>$value->School
+                    'school'=>$value->School,
+                    'time'=>$this->gettimebefore($value->Uploaddate)
                 ];
                 array_push($data,$item);
             }
@@ -370,5 +393,22 @@
             }
             return 0;
         }
-        
+        /**
+         * 内部方法 获取上传时间距离现在过去几分钟
+         * 已实装
+         * 2018-3-3 张煜
+         */
+        private function gettimebefore($time){//获取距离现在时间
+            $nowtime=date('Y-m-d H:i');
+            $now = strtotime($nowtime);
+            $old = strtotime($time);
+            $durlingtime=round((($now-$old))/60);
+            if($durlingtime>=60 && $durlingtime<1440){
+                return round($durlingtime/60).'小时';
+            }else if($durlingtime>=1440){
+                return round($durlingtime/1440).'天';
+            }else{
+                return $durlingtime.'分钟';
+            }  
+        }
     }

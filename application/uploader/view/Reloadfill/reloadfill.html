@@ -20,8 +20,7 @@
                 <div class="page-header">
                     <h1>
                         试题录入
-                        <small>新建</small>
-                        {include file="../application/common/QQ.html" /}
+                        <small>新建</small> {include file="../application/common/QQ.html" /}
                     </h1>
                 </div>
                 <nav class="navbar navbar-default" role="navigation">
@@ -71,8 +70,7 @@
                                     <form role="form">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">题干(需要挖空处请使用 “__”双下划线标识,两个标识中间填写答案)</label>
-                                            <button class="btn btn-sm btn-default"
-                                                type="button" id="addunderline">添加双下划线标识符__</button>
+                                            <button class="btn btn-sm btn-default" type="button" id="addunderline">添加双下划线标识符__</button>
                                             <hr>
                                             <div id="editor1">
                                                 <p>{$data.name}</p>
@@ -81,8 +79,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">分值</label>
-                                            <input class="form-control" id="name" type="number" name='score' value="{$data.score}"
-                                            />
+                                            <input class="form-control" id="name" type="number" name='score' value="{$data.score}" />
                                         </div>
                                         <div id="title">
                                             <label for="exampleInputEmail1">帮助选项</label>
@@ -138,6 +135,8 @@
     <script src="__STATIC__/vendor/wangEditor-3.1.1/release/wangEditor.js"></script>
     <script src="__STATIC__/js/reloadfill.js"></script>
     <script src="__STATIC__/js/quit.js"></script>
+    <script src="__STATIC__/vendor/jnotify/notify.js"></script>
+    <script src="__STATIC__/js/notifyforauditor.js"></script>
 </body>
 
 </html>
