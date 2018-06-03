@@ -18,4 +18,15 @@ class Historypaper extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
+
+    public function addmoney($amount){
+        if(isset($_COOKIE['userid'])){
+            $user=UserModel::get(["Cookie"=>$_COOKIE['userid']]);//从数据库调取此用户信息
+            if($user){
+                $user_c =new \app\api\controller\User();
+                $user_c->addmoney($user->ID,$amount);
+                return 1;
+            }else return 0;
+        }
+    }
 }

@@ -12,7 +12,7 @@ class Index extends Controller{
                     $testpaper=new \app\api\controller\Testpaper();
                     $this->assign("user",$data);
                     $this->assign('working',$testpaper->getwaitingtestpapernumberforauditor($data->ID));
-                    return $this->fetch();
+                    return $this->fetch('index');
                 }
             }
         }

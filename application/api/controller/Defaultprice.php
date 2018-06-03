@@ -10,7 +10,7 @@
         public function getdefaultprice(){
             $price = priceModel::get(["ID"=>1]);
             if($price){
-                return $price;
+                return ["uploaderprice"=>$price->Uploaderprice,"auditorprice"=>$price->Auditorprice];
             }else{
                 return null;
             }
@@ -19,11 +19,11 @@
         /**
          * 修改目前的单价情况
          */
-        public function setdefaultprice($uploaderPrice,$auditorPrice){
+        public function setdefaultprice($uploaderprice,$auditorprice){
             $price = priceModel::get(["ID"=>1]);
             if($price){
-                $price->Uploaderprice = $uploaderPrice;
-                $price->Auditorprice = $auditorPrice;
+                $price->Uploaderprice = $uploaderprice;
+                $price->Auditorprice = $auditorprice;
                 $price->save();
                 return 1;
             }else{

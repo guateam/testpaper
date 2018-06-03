@@ -5,10 +5,7 @@ $('#add').click(() => {
                 text: "是",
                 value: true,
             },
-            no: {
-                text: '否',
-                value: false,
-            }
+            cancel:'否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,

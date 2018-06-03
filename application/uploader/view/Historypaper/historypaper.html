@@ -87,6 +87,12 @@
                                                 学校
                                             </th>
                                             <th>
+                                                支付金额
+                                            </th>
+                                            <th>
+                                                收款状态
+                                            </th>
+                                            <th>
                                                 操作
                                             </th>
                                         </tr>
@@ -107,10 +113,19 @@
                                                 {$it.school}
                                             </td>
                                             <td>
+                                                {$it.price}
+                                            </td>
+                                            <td>
+                                                {if condition = "$it.isPay == 0"}待收款{else /}已收款{/if}
+                                            </td>
+                                            <td>
                                                 <button value={ $it.id} type="button" class="btn btn-default col-sm-offset-1" onclick="turn_to_detail(this.value)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                     查看
                                                 </button>
+                                                {if condition = "$it.isPay == 0"}
+                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpay(this.value)">确认收款</button>
+                                                {/if}
                                             </td>
                                         </tr>
                                         {/volist}
@@ -126,6 +141,7 @@
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src="__STATIC__/js/history.js"></script>
     <script src="__STATIC__/js/quit.js"></script>
     <script src="__STATIC__/vendor/jnotify/notify.js"></script>

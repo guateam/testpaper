@@ -5,10 +5,7 @@ function confirm(id) {
                 text: "是",
                 value: true,
             },
-            no: {
-                text: '否',
-                value: false,
-            }
+            cancel:'否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
@@ -34,10 +31,7 @@ function cancel(id) {
                 text: "是",
                 value: true,
             },
-            no: {
-                text: '否',
-                value: false,
-            }
+            cancel:'否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
