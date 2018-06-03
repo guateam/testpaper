@@ -90,7 +90,7 @@
                                                 支付金额
                                             </th>
                                             <th>
-                                                支付状态
+                                                收款状态
                                             </th>
                                             <th>
                                                 操作
@@ -116,7 +116,7 @@
                                                 {$it.price}
                                             </td>
                                             <td>
-                                                {if condition = "$it.isPay == 0"}待支付{else /}已支付{/if}
+                                                {if condition = "$it.isPay == 0"}待收款{else /}已收款{/if}
                                             </td>
                                             <td>
                                                 <button value={ $it.id} type="button" class="btn btn-default col-sm-offset-1" onclick="turn_to_detail(this.value)">
@@ -124,7 +124,7 @@
                                                     查看
                                                 </button>
                                                 {if condition = "$it.isPay == 0"}
-                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpay(this.value)">确认支付</button>
+                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpay(this.value)">确认收款</button>
                                                 {/if}
                                             </td>
                                         </tr>
