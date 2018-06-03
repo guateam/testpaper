@@ -11,3 +11,10 @@ $("#QQbutton").on('click',function(){
         })
     }
 })
+
+$('#pricebutton').on('click',()=>{
+    $.post("/testpaper/public/index.php/api/Defaultprice/setdefaultprice",{
+        uploaderPirce:$('#uploaderprice'),
+        auditorPrice:
+    })
+})

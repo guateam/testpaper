@@ -262,6 +262,7 @@
       clearTimeout(timer);
       isFirstClick = true;
       isTimeUp = false;
+      isComplete = false;
       this.sliderContainer.className = 'sliderContainer'
       this.slider.style.left = 0
       this.block.style.left = 0
