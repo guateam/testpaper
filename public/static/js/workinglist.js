@@ -62,6 +62,11 @@ var panoption = {
         text: '当前正在运行的试卷',
         x: 'center'
     },
+    tooltip: {
+        label: {
+            show: true
+        }
+    },
     legend: {
         orient: 'vertical',
         left: 'left',

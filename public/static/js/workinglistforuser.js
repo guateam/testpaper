@@ -13,7 +13,7 @@ var lineoption = {
         }
     },
     legend: {
-        data: ['录入量', '通过量'],
+        data: ['录入量', '审核量'],
     },
     xAxis: [{
         type: 'category',
@@ -39,7 +39,7 @@ var lineoption = {
         type: 'bar',
         data: []
     }, {
-        name: '通过量',
+        name: '审核量',
         type: 'bar',
         data: []
     }, ]
@@ -49,6 +49,11 @@ var panoption = {
     title: {
         text: '当前正在运行的试卷',
         x: 'center'
+    },
+    tooltip: {
+        label: {
+            show: true
+        }
     },
     legend: {
         orient: 'vertical',

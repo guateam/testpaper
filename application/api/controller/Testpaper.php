@@ -600,7 +600,7 @@
                         'data'=>$upload
                     ],
                     [
-                        'name'=>'通过量',
+                        'name'=>'审核量',
                         'data'=>$access
                     ],
                 ]
