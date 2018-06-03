@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
-class Index extends Controller{
+class Workinglist extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();

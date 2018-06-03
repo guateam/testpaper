@@ -72,26 +72,32 @@
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-hover">
-                                            <tr>
-                                                <th>姓名</th>
-                                                <th class="col-md-2">电话</th>
+                                            <thead>
+                                                <tr>
+                                                    <th>姓名</th>
+                                                    <th class="col-md-2">电话</th>
 
-                                                <th>正在录入试卷数</th>
-                                                <th>等待审核试卷数</th>
-                                                <th>审核不通过试卷数</th>
-                                                <th>审核通过试卷数</th>
-                                            </tr>
-                                            {volist name='userlist' id='vo'}
-                                            <tr>
-                                                <td>{$vo.name}</td>
-                                                <td>{$vo.phonenumber}</td>
+                                                    <th>正在录入试卷数</th>
+                                                    <th>等待审核试卷数</th>
+                                                    <th>审核不通过试卷数</th>
+                                                    <th>审核通过试卷数</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {volist name='userlist' id='vo'}
 
-                                                <td>{$vo.workingnum}</td>
-                                                <td>{$vo.waitingnum}</td>
-                                                <td>{$vo.errornum}</td>
-                                                <td>{$vo.num}</td>
-                                            </tr>
-                                            {/volist}
+                                                <tr>
+                                                    <td><a href="/testpaper/public/index.php/admin/workinglist/user/id/{$vo.id}">{$vo.name}</a></td>
+                                                    <td>{$vo.phonenumber}</td>
+
+                                                    <td>{$vo.workingnum}</td>
+                                                    <td>{$vo.waitingnum}</td>
+                                                    <td>{$vo.errornum}</td>
+                                                    <td>{$vo.num}</td>
+                                                </tr>
+
+                                                {/volist}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -103,18 +109,22 @@
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-hover">
-                                            <tr>
-                                                <th>姓名</th>
-                                                <th>电话</th>
-                                                <th>审核试卷数</th>
-                                            </tr>
-                                            {volist name='auditorlist' id='vo'}
-                                            <tr>
-                                                <td>{$vo.name}</td>
-                                                <td>{$vo.phonenumber}</td>
-                                                <td>{$vo.num}</td>
-                                            </tr>
-                                            {/volist}
+                                            <thead>
+                                                <tr>
+                                                    <th>姓名</th>
+                                                    <th>电话</th>
+                                                    <th>审核试卷数</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {volist name='auditorlist' id='vo'}
+                                                <tr>
+                                                    <td>{$vo.name}</td>
+                                                    <td>{$vo.phonenumber}</td>
+                                                    <td>{$vo.num}</td>
+                                                </tr>
+                                                {/volist}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
