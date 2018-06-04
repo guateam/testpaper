@@ -77,7 +77,8 @@
                             {$data.name}
                         </h1>
                         <h4 align="center">
-                            {$data.class} {$data.subject} {$data.school} 总分：{$data.score} {if condition="$data.unexpectscore>0"} 分值多于总分：<strong style="color:tomato">{$data.unexpectscore}</strong>分{elseif condition="$data.unexpectscore==0"/}{else /} 分值少于总分：
+                            {$data.class} {$data.subject} {$data.school} 试卷总分：{$data.score}分<br> {if condition="$data.unexpectscore>0"} 各题分值之和大于试卷总分：<strong style="color:tomato">{$data.unexpectscore}</strong>分{elseif condition="$data.unexpectscore==0"/}{else
+                            /} 各题分值之和小于试卷总分：
                             <strong style="color:tomato">{$data.unexpectscore*-1}</strong>分{/if}
                         </h4>
                     </div>

@@ -14,6 +14,7 @@ class Index extends Controller{
                     $working=$testpaper->getwaitingtestpapernumberforadmin();
                     $this->assign('working',$working);
                     $this->assign("user",$data);
+                    $this->assign('alert',$testpaper->getalertwaitngtestpapernumberforadmin());
                     $this->assign('defaultprice',$price->getdefaultprice());
                     return $this->fetch();
                 }

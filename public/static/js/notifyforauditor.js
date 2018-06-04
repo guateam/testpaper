@@ -25,20 +25,20 @@ $(document).ready(() => {
             }
         }
     })
-    setInterval(() => {
-        $.post('/testpaper/public/index.php/api/log/getalert/id/' + $.cookie('userid')).done((data) => {
-            if (data.status == 1) {
-                data.data.forEach(element => {
-                    $.notify(element.name, {
-                        style: 'alert',
-                        className: element.style,
-                        position: 'right buttom',
-                        showDuration: 600
-                    })
-                });
-            }
-        })
-    }, 20000)
+
+    $.post('/testpaper/public/index.php/api/log/getalert/id/' + $.cookie('userid')).done((data) => {
+        if (data.status == 1) {
+            data.data.forEach(element => {
+                $.notify(element.name, {
+                    style: 'alert',
+                    className: element.style,
+                    position: 'right buttom',
+                    showDuration: 600
+                })
+            });
+        }
+    })
+
 
 })
 

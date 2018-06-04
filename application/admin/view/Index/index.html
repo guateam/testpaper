@@ -66,10 +66,11 @@
                                     <div class="caption">
                                         <h3>
                                             试卷分配 {if condition="$working>0 "}
-                                            <span class="label label-success">{$working}</span>{else /}{/if}
+                                            <span class="label label-success">{$working}</span>{else /}{/if} {if condition="$alert>0 "}
+                                            <span class="label label-danger">{$alert}</span>{else /}{/if}
                                         </h3>
                                         <p>
-                                            点击前往分配页面
+                                            为试卷分配相应的审核员
                                         </p>
                                         <p>
                                             <a class="btn btn-primary" href="/testpaper/public/index.php/admin/setauditor">前往</a>
@@ -83,13 +84,31 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/sports/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            人员情况
+                                            工作情况
                                         </h3>
                                         <p>
-                                            上传人工作情况
+                                            上传人与审核员工作情况
                                         </p>
                                         <p>
                                             <a class="btn btn-primary" href="/testpaper/public/index.php/admin/userlist">前往</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--工作效率-->
+                            <div class="col-md-3">
+                                <div class="thumbnail">
+                                    <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/sports/default.jpg" />
+                                    <div class="caption">
+                                        <h3>
+                                            当前平台工作概览
+                                        </h3>
+                                        <p>
+                                            查看当前正在运行的试卷与一段时间内的工作情况
+                                        </p>
+                                        <p>
+                                            <a class="btn btn-primary" href="/testpaper/public/index.php/admin/workinglist">前往</a>
                                         </p>
                                     </div>
                                 </div>
@@ -100,30 +119,13 @@
                                     <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/sports/default.jpg" />
                                     <div class="caption">
                                         <h3>
-                                            历史记录
+                                            已通过试卷记录
                                         </h3>
                                         <p>
-                                            历史记录信息
+                                            已通过试卷信息
                                         </p>
                                         <p>
                                             <a class="btn btn-primary" href="/testpaper/public/index.php/admin/historypaper">前往</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--工作效率-->
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img alt="300x200" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/600/200/sports/default.jpg" />
-                                    <div class="caption">
-                                        <h3>
-                                            工作效率
-                                        </h3>
-                                        <p>
-                                            查看当前正在运行的试卷与一段时间内的工作情况
-                                        </p>
-                                        <p>
-                                            <a class="btn btn-primary" href="/testpaper/public/index.php/admin/workinglist">前往</a>
                                         </p>
                                     </div>
                                 </div>
@@ -157,25 +159,23 @@
                                 </p>
                             </div>
                             <div class="list-group-item">
-                                    <h5 class="list-group-item-heading">
-                                        薪水情况
-                                    </h5>
-                                    <p class="list-group-item-text">
-                                        上传者每份试卷:<b>{$defaultprice['uploaderprice']}</b>元<br>
-                                        审核者每份试卷:<b>{$defaultprice['auditorprice']}</b>元
-                                    </p>
+                                <h5 class="list-group-item-heading">
+                                    工资价位
+                                </h5>
+                                <p class="list-group-item-text">
+                                    上传者每份试卷:<b>{$defaultprice['uploaderprice']}</b>元<br> 审核者每份试卷:
+                                    <b>{$defaultprice['auditorprice']}</b>元
+                                </p>
                             </div>
                             <div class="list-group-item ">
                                 <a class="btn btn-warning" id="help-button" href="#help-page" data-toggle="modal">
                                     <span class="glyphicon glyphicon-question-sign"></span> 帮助
                                 </a>
                                 <a class="btn btn-default" id="QQ" href="#QQ-page" data-toggle="modal">
-                                    <span class="glyphicon glyphicon-phone"></span>
-                                    修改客服QQ
+                                    <span class="glyphicon glyphicon-phone"></span> 修改客服QQ
                                 </a>
                                 <a class="btn btn-default" id="QQ" href="#price-page" data-toggle="modal">
-                                    <span class="glyphicon glyphicon-usd"></span>
-                                    设定试卷工资
+                                    <b>￥</b> 设定试卷工资
                                 </a>
                                 <!--这里是弹出的帮助页面-->
                                 <div class="modal fade" id="help-page" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -269,19 +269,25 @@
                                                     <form class="col-md-12" role="form">
                                                         <div>
                                                             <div class="form-group ">
-                                                                <h4>上传者每次上传试卷应得的工资:</h4>
+                                                                <h4>上传者每次上传试卷应得的工资(元):</h4>
                                                             </div>
                                                             <div class="form-group " id="form-price">
-                                                                <input type="number" class="form-control" id="uploaderprice" min = 0>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon" id="basic-addon1">￥</span>
+                                                                    <input type="number" class="form-control" id="uploaderprice" min=0>
+                                                                </div>
                                                             </div>
                                                             <br>
                                                         </div>
                                                         <div>
                                                             <div class="form-group ">
-                                                                <h4>审核者每次审核试卷应得的工资:</h4>
+                                                                <h4>审核者每次审核试卷应得的工资(元):</h4>
                                                             </div>
                                                             <div class="form-group" id="form-price">
-                                                                <input type="number" class="form-control" id="auditorprice" min = 0>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon" id="basic-addon1">￥</span>
+                                                                    <input type="number" class="form-control" id="auditorprice" min=0>
+                                                                </div>
                                                             </div>
                                                             <br>
                                                         </div>
@@ -289,8 +295,8 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" id="pricebutton">确认修改</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                <button type="button" class="btn btn-success" id="pricebutton">确认修改</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                             </div>
                                         </div>
                                     </div>
