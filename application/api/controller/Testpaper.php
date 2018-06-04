@@ -264,6 +264,12 @@
                     'school'=>$value->School,
                     'uploader'=>$user->getname($value->Uploader),
                     'auditor'=>$user->getname($value->Auditor),
+                    'auditorispay'=>$value->Auditorispay,
+                    'auditorprice'=>$value->Auditorprice,
+                    'isPay'=>$value->isPay,
+                    'price'=>$value->Price,
+                    'upid'=>$value->Uploader,
+                    'auid'=>$value->Auditor
                 ];
                 array_push($data,$item);
             }
@@ -413,14 +419,14 @@
         /**
          * uploader确认收款
          */
-        public function confirmpaying($id){
+        public function confirmpaying($uid,$id){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
             if($testpaper)
             {
                 $testpaper->isPay = 1;
                 $testpaper->save();
                 $money = new \app\uploader\controller\Historypaper();
-                $money->addmoney($testpaper->Price);
+                $money->addmoney($uid,$testpaper->Price);
                 return 1;
             }
             else return 0;
@@ -428,7 +434,7 @@
         /**
          * auditor确认收款
          */
-        public function auditorconfirmpaying($id){
+        public function auditorconfirmpaying($uid,$id){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
             if($testpaper)
             {

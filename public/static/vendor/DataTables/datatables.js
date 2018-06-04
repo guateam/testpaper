@@ -15253,5 +15253,3 @@
 
 	return $.fn.dataTable;
 }));
-
-

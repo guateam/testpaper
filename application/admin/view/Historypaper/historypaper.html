@@ -92,6 +92,18 @@
                                                 审核人
                                             </th>
                                             <th>
+                                                上传者应得
+                                            </th>
+                                            <th>
+                                                上传者付款状态
+                                            </th>
+                                            <th>
+                                                审核者应得
+                                            </th>
+                                            <th>
+                                                审核者支付状态
+                                            </th>
+                                            <th>
                                                 操作
                                             </th>
                                         </tr>
@@ -118,9 +130,27 @@
                                                 {$it.auditor}
                                             </td>
                                             <td>
+                                                {$it.price}元
+                                            </td>
+                                            <td>
+                                                {if condition = "$it.isPay == 0"}待收款{else /}已收款{/if}
+                                            </td>
+                                            <td>
+                                                {$it.auditorprice}元
+                                            </td>
+                                            <td>
+                                                {if condition = "$it.auditorispay == 0"}待收款{else /}已收款{/if}
+                                            </td>
+                                            <td>
                                                 <a class="btn btn-default" href="/testpaper/public/index.php/admin/historypaperdetail/index/id/{$it.id}">
                                                     <span class="glyphicon glyphicon-pencil"></span> 查看
                                                 </a>
+                                                {if condition = "$it.isPay == 0"}
+                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpayuploader(this.value,'{$it.upid}')">付款上传者</button>
+                                                {/if}
+                                                {if condition = "$it.auditorispay == 0"}
+                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpayauditor(this.value,'{$it.auid}')">付款审核者</button>
+                                                {/if}
                                             </td>
                                         </tr>
                                         {/volist}
@@ -138,6 +168,7 @@
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
     <script src="__STATIC__/vendor/DataTables/datatables.js"></script>
     <script src="__STATIC__/vendor/DataTables/dataTables.bootstrap.js"></script>
+
     <script>
         $('#table').dataTable({
             language: {
@@ -169,6 +200,7 @@
     <script src="__STATIC__/js/quit.js"></script>
     <script src="__STATIC__/vendor/jnotify/notify.js"></script>
     <script src="__STATIC__/js/notifyforauditor.js"></script>
+    <script src="__STATIC__/js/pay.js"></script>
 </body>
 
 </html>
