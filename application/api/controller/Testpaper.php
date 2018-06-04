@@ -20,7 +20,8 @@
                 'HeadQuestion'=>json_encode($headquestion),
                 'State'=>0,
                 'Score'=>$score,
-                'Price'=>$defaultprice['uploaderprice']
+                'Price'=>$defaultprice['uploaderprice'],
+                'Auditorprice'=>$defaultprice['auditorprice']
             ]);
             $testpaper->save();
             \app\api\controller\Timetable::add('Newpaper');
@@ -242,7 +243,9 @@
                     "name"=>$value->Name,
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
-                    'school'=>$value->School
+                    'school'=>$value->School,
+                    'isPay'=>$value->Auditorispay,
+                    'price'=>$value->Auditorprice
                 ];
                 array_push($data,$item);
             }
@@ -408,7 +411,7 @@
             return 0;
         }
         /**
-         * 确认收款
+         * uploader确认收款
          */
         public function confirmpaying($id){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
@@ -418,6 +421,21 @@
                 $testpaper->save();
                 $money = new \app\uploader\controller\Historypaper();
                 $money->addmoney($testpaper->Price);
+                return 1;
+            }
+            else return 0;
+        }
+        /**
+         * auditor确认收款
+         */
+        public function auditorconfirmpaying($id){
+            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
+            if($testpaper)
+            {
+                $testpaper->Auditorispay = 1;
+                $testpaper->save();
+                $money = new \app\uploader\controller\Historypaper();
+                $money->addmoney($testpaper->Auditorprice);
                 return 1;
             }
             else return 0;
