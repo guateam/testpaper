@@ -588,8 +588,8 @@
                 }
             }
             for($i=0;$i<count($x);$i++){
+                $k=$i;
                 for($j=$i;$j<count($x);$j++){
-                    $k=$i;
                     if($x[$k]>$x[$j]){
                         $k=$j;
                     }
