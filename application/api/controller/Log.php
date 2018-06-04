@@ -22,9 +22,9 @@
                             'name'=>$value['Note'],
                             'style'=>$value['Type']
                         ];
-                        $state=\app\api\model\Log::get(['ID'=>$value['ID']]);
+                        /**$state=\app\api\model\Log::get(['ID'=>$value['ID']]);
                         $state->State=1;
-                        $state->save();
+                        $state->save();*/
                         array_push($data,$item);
                     }
                 }
@@ -40,7 +40,7 @@
             $log->data([
                 'Name'=>$name,
                 'From'=>$from,
-                'To'=>$to,
+                'ToU'=>$to,
                 'Type'=>$type,
                 'Note'=>$note,
                 'State'=>0,
@@ -61,14 +61,22 @@
                         foreach($list as $value){
                             $to.=$value->ID.',';
                         }
-                        $this->add('催单0',$userid,$to,'warning','你有一份试卷被催单！',$testpaperid);
+                        $this->add('催单0',$userid,$to,'warning','你有一份试卷被提醒分配！',$testpaperid);
                     }else{
-                        $this->add('催单1',$userid,$testpaper->Auditorlist,'warning','你有一份试卷被催单！',$testpaperid);
+                        $this->add('催单1',$userid,$testpaper->Auditorlist,'warning','你有一份试卷被提醒审核！',$testpaperid);
                     }
                     return json(['status'=>1]);
                 }
             }
             return json(['status'=>0]);
+        }
+        public static function set($id,$type=0){
+            $log=\app\api\model\Log::get(['Name'=>'催单'.$type,'Testpaper'=>$id,'State'=>0]);
+            if($log){
+                $log->Name='催单';
+                $log->State=1;
+                $log->save();
+            }
         }
     }
 

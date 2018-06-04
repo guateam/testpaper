@@ -96,13 +96,19 @@
             $data=[];
             foreach($list as $value){
                 if($value['State']==1){
+                    $log=\app\api\model\Log::get(['Name'=>'催单1','Testpaper'=>$value['ID'],'State'=>0]);
+                    $alert=0;
+                    if($log){
+                        $alert=1;
+                    }
                     $item=[
                         "id"=>$value['ID'],
                         "name"=>$value['Name'],
                         'class'=>$value['Class'],
                         'subject'=>$value['Subject'],
                         'school'=>$value['School'],
-                        'time'=>$this->gettimebefore($value['Uploaddate'])
+                        'time'=>$this->gettimebefore($value['Uploaddate']),
+                        'alert'=>$alert
                     ];
                     array_push($data,$item);
                 }
@@ -110,10 +116,36 @@
             return $data;
         }
         public function getwaitingtestpapernumberforauditor($userid){
-            return count($this->getwaitingauditordata($userid));
+            return count($this->getwaitingtestpaper($userid));
+        }
+        public function getalertwaitngtestpapernumberforauditor($userid){
+            $list=\think\Db::query("select * from testpaper where Auditorlist like '%,".$userid.",%'");
+            $alert=0;
+            foreach($list as $value){
+                if($value['State']==1){
+                    $log=\app\api\model\Log::get(['Name'=>'催单1','Testpaper'=>$value['ID'],'State'=>0]);
+                    if($log){
+                        $alert++;
+                    }
+                }
+            }
+            return $alert;
         }
         public function getwaitingtestpapernumberforadmin(){
             return count($this->getwaitingauditordata());
+        }
+        public function getalertwaitngtestpapernumberforadmin(){
+            $list=\app\api\model\Testpaper::all(['State'=>1]);
+            $alert=0;
+            foreach($list as $value){
+               
+                    $log=\app\api\model\Log::get(['Name'=>'催单0','Testpaper'=>$value->ID,'State'=>0]);
+                    if($log){
+                        $alert++;
+                    }
+                
+            }
+            return $alert;
         }
         public function gettestpaper($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
@@ -297,6 +329,7 @@
             ]);
             $testpaper->save();
             \app\api\controller\Timetable::add('Access');
+            \app\api\controller\Log::set($id,1);
         }
         public function cancel($id,$auditorid,$note){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
@@ -308,18 +341,25 @@
             ]);
             $testpaper->save();
             \app\api\controller\Timetable::add('Back');
+            \app\api\controller\Log::set($id,1);
         }
         public function getwaitingauditordata(){
             $testpaper=\app\api\model\Testpaper::all(['Auditorlist'=>'','State'=>1]);
             $data=[];
             foreach($testpaper as $value){
+                $log=\app\api\model\Log::get(['Name'=>'催单0','Testpaper'=>$value['ID'],'State'=>0]);
+                $alert=0;
+                if($log){
+                    $alert=1;
+                }
                 $item=[
                     "id"=>$value->ID,
                     "name"=>$value->Name,
                     'class'=>$value->Class,
                     'subject'=>$value->Subject,
                     'school'=>$value->School,
-                    'time'=>$this->gettimebefore($value->Uploaddate)
+                    'time'=>$this->gettimebefore($value->Uploaddate),
+                    'alert'=>$alert
                 ];
                 array_push($data,$item);
             }
@@ -333,6 +373,7 @@
                 ]);
                 $testpaper->save();
                 \app\api\controller\Timetable::add('Set');
+                \app\api\controller\Log::set($id,0);
             }
         }
         /**

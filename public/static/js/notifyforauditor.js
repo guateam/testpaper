@@ -25,41 +25,41 @@ $(document).ready(() => {
             }
         }
     })
-    setInterval(() => {
-        $.post('/testpaper/public/index.php/api/log/getalert/id/' + $.cookie('userid')).done((data) => {
-            if (data.status == 1) {
-                data.data.forEach(element => {
-                    $.notify(element.name, {
-                        style: 'alert',
-                        className: element.style,
-                        position: 'right buttom',
-                        showDuration: 600
-                    })
-                });
-            }
-        })
-    }, 20000)
+
+    $.post('/testpaper/public/index.php/api/log/getalert/id/' + $.cookie('userid')).done((data) => {
+        if (data.status == 1) {
+            data.data.forEach(element => {
+                $.notify(element.name, {
+                    style: 'alert',
+                    className: element.style,
+                    position: 'right buttom',
+                    showDuration: 600
+                })
+            });
+        }
+    })
+
 
 })
 
-function confirmpay(id){
+function confirmpay(id) {
     swal("确认", "是否确实收到了该试卷的结算？", 'info', {
         buttons: {
             yes: {
                 text: "是",
                 value: true,
             },
-            cancel:"否"
+            cancel: "否"
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
-    }).then((ok)=>{
-        if(ok){
-            $.post("/testpaper/public/index.php/api/Testpaper/auditorconfirmpaying",{
+    }).then((ok) => {
+        if (ok) {
+            $.post("/testpaper/public/index.php/api/Testpaper/auditorconfirmpaying", {
                 id: id
-            }).done((result)=>{
-                if(result == 1){
-                    swal("完成",'已经确认收款','success').then((ok)=>{
+            }).done((result) => {
+                if (result == 1) {
+                    swal("完成", '已经确认收款', 'success').then((ok) => {
                         location.reload();
                     });
                 }

@@ -54,7 +54,7 @@ $('#add').click(function() {
         titlenum++;
         small_is_add = true;
     } else {
-
+        swal('错误', '大题数量必须大于零', 'error')
     }
     $("input[name='titlename']").val("")
     $("#titletype").val("选择题")
