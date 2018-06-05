@@ -3,10 +3,9 @@ namespace app\auditor\controller;
 use think\Controller;
 use think\Db;
 use \app\api\model\User as UserModel;
-use \app\api\model\Testpaper as PaperModel;
-use \app\api\model\Select as SelectModel;
-use \app\api\model\Fill as FillModel;
-use \app\api\model\Shortanswer as AnswerModel;
+/**
+ * 历史记录详情页
+ */
 class Historypaperdetail extends Controller{
     /**
      * 新的历史记录登录

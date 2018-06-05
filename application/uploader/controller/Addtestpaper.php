@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 录入大题页
+ */
 class Addtestpaper extends Controller{
     public function index($id){
         if(isset($_COOKIE['userid'])){

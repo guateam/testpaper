@@ -2,7 +2,13 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 新建试卷页
+ */
 class Newtestpaper extends Controller{
+    /**
+     * 获取视图
+     */
     public function index(){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
@@ -14,6 +20,9 @@ class Newtestpaper extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
+    /**
+     * 新建试卷
+     */
     public function add($name,$class,$subject,$school,$uploader,$headquestion,$score){
         $user=new \app\api\controller\User();
         $uploaderid=$user->checkuser($uploader);

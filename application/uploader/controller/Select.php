@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 选择题录入页
+ */
 class Select extends Controller{
     public function index($belong,$belongid){
         if(isset($_COOKIE['userid'])){

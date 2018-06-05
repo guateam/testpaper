@@ -2,7 +2,13 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 录入填空题页
+ */
 class Fill extends Controller{
+    /**
+     * 获取视图
+     */
     public function index($belong,$belongid){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
@@ -23,12 +29,17 @@ class Fill extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
-    
+    /**
+     * 添加大题
+     */
     public function add($belong,$belongid,$name,$answer,$score){
         $fill=new \app\api\controller\Fill();
         $fill->add($belong,$belongid,$name,$answer,$score);
         return json(['status'=>1]);
     }
+    /**
+     * 获取当前录入进度
+     */
     public function getprogress($belong,$belongid){
         $fill=new \app\api\controller\Fill();
         return json(\array_merge(['status'=>1], $fill->getprogress($belong,$belongid)));

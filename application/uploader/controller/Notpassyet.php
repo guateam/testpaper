@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 尚未通过试卷页
+ */
 class Notpassyet extends Controller{
     public function index(){
         if(isset($_COOKIE['userid']))

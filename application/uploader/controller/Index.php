@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 录入人主页
+ */
 class Index extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){

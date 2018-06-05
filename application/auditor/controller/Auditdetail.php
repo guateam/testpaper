@@ -2,7 +2,13 @@
 namespace app\auditor\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 审核详情页
+ */
 class Auditdetail extends Controller{
+    /**
+     * 获取视图
+     */
     public function index($id){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
@@ -20,6 +26,9 @@ class Auditdetail extends Controller{
         }
         return $this->error('请先登录','index/index/index');
     }
+    /**
+     * 审核通过
+     */
     public function confirm($id,$auditorid){
         $testpaper=new \app\api\controller\Testpaper();
         $user=new \app\api\controller\User();
@@ -40,6 +49,9 @@ class Auditdetail extends Controller{
         }
         return json(['status'=>0]);
     }
+    /**
+     * 审核不通过
+     */
     public function cancel($id,$auditorid,$note){
         $testpaper=new \app\api\controller\Testpaper();
         $user=new \app\api\controller\User();

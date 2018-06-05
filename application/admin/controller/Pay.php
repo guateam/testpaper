@@ -2,6 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 支付页面
+ */
 class Pay extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){

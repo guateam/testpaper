@@ -2,6 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 账单详情页
+ */
 class Paydetail extends Controller{
     public function index($unpaid_id){
         if(isset($_COOKIE['userid'])){
