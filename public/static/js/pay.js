@@ -1,5 +1,8 @@
-function confirmpayuploader(id,uid){
-    swal("确认", "是否确实收到了该试卷的结算？", 'info', {
+
+
+
+function confirmpayuploader(uid,id){
+    swal("确认", "是否确认结算工资？", 'info', {
         buttons: {
             yes: {
                 text: "是",
@@ -12,7 +15,8 @@ function confirmpayuploader(id,uid){
     }).then((ok)=>{
         if(ok){
             $.post("/testpaper/public/index.php/api/Testpaper/confirmpaying",{
-                id: id
+                id: id.split(','),
+                uid:uid
             }).done((result)=>{
                 if(result == 1){
                     swal("完成",'已经确认收款','success').then((ok)=>{
@@ -24,8 +28,8 @@ function confirmpayuploader(id,uid){
     })
 }
 
-function confirmpayauditor(id,uid){
-    swal("确认", "是否确实收到了该试卷的结算？", 'info', {
+function confirmpayauditor(uid,id){
+    swal("确认", "是否确认结算工资？", 'info', {
         buttons: {
             yes: {
                 text: "是",
@@ -38,7 +42,8 @@ function confirmpayauditor(id,uid){
     }).then((ok)=>{
         if(ok){
             $.post("/testpaper/public/index.php/api/Testpaper/auditorconfirmpaying",{
-                id: id
+                id: id.split(','),
+                uid:uid
             }).done((result)=>{
                 if(result == 1){
                     swal("完成",'已经确认收款','success').then((ok)=>{

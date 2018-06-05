@@ -26,6 +26,16 @@ class Auditdetail extends Controller{
         $userid=$user->checkuser($auditorid);
         if($userid){
             $testpaper->confirm($id,$userid);
+            $paper_price = $testpaper->getprice($id);
+            if($paper_price)
+            {
+                $uploaderid = $testpaper->getuploader($id);
+                //审核者增加未发放工资
+                $user->addunpaid($userid,$paper_price['auditorprice']);
+                //上传者增加未发放工资
+                $user->addunpaid($uploaderid,$paper_price['price']);
+            }
+
             return json(['status'=>1]);
         }
         return json(['status'=>0]);

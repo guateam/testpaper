@@ -123,9 +123,6 @@
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                     查看
                                                 </button>
-                                                {if condition = "$it.isPay == 0"}
-                                                <button value = {$it.id} type = "button" class = "btn btn-warning" id = "pay" onclick = "confirmpay(this.value)">确认收款</button>
-                                                {/if}
                                             </td>
                                         </tr>
                                         {/volist}
