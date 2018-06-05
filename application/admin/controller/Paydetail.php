@@ -12,6 +12,9 @@ class Paydetail extends Controller{
                     $unpaid_c=new \app\api\controller\User();
                     $price = new \app\api\controller\Defaultprice();
                     $unpaiduser=$unpaid_c->getunpaiduser();
+                    //判断目前id是否超过了总数，若是，则到达队列末尾，指针回到第一位
+                    if($unpaid_id >=count($unpaiduser['userinfo']) )$unpaid_id = 0;
+                    //若依然超过总数，则所有人员都已经付款完毕
                     if($unpaid_id >=count($unpaiduser['userinfo']) || $unpaid_id<0 )return $this->error('已无待付款人员','admin/index/index');
                     //未支付的试卷id
                     $paper_id = [];

@@ -129,8 +129,7 @@
         public function addmoney($userid,$amount){
             $user=UserModel::get(['ID'=>$userid]);
             if($user){
-                $user->Wallet+=$amount;
-                $user->Unpaid-=$amount;
+                $user->Wallet-=$amount;
                 $user->save();
                 return 1;
             }else{
@@ -159,7 +158,7 @@
         public function addunpaid($uid,$amount){
             $user = UserModel::get(['ID'=>$uid]);
             if($user){
-                $user->Unpaid+=$amount;
+                $user->Wallet+=$amount;
                 $user->save();
                 return 1; 
             }else{
