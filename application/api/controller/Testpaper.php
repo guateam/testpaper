@@ -6,6 +6,9 @@
      * 
      */
     class Testpaper extends Controller{
+        /**
+         * 新建试卷
+         */
         public function add($name,$class,$subject,$school,$uploader,$headquestion,$score){
             $testpaper=new \app\api\model\Testpaper();
 
@@ -27,6 +30,9 @@
             \app\api\controller\Timetable::add('Newpaper');
             return $testpaper->ID;
         }
+        /**
+         * 获取大题目录
+         */
         public function getheadquestion($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             if($testpaper){
@@ -60,12 +66,18 @@
                 return $data;
             }
         }
+        /**
+         * 获取大题下所有数据
+         */
         public function getQuestionValue($id,$titleid){
             $data1=\app\api\model\Select::all(['Belong'=>$id,'BelongTitle'=>$titleid]);
             $data2=\app\api\model\Fill::all(['Belong'=>$id,'BelongTitle'=>$titleid]);
             $data3=\app\api\model\Shortanswer::all(['Belong'=>$id,'BelongTitle'=>$titleid]);
             return count(array_merge($data1,$data2,$data3));
         }
+        /**
+         * 获取特定大题头信息
+         */
         public function getTitle($id,$belongid){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             if($testpaper){
@@ -76,6 +88,9 @@
                 ];
             }
         }
+        /**
+         * 获取正在录入的试卷
+         */
         public function getworkingtestpaper($userid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>0]);
             $data=[];
@@ -91,6 +106,9 @@
             }
             return $data;
         }
+        /**
+         * 获取等待该审核人审核的试卷
+         */
         public function getwaitingtestpaper($userid){
             $list=\think\Db::query("select * from testpaper where Auditorlist like '%,".$userid.",%'");
             $data=[];
@@ -115,9 +133,15 @@
             }
             return $data;
         }
+        /**
+         * 获取等待该审核人审核的试卷数量
+         */
         public function getwaitingtestpapernumberforauditor($userid){
             return count($this->getwaitingtestpaper($userid));
         }
+        /**
+         * 获取该审核员被催单的试卷数量
+         */
         public function getalertwaitngtestpapernumberforauditor($userid){
             $list=\think\Db::query("select * from testpaper where Auditorlist like '%,".$userid.",%'");
             $alert=0;
@@ -131,9 +155,15 @@
             }
             return $alert;
         }
+        /**
+         * 获取等待管理员分配人员的试卷数量
+         */
         public function getwaitingtestpapernumberforadmin(){
             return count($this->getwaitingauditordata());
         }
+        /**
+         * 获取管理员被催单的试卷数量
+         */
         public function getalertwaitngtestpapernumberforadmin(){
             $list=\app\api\model\Testpaper::all(['State'=>1]);
             $alert=0;
@@ -147,6 +177,9 @@
             }
             return $alert;
         }
+        /**
+         * 获取试卷预览数据
+         */
         public function gettestpaper($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             if($testpaper){
@@ -191,6 +224,9 @@
                 ];
             }
         }
+        /**
+         * 录入完成
+         */
         public function commit($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
@@ -200,19 +236,30 @@
             $testpaper->save();
             \app\api\controller\Timetable::add('Upload');
         }
+        /**
+         * 获取正在录入的试卷数量
+         */
         public function getworkingtestpapernumber($userid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>0]);
             return count($list);
         }
+        /**
+         * 获取等待审核的试卷数量
+         */
         public function getwaitingtestpapernumber($userid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>1]);
             return count($list);
         }
+        /**
+         * 获取被打回的试卷数量
+         */
         public function geterrortestpapernumber($userid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$userid,'State'=>3]);
             return count($list);
         }
-
+        /**
+         * 获取等待审核的试卷信息
+         */
         public function getwaitingpaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>1]);
             $data = [];
@@ -249,6 +296,9 @@
             }
             return $data;
         }
+        /**
+         * 获取审核通过的试卷
+         */
         public function getpasspaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>2]);
             $data = [];
@@ -266,6 +316,9 @@
             }
             return $data;
         }
+        /**
+         * 获取审核通过的试卷（审核人）
+         */
         public function getpasspaperforauditor($auditorid){
             $list=\app\api\model\Testpaper::all(['Auditor'=>$auditorid,"State"=>2]);
             $data = [];
@@ -283,6 +336,9 @@
             }
             return $data;
         }
+        /**
+         * 获取审核通过的试卷（管理员）
+         */
         public function getpasspaperforadmin(){
             $list=\app\api\model\Testpaper::all(["State"=>2]);
             $data = [];
@@ -307,6 +363,9 @@
             }
             return $data;
         }
+        /**
+         * 获取被打回的试卷
+         */
         public function getbackpaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>3]);
             $data = [];
@@ -323,6 +382,9 @@
             }
             return $data;
         }
+        /**
+         * 审核通过
+         */
         public function confirm($id,$auditorid){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $user=new \app\api\controller\User();
@@ -337,6 +399,9 @@
             \app\api\controller\Timetable::add('Access');
             \app\api\controller\Log::set($id,1);
         }
+        /**
+         * 审核不通过
+         */
         public function cancel($id,$auditorid,$note){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
@@ -349,6 +414,9 @@
             \app\api\controller\Timetable::add('Back');
             \app\api\controller\Log::set($id,1);
         }
+        /**
+         * 获取等待分配人员的试卷
+         */
         public function getwaitingauditordata(){
             $testpaper=\app\api\model\Testpaper::all(['Auditorlist'=>'','State'=>1]);
             $data=[];
@@ -371,6 +439,9 @@
             }
             return $data;
         }
+        /**
+         * 分配试卷的审核人
+         */
         public function setauditor($id,$auditorlist){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
             if($testpaper){
@@ -423,6 +494,9 @@
             }
             return 0;
         }
+        /**
+         * 获取试卷录入分值与设定分值的偏差值
+         */
         public function getunexpectscore($id){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
             if($testpaper){
@@ -505,6 +579,9 @@
                 return $durlingtime.'分钟';
             }  
         }
+        /**
+         * 获取所有正在运行的试卷
+         */
         public function getallworkinglist(){
             $list=\app\api\model\Testpaper::all();
             $data=[];
@@ -548,6 +625,9 @@
             }
             return $data;
         }
+        /**
+         * 获取正在运行的试卷比例数据
+         */
         public function getpandata(){
             $working=count(\app\api\model\Testpaper::all(['State'=>0]));
             $waiting1=count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'']));
@@ -555,6 +635,9 @@
             $back=count(\app\api\model\Testpaper::all(['State'=>3]));
             return [['value'=>$working,'name'=>'正在录入'],['value'=>$waiting1,'name'=>'等待分配'],['value'=>$waiting2,'name'=>'等待审核'],['value'=>$back,'name'=>'被打回'],];
         }
+        /**
+         * 获取该上传人的正在运行的试卷信息
+         */
         public function getworkinglist($id){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$id]);
             $data=[];
@@ -598,6 +681,9 @@
             }
             return $data;
         }
+        /**
+         * 获取该上传人正在运行的试卷比例数据
+         */
         public function getpandataforuser($id){
             $working=count(\app\api\model\Testpaper::all(['State'=>0,'Uploader'=>$id]));
             $waiting1=count(\app\api\model\Testpaper::all(['State'=>1,'Auditorlist'=>'','Uploader'=>$id]));
@@ -605,6 +691,9 @@
             $back=count(\app\api\model\Testpaper::all(['State'=>3,'Uploader'=>$id]));
             return [['value'=>$working,'name'=>'正在录入'],['value'=>$waiting1,'name'=>'等待分配'],['value'=>$waiting2,'name'=>'等待审核'],['value'=>$back,'name'=>'被打回'],];
         }
+        /**
+         * 获取该上传人的历史上传效率柱状图
+         */
         public function getlinedataforuser($id){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$id]);
             $x=[];

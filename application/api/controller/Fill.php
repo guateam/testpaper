@@ -7,6 +7,10 @@
      * 
      */
     class Fill extends Controller{
+        /**
+         * 获取进度条
+         * 获取当前大题录入进度
+         */
         public function getprogress($belong,$belongid){
             $list=\app\api\model\Fill::all(['Belong'=>$belong,'BelongTitle'=>$belongid]);
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$belong]);
@@ -14,6 +18,9 @@
             $number=$list1[$belongid-1]->number;
             return ['progress'=>round(((count($list)+1)/$number)*100),'now'=>count($list)+1];
         }
+        /**
+         * 添加填空题
+         */
         public function add($belong,$belongid,$name,$answerlist,$score){
             $fill=new \app\api\model\Fill();
             $fill->data([
@@ -25,6 +32,9 @@
             ]);
             $fill->save();
         }
+        /**
+         * 获取填空题
+         */
         public function getdata($id,$belongid){
             $list=\app\api\model\Fill::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
             $data=[];
@@ -40,6 +50,9 @@
             }
             return $data;
         }
+        /**
+         * 获取修改填空题时需要的信息
+         */
         public function getreloaddata($id){
             $fill=\app\api\model\Fill::get(['ID'=>$id]);
             if($fill){
@@ -63,6 +76,10 @@
                 return $data;
             }
         }
+        /**
+         * 编辑填空题
+         * 根据传入参数更新填空题
+         */
         public function edit($name,$answerlist,$score,$id){
             $fill=\app\api\model\Fill::get(['ID'=>$id]);
             if($fill){

@@ -7,6 +7,10 @@
      * 
      */
     class Select extends Controller{
+        /**
+         * 获取进度条
+         * 获取当前大题录入进度
+         */
         public function getprogress($belong,$belongid){
             $list=\app\api\model\Select::all(['Belong'=>$belong,'BelongTitle'=>$belongid]);
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$belong]);
@@ -14,6 +18,9 @@
             $number=$list1[$belongid-1]->number;
             return ['progress'=>round(((count($list)+1)/$number)*100),'now'=>count($list)+1];
         }
+        /**
+         * 添加填空题
+         */
         public function add($belong,$belongid,$name,$answerlist,$score){
             $select=new \app\api\model\Select();
             $answer=[];
@@ -34,6 +41,9 @@
             ]);
             $select->save();
         }
+        /**
+         * 获取填空题数据
+         */
         public function getdata($id,$belongid){
             $list=\app\api\model\Select::all(['Belong'=>$id,'BelongTitle'=>$belongid]);
             $data=[];
@@ -59,6 +69,9 @@
             }
             return $data;
         }
+        /**
+         * 获取填空题修改时所需题干信息与分数信息
+         */
         public function getreloaddata($id){
             $select=\app\api\model\Select::get(['ID'=>$id]);
             if($select){
@@ -69,6 +82,9 @@
                 return $data;
             }
         }
+        /**
+         * 获取选择题修改时所需选项信息
+         */
         public function getoptiondata($id){
             $select=\app\api\model\Select::get(['ID'=>$id]);
             if($select){
@@ -86,6 +102,9 @@
                 return $list;
             }
         }
+        /**
+         * 根据参数修改选择题
+         */
         public function edit($name,$answerlist,$score,$id){
             $select=\app\api\model\Select::get(['ID'=>$id]);
             $answer=[];

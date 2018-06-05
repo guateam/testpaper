@@ -3,10 +3,13 @@
     use think\Controller;
     use \app\api\model\QQ as QQModel;
     /**
-     * 账户控制类
+     * 时间表控制类
      * 
      */
     class Timetable extends Controller{
+        /**
+         * 使当天特定种类的数据加一
+         */
         public static function add($type){
             $time=\app\api\model\Timetable::get(['Time'=>date('Y-m-d')]);
             if($time){
@@ -37,6 +40,9 @@
                 $time->save();
             }
         }
+        /**
+         * 获取全平台的历史柱状图数据
+         */
         public function getlinedata(){
             $list=\app\api\model\Timetable::all();
             $access=[];
