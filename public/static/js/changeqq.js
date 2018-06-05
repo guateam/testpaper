@@ -32,6 +32,8 @@ $('#pricebutton').on('click', () => {
 
             }
         })
+    } else {
+        swal('错误', '价格必须大于零！', 'error')
     }
 
 });
