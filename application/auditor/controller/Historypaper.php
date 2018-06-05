@@ -3,7 +3,9 @@ namespace app\auditor\controller;
 use think\Controller;
 use think\Db;
 use \app\api\model\User as UserModel;
-use \app\api\model\Testpaper as PaperModel;
+/**
+ * 历史记录页
+ */
 class Historypaper extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){

@@ -15,6 +15,9 @@ function removetitle(number) {
         }
     }
 }
+/**
+ * 检测试卷是否重复
+ */
 $("#new-question").on('click', () => {
     if (check_base_fill() == 1) {
         $.post("/testpaper/public/index.php/uploader/newtestpaper/check_paper_reupload", {
@@ -38,12 +41,18 @@ $("#new-question").on('click', () => {
         swal("错误", "试卷基础信息还未填写完毕，请先填写试卷基础信息", 'error');
     }
 
-})
-
+});
+/**
+ * 退出方法
+ * 弃用
+ */
 $("#quit").on("click", function() {
     $.cookie("userid", "", { expires: -1, path: '/' });
     window.location.href = "/testpaper/public/index.php/index";
 });
+/**
+ * 添加大题方法
+ */
 $('#add').click(function() {
     name = $("input[name='titlename']").val();
     type = $("#titletype").val();
@@ -59,8 +68,10 @@ $('#add').click(function() {
     $("input[name='titlename']").val("")
     $("#titletype").val("选择题")
     $("input[name='titlenumber']").val("")
-})
-
+});
+/**
+ * 新建试卷方法
+ */
 $('#send').click(function() {
         var state = check_all_fill()
         if (state == -1) swal('添加试卷失败', '请添加至少一道大题', 'error');

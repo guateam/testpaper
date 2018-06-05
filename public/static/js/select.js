@@ -1,3 +1,6 @@
+/**
+ * 初始化富文本
+ */
 var titlenum = 1;
 var titlelist = [];
 var E = window.wangEditor
@@ -43,7 +46,10 @@ $text2.val(editor2.txt.html())
     string = string.replace(/\n/g, "<br>")
     return string.replace(/\s/g, '&nbsp;')
 }*/
-
+/**
+ * 移除选项方法
+ * @param {*} number 
+ */
 function removetitle(number) {
     for (i = 0; i < titlelist.length; i++) {
         if (titlelist[i]["ID"] == number) {
@@ -52,11 +58,17 @@ function removetitle(number) {
         }
     }
 }
+/**
+ * 退出方法
+ * 弃用
+ */
 $("#quit").on("click", function() {
     $.cookie("userid", "", { expires: -1, path: '/' });
     window.location.href = "/testpaper/public/index.php/index";
 });
-
+/**
+ * 更新进度条方法
+ */
 function updateprogress() {
     $.get("/testpaper/public/index.php/uploader/select/getprogress", {
         belong: $.cookie('belong'),
@@ -73,8 +85,11 @@ function updateprogress() {
         }
     })
 }
-
+//初始化进度条
 updateprogress();
+/**
+ * 录入选择题
+ */
 $("#next").click(() => {
     $.post('/testpaper/public/index.php/uploader/select/add', {
         belong: $.cookie('belong'),
@@ -95,8 +110,10 @@ $("#next").click(() => {
             titlenum = 1;
         }
     })
-})
-
+});
+/**
+ * 添加选项方法
+ */
 $('#add').click(() => {
     if ($("textarea[name='answer']").val() != '') {
         titlelist.push({ "ID": titlenum, "answer": $("textarea[name='answer']").val(), "type": $("#toggle").bootstrapSwitch('state') });

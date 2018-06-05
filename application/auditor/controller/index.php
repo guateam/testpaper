@@ -2,6 +2,9 @@
 namespace app\auditor\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 审核员主页
+ */
 class Index extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){

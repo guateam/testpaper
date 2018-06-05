@@ -1,3 +1,7 @@
+/**
+ * 催单方法
+ * @param {*} id 
+ */
 function warning(id) {
     $.post('/testpaper/public/index.php/api/log/warningauditor', {
         testpaperid: id,

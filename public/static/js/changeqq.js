@@ -1,4 +1,7 @@
-$("#QQbutton").on('click', function () {
+/**
+ * 修改qq方法
+ */
+$("#QQbutton").on('click', function() {
     if ($("#QQnumber").val() != '') {
         $.post("/testpaper/public/index.php/api/Qq/setQQnumber", {
             qqnumber: $("#QQnumber").val()
@@ -10,17 +13,18 @@ $("#QQbutton").on('click', function () {
             });
         })
     }
-})
-
+});
+/**
+ * 修改价格方法
+ */
 $('#pricebutton').on('click', () => {
     if ($('#uploaderprice').val() != '' && $('#uploaderprice').val() != '') {
         $.post("/testpaper/public/index.php/api/Defaultprice/setdefaultprice", {
             uploaderprice: $('#uploaderprice').val(),
             auditorprice: $('#auditorprice').val()
-        }).done((result)=>{
-            if(result == 1)
-            {
-                swal('成功','已设定新的试卷价格','success').then(()=>{
+        }).done((result) => {
+            if (result == 1) {
+                swal('成功', '已设定新的试卷价格', 'success').then(() => {
                     location.reload();
                 });
 
@@ -28,4 +32,4 @@ $('#pricebutton').on('click', () => {
         })
     }
 
-})
+});

@@ -1,3 +1,4 @@
+//初始化柱状图
 var line = echarts.init(document.getElementById('line'));
 var lineoption = {
     title: {
@@ -45,6 +46,7 @@ var lineoption = {
     }, ]
 };
 line.setOption(lineoption)
+    //初始化饼状图
 var panoption = {
     title: {
         text: '当前正在运行的试卷',
@@ -76,12 +78,14 @@ var panoption = {
     }]
 }
 var pan = echarts.init(document.getElementById('pan'));
-pan.setOption(panoption)
+pan.setOption(panoption);
+//获取柱状图数据
 $.post('/testpaper/public/index.php/admin/workinglist/getlinedataforuser/id/' + $.cookie('id')).done((data) => {
     if (data.status == 1) {
         line.setOption(data.data)
     }
-})
+});
+//获取饼状图数据
 $.post('/testpaper/public/index.php/admin/workinglist/getpandataforuser/id/' + $.cookie('id')).done((data) => {
     if (data.status == 1) {
         pan.setOption({ series: [{ name: '试卷数量', data: data.data }] })

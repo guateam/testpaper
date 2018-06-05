@@ -1,3 +1,6 @@
+/**
+ * 分配审核员方法
+ */
 $('#add').click(() => {
     swal('提示', '是否确认由这些审核人员审核该份试卷？', 'info', {
         buttons: {
@@ -5,7 +8,7 @@ $('#add').click(() => {
                 text: "是",
                 value: true,
             },
-            cancel:'否'
+            cancel: '否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,

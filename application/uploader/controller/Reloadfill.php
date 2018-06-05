@@ -2,7 +2,13 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 编辑选择题页
+ */
 class Reloadfill extends Controller{
+    /**
+     * 获取视图
+     */
     public function index($id){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
@@ -20,6 +26,9 @@ class Reloadfill extends Controller{
         }
         return $this->error('请先登录');
     }
+    /**
+     * 编辑方法
+     */
     public function edit($name,$answer,$score,$id){
         $select=new \app\api\controller\Fill();
         $select->edit($name,$answer,$score,$id);

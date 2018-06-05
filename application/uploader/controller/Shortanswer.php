@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 简答题录入页
+ */
 class Shortanswer extends Controller{
     public function index($belong,$belongid){
         if(isset($_COOKIE['userid'])){

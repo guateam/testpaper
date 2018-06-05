@@ -1,4 +1,7 @@
 $(document).ready(() => {
+    /**
+     * 添加提示信息css样式
+     */
     $.notify.addStyle("alert", {
         html: '<div><strong><span data-notify-text/></strong></div>',
         classes: {
@@ -24,8 +27,10 @@ $(document).ready(() => {
                 "border-color": "#ebccd1"
             }
         }
-    })
-
+    });
+    /**
+     * 显示提示信息
+     */
     $.post('/testpaper/public/index.php/api/log/getalert/id/' + $.cookie('userid')).done((data) => {
         if (data.status == 1) {
             data.data.forEach(element => {
@@ -41,4 +46,3 @@ $(document).ready(() => {
 
 
 })
-

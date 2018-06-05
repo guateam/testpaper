@@ -2,7 +2,13 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 编辑选择题页
+ */
 class Reloadselect extends Controller{
+    /**
+     * 获取视图
+     */
     public function index($id){
         if(isset($_COOKIE['userid'])){
             $user=new \app\api\controller\User();
@@ -20,6 +26,9 @@ class Reloadselect extends Controller{
         }
         return $this->error('请先登录');
     }
+    /**
+     * 获取选项信息
+     */
     public function getoption($id){
         $select=new \app\api\controller\Select();
         $data=$select->getoptiondata($id);
@@ -29,6 +38,9 @@ class Reloadselect extends Controller{
             return json(['status'=>1]);
         }
     }
+    /**
+     * 编辑方法
+     */
     public function edit($name,$answerlist,$score,$id){
         $select=new \app\api\controller\Select();
         $select->edit($name,$answerlist,$score,$id);

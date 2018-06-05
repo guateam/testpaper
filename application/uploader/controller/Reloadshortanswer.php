@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 编辑简答题页
+ */
 class Reloadshortanswer extends Controller{
     public function index($id){
         if(isset($_COOKIE['userid'])){

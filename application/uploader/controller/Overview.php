@@ -2,6 +2,9 @@
 namespace app\uploader\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 试卷预览页
+ */
 class Overview extends Controller{
     /**
      * 新的历史记录登录

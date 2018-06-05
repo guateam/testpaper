@@ -1,3 +1,7 @@
+/**
+ * 审核通过方法
+ * @param {*} id 
+ */
 function confirm(id) {
     swal('提示', '是否确认通过该份试卷？', 'info', {
         buttons: {
@@ -5,7 +9,7 @@ function confirm(id) {
                 text: "是",
                 value: true,
             },
-            cancel:'否'
+            cancel: '否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
@@ -23,7 +27,10 @@ function confirm(id) {
         }
     })
 }
-
+/**
+ * 审核不通过方法
+ * @param {*} id 
+ */
 function cancel(id) {
     swal('提示', '是否确认打回该份试卷？', 'info', {
         buttons: {
@@ -31,7 +38,7 @@ function cancel(id) {
                 text: "是",
                 value: true,
             },
-            cancel:'否'
+            cancel: '否'
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
