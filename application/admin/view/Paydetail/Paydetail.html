@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>管理员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bill/css/htmleaf-demo.css" />
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-8 col-sm-6">
+                <div class="pricingTable {if condition = '$unpaiduser["Type"]==1'}purple{/if} ">
+                    <div class="pricingTable-header">
+                        <h3 class="title">
+                            {if condition = "$unpaiduser['Type']==0"} 上传者 {else /} 审核者 {/if} {$unpaiduser['Username']}
+                        </h3>
+                        <span class="sub-title">需要支付</span>
+                        <span class="year">账单
+                            <br>单位：元</span>
+                    </div>
+                    <div class="price-value">
+                        <div class="value">
+                            <span class="currency">￥</span>
+                            <span class="amount">{$unpaiduser['Unpaid']}
+                                <span></span>
+                            </span>
+                            <span class="month">应付</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-content">
+
+                        <table class="table" id='table'>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        试卷名
+                                    </th>
+                                    <th>
+                                        科目
+                                    </th>
+                                    <th>
+                                        学院
+                                    </th>
+                                    <th>
+                                        学校
+                                    </th>
+                                    <th>
+                                        需要支付
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name = "$unpaiddata" id = "it"}
+                                <tr>
+                                    <td>
+                                        {$it.name}
+                                    </td>
+                                    <td>
+                                        {$it.class}
+                                    </td>
+                                    <td>
+                                        {$it.subject}
+                                    </td>
+                                    <td>
+                                        {$it.school}
+                                    </td>
+                                    <td>
+                                        <b>
+                                            {if condition = "$unpaiduser['Type']==0"} {$it['price']} {else /} {$it['auditorprice']}{/if}
+                                        </b>
+                                        元
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                    </ul>
+                    {if condition = "$unpaiduser['Type']==0"}
+                    <a  class="pricingTable-signup" onclick = "confirmpayuploader('{$unpaiduserid}','{$ids}')">支付</a>
+                    {else /}
+                    <a class="pricingTable-signup" onclick = "confirmpayauditor('{$unpaiduserid}','{$ids}')">支付</a>
+                    {/if}
+                    <a href="/testpaper/public/index.php/admin/pay/index" class="pricingTable-signup">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
+    <script src="__STATIC__/js/quit.js"></script>
+    <script src="__STATIC__/js/pay.js"></script>
+</body>

@@ -130,10 +130,41 @@
             $user=UserModel::get(['ID'=>$userid]);
             if($user){
                 $user->Wallet+=$amount;
+                $user->Unpaid-=$amount;
                 $user->save();
                 return 1;
             }else{
-                return "未知";
+                return 0;
             }
+        }
+        public function getunpaiduser()
+        {
+            $userlist = UserModel::all();
+            $paper_c =new  \app\api\controller\Testpaper();
+            $data = [];
+            $ori = count($userlist);
+            for($i = 0;$i<$ori;$i++)
+            {
+                $paper_info = $paper_c->getunpaidpaper($userlist[$i]->ID);
+                if(count($paper_info) <=0 )
+                {
+                    unset($userlist[$i]);
+                }
+                else array_push($data,$paper_info);
+            }
+            $userlist = array_values($userlist);
+            return ['userinfo'=>$userlist,'datainfo'=>$data];
+        }
+
+        public function addunpaid($uid,$amount){
+            $user = UserModel::get(['ID'=>$uid]);
+            if($user){
+                $user->Unpaid+=$amount;
+                $user->save();
+                return 1; 
+            }else{
+                return 0;
+            }
+
         }
     }

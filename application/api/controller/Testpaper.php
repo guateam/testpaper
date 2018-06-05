@@ -307,6 +307,44 @@
             }
             return $data;
         }
+        public function getunpaidpaper($uid){
+            $user = \app\api\model\User::get(['ID'=>$uid]);
+            $whichpay = '';
+            $whopay = '';
+            if(!$user)return 0;
+            if($user->Type == 0)
+            {
+                $whopay = 'Uploader';
+                $whichpay = "isPay";
+            }
+            else 
+            {
+                $whopay = 'Auditor';
+                $whichpay = 'Auditorispay';
+            }
+            $list=\app\api\model\Testpaper::all([$whopay=>$uid,$whichpay=>0]);
+            $data = [];
+            $user=new \app\api\controller\User();
+            foreach ($list as $value) {
+                $item=[
+                    "id"=>$value->ID,
+                    "name"=>$value->Name,
+                    'class'=>$value->Class,
+                    'subject'=>$value->Subject,
+                    'school'=>$value->School,
+                    'uploader'=>$user->getname($value->Uploader),
+                    'auditor'=>$user->getname($value->Auditor),
+                    'auditorispay'=>$value->Auditorispay,
+                    'auditorprice'=>$value->Auditorprice,
+                    'isPay'=>$value->isPay,
+                    'price'=>$value->Price,
+                    'upid'=>$value->Uploader,
+                    'auid'=>$value->Auditor
+                ];
+                array_push($data,$item);
+            }
+            return $data;
+        }
         public function getbackpaper($upid){
             $list=\app\api\model\Testpaper::all(['Uploader'=>$upid,"State"=>3]);
             $data = [];
@@ -461,31 +499,68 @@
          * uploader确认收款
          */
         public function confirmpaying($uid,$id){
-            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
-            if($testpaper)
-            {
-                $testpaper->isPay = 1;
-                $testpaper->save();
-                $money = new \app\uploader\controller\Historypaper();
-                $money->addmoney($uid,$testpaper->Price);
-                return 1;
+            $success = true;
+            foreach($id as $each){
+                $testpaper=\app\api\model\Testpaper::get(["ID"=>$each]);
+                if($testpaper)
+                {
+                    $testpaper->isPay = 1;
+                    $testpaper->save();
+                    $user_c =new \app\api\controller\User();
+                    $user_c->addmoney($uid,$testpaper->Price);
+                }
+                else{
+                   $success = false; 
+                   break;
+                } 
             }
+            if($success)return 1;
             else return 0;
         }
         /**
          * auditor确认收款
          */
         public function auditorconfirmpaying($uid,$id){
+            $success = true;
+            foreach($id as $each){
+                $testpaper=\app\api\model\Testpaper::get(["ID"=>$each]);
+                if($testpaper)
+                {
+                    $testpaper->Auditorispay = 1;
+                    $testpaper->save();
+                    $user_c =new \app\api\controller\User();
+                    $user_c->addmoney($uid,$testpaper->Auditorprice);
+                }
+                else{
+                    $success = false;
+                    break;
+                }
+            }
+            if($success)return 1;
+            else return 0;
+        }
+        /**
+         * 获取试卷的金额
+         */
+        public function getprice($id){
             $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
             if($testpaper)
             {
-                $testpaper->Auditorispay = 1;
-                $testpaper->save();
-                $money = new \app\uploader\controller\Historypaper();
-                $money->addmoney($testpaper->Auditorprice);
-                return 1;
+                return ['price'=>$testpaper->Price,'auditorprice'=>$testpaper->Auditorprice];
             }
             else return 0;
+        }
+        /**
+         * 获取试卷的上传者id
+         */
+        public function getuploader($id){
+            $testpaper=\app\api\model\Testpaper::get(["ID"=>$id]);
+            if($testpaper)
+            {
+                return $testpaper->Uploader;
+            } else{
+                return 0;
+            }
         }
         /**
          * 内部方法 获取上传时间距离现在过去几分钟

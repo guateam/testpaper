@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>管理员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
+</head>
+
+<body>
+    <div class="container" style="width: 95%">
+        <div class="row">
+            <div class="col-md-12 column">
+                <!--这里是标题部分-->
+                <div class="page-header">
+                    <h1>
+                        管理员
+                        <small>发放工资</small> {include file="../application/common/QQ.html" /}
+                    </h1>
+                </div>
+                <!--这里是导航栏部分-->
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="">
+                            <strong>管理员</strong>
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li id="paper-nav" >
+                                <a  href="/testpaper/public/index.php/admin/index">主页</a>
+                            </li>
+                            <li id="settings-nav" class = 'active'>
+                                <a  href="">发放工资</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="" id="quit">退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--这里时待审核试卷部分-->
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <b>待发工资人员</b>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        待支付人员
+                                    </th>
+                                    <th>
+                                        待支付金额
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name = "$unpaid['userinfo']" id = "it"}
+                                <tr>
+                                    <td>
+                                        {$it.Username}
+                                    </td>
+                                    <td>
+                                        {$it.Unpaid}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-default" href="/testpaper/public/index.php/admin/Paydetail/index/unpaid_id/{$key}">
+                                            <span class="glyphicon glyphicon-pencil"></span> 查看详情
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
+    <script src="__STATIC__/js/quit.js"></script>
+</body>
