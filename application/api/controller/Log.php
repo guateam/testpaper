@@ -49,6 +49,9 @@
             ]);
             $log->save();
         }
+        /**
+         * 生成提醒审核提醒
+         */
         public function warningauditor($testpaperid,$from){
             $user=new User();
             $userid=$user->checkuser($from);
@@ -61,7 +64,7 @@
                         foreach($list as $value){
                             $to.=$value->ID.',';
                         }
-                        $this->add('催单0',$userid,$to,'warning','你有一份试卷被提醒分配！',$testpaperid);
+                        $this->add('催单0',$userid,$to,'warning','有一份试卷被提醒分配审核人！',$testpaperid);
                     }else{
                         $this->add('催单1',$userid,$testpaper->Auditorlist,'warning','你有一份试卷被提醒审核！',$testpaperid);
                     }
@@ -70,6 +73,9 @@
             }
             return json(['status'=>0]);
         }
+        /**
+         * 标记审核提醒为已读
+         */
         public static function set($id,$type=0){
             $log=\app\api\model\Log::get(['Name'=>'催单'.$type,'Testpaper'=>$id,'State'=>0]);
             if($log){

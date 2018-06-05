@@ -7,6 +7,9 @@
      * 
      */
     class User extends Controller{
+        /**
+         * 检查cookie是否有效，返回用户id
+         */
         public function checkuser($cookie){
             $user=\app\api\model\User::get(['Cookie'=>$cookie]);
             if($user){
@@ -76,6 +79,9 @@
                 }else return json(['status'=>0]);
             }else return json(['status'=>-1]);
         }
+        /**
+         * 增加用户审核/上传的试卷数量
+         */
         public function addnum($id){
             $user=UserModel::get(['ID'=>$id]);
             if($user){
@@ -83,6 +89,9 @@
                 $user->save();
             }
         }
+        /**
+         * 获取所有审核员id
+         */
         public function getauditorlist(){
             $list=UserModel::all(["Type"=>1]);
             $data=[];
@@ -97,6 +106,9 @@
             }
             return $data;
         }
+        /**
+         * 获取所有上传人信息
+         */
         public function getuserlist(){
             $list=UserModel::all(["Type"=>0]);
             $data=[];
@@ -118,6 +130,9 @@
             }
             return $data;
         }
+        /**
+         * 获取姓名
+         */
         public function getname($userid){
             $user=UserModel::get(['ID'=>$userid]);
             if($user){
@@ -125,7 +140,9 @@
             }
             return "未知";
         }
-
+        /**
+         * 添加账户余额
+         */
         public function addmoney($userid,$amount){
             $user=UserModel::get(['ID'=>$userid]);
             if($user){
