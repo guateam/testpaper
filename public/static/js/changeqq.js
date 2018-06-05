@@ -18,7 +18,7 @@ $("#QQbutton").on('click', function() {
  * 修改价格方法
  */
 $('#pricebutton').on('click', () => {
-    if ($('#uploaderprice').val() != '' && $('#uploaderprice').val() != '') {
+    if ($('#uploaderprice').val() != '' && $('#uploaderprice').val() != '' && $('#uploaderprice').val() > 0 && $('#uploaderprice').val() > 0) {
         $.post("/testpaper/public/index.php/api/Defaultprice/setdefaultprice", {
             uploaderprice: $('#uploaderprice').val(),
             auditorprice: $('#auditorprice').val()
