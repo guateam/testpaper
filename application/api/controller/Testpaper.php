@@ -580,7 +580,9 @@
                 {
                     $testpaper->isPay = 1;
                     $testpaper->save();
+                    $bill_c = new \app\api\controller\Bill();
                     $user_c =new \app\api\controller\User();
+                    $bill_c->addBill($testpaper->Price,0,$testpaper->ID);
                     $user_c->addmoney($uid,$testpaper->Price);
                 }
                 else{
@@ -603,6 +605,8 @@
                     $testpaper->Auditorispay = 1;
                     $testpaper->save();
                     $user_c =new \app\api\controller\User();
+                    $bill_c = new \app\api\controller\Bill();
+                    $bill_c->addBill($testpaper->Price,1,$testpaper->ID);
                     $user_c->addmoney($uid,$testpaper->Auditorprice);
                 }
                 else{

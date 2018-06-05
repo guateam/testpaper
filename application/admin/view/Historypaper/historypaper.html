@@ -93,18 +93,6 @@
                                                 审核人
                                             </th>
                                             <th>
-                                                上传者应得
-                                            </th>
-                                            <th>
-                                                上传者付款状态
-                                            </th>
-                                            <th>
-                                                审核者应得
-                                            </th>
-                                            <th>
-                                                审核者支付状态
-                                            </th>
-                                            <th>
                                                 操作
                                             </th>
                                         </tr>
@@ -129,18 +117,6 @@
                                             </td>
                                             <td>
                                                 {$it.auditor}
-                                            </td>
-                                            <td>
-                                                {$it.price}元
-                                            </td>
-                                            <td>
-                                                {if condition = "$it.isPay == 0"}待收款{else /}已收款{/if}
-                                            </td>
-                                            <td>
-                                                {$it.auditorprice}元
-                                            </td>
-                                            <td>
-                                                {if condition = "$it.auditorispay == 0"}待收款{else /}已收款{/if}
                                             </td>
                                             <td>
                                                 <a class="btn btn-default" href="/testpaper/public/index.php/admin/historypaperdetail/index/id/{$it.id}">
