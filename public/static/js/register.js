@@ -4,6 +4,7 @@ $(document).ready(function () {
     var username = $("#username");
     var register = $("#register-button");
     var phonenumber = $("#phonenumber");
+    var alipay =  $("#alipay");
     var back = $("#back-button");
     var captcha = false
     jigsaw.init(document.getElementById('captcha'), function () {
@@ -31,6 +32,12 @@ $(document).ready(function () {
                 error_item("form-repassword")
             } else pass_item("form-repassword");
         }
+        if (alipay.val() == '') {
+            swal("错误", "支付宝账号不能为空", "error");
+            error_item("form-alipay")
+        } else {
+            pass_item("form-alipay");
+        }
 
         if (phonenumber.val() == '') {
             swal("错误", "手机号不能为空", "error");
@@ -44,11 +51,12 @@ $(document).ready(function () {
             error_item("form-username");
         } else pass_item("form-username");
 
-        if (captcha && password.val() != '' && username.val() != '' && phonenumber.val() != '' && $("input[name='type']:checked").val() != '') {
+        if (captcha && password.val() != '' && username.val() != '' && alipay.val() != '' && phonenumber.val() != '' && $("input[name='type']:checked").val() != '') {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
                 Password: password.val(),
                 PhoneNumber: phonenumber.val(),
+                Alipay:alipay.val(),
                 Type: $("input[name='type']:checked").val(),
                 Num: 0
             }).done(function (result) {
