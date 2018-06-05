@@ -19,7 +19,7 @@ function commit(id) {
                 text: "是",
                 value: true,
             },
-            cancel:"否"
+            cancel: "否"
         },
         closeOnClickOutside: false,
         closeOnEsc: false,
@@ -28,7 +28,7 @@ function commit(id) {
             $.post('/testpaper/public/index.php/uploader/addtestpaper/commit/id/' + id).done((data) => {
                 if (data.status == 1) {
                     swal('成功', '提交试卷成功，等待审核。', 'success').then((ok) => {
-                        self.location = document.referrer;
+                        window.location = '/testpaper/public/index.php/uploader/index/index'
                     })
                 } else {
                     swal('错误', '提交试卷失败', 'error')
