@@ -2,6 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 分配人员页面
+ */
 class Setauditordetail extends Controller{
     public function index($id){
         if(isset($_COOKIE['userid'])){

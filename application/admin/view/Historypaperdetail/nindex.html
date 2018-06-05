@@ -81,6 +81,7 @@
                         </h4>
                     </div>
                     {volist name = "data.children" id = "vo" key='key'} {switch name ="vo.type"} {case value = "选择题"}
+                    <!--选择题-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <span style="font-size: 30px">{$key}.</span>
@@ -102,6 +103,7 @@
                         </div>
                     </div>
                     {/case} {case value = "填空题"}
+                    <!--填空题-->
                     <div class="panel panel-default">
                         <div class='panel-heading'>
                             <span style="font-size: 30px">{$key+1}.</span>
@@ -120,6 +122,7 @@
                         </div>
                     </div>
                     {/case} {case value = "简答题"}
+                    <!--简答题-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <span style="font-size: 30px">{$key}.</span>

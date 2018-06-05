@@ -2,6 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 use \app\api\model\User as UserModel;
+/**
+ * 人员管理页面
+ */
 class Userlist extends Controller{
     public function index(){
         if(isset($_COOKIE['userid'])){
