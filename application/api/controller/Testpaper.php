@@ -378,7 +378,7 @@
                 $whopay = 'Auditor';
                 $whichpay = 'Auditorispay';
             }
-            $list=\app\api\model\Testpaper::all([$whopay=>$uid,$whichpay=>0]);
+            $list=\app\api\model\Testpaper::all([$whopay=>$uid,$whichpay=>0,'State'=>2]);
             $data = [];
             $user=new \app\api\controller\User();
             foreach ($list as $value) {
