@@ -2,7 +2,7 @@
  * 修改qq方法
  */
 $("#QQbutton").on('click', function() {
-    if ($("#QQnumber").val() != '') {
+    if ($("#QQnumber").val() != '' && $("#QQnumber").val() == $("#QQnumber1").val()) {
         $.post("/testpaper/public/index.php/api/Qq/setQQnumber", {
             qqnumber: $("#QQnumber").val()
         }).done((result) => {
@@ -12,6 +12,8 @@ $("#QQbutton").on('click', function() {
                 }
             });
         })
+    } else {
+        swal('错误', '请确认两次输入无误！', 'error')
     }
 });
 /**
