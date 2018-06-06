@@ -230,7 +230,7 @@
         public function commit($id){
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
-                'Uploaddate'=>date('Y-m-d H:s'),
+                'Uploaddate'=>date('Y-m-d H:i'),
                 'State'=>1
             ]);
             $testpaper->save();
@@ -392,6 +392,7 @@
                     'auditor'=>$user->getname($value->Auditor),
                     'auditorispay'=>$value->Auditorispay,
                     'auditorprice'=>$value->Auditorprice,
+                    'audittime'=>$value->Audittime,
                     'isPay'=>$value->isPay,
                     'price'=>$value->Price,
                     'upid'=>$value->Uploader,
@@ -430,7 +431,7 @@
             $user->addnum($auditorid);
             $testpaper->data([
                 'Auditor'=>$auditorid,
-                'Audittime'=>date('Y-m-d H:s'),
+                'Audittime'=>date('Y-m-d H:i'),
                 'State'=>2
             ]);
             $testpaper->save();
@@ -444,7 +445,7 @@
             $testpaper=\app\api\model\Testpaper::get(['ID'=>$id]);
             $testpaper->data([
                 'Auditor'=>$auditorid,
-                'Audittime'=>date('Y-m-d H:s'),
+                'Audittime'=>date('Y-m-d H:i'),
                 'State'=>3,
                 'Note'=>$note
             ]);

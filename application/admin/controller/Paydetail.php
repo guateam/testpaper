@@ -23,9 +23,15 @@ class Paydetail extends Controller{
                     $paper_id = [];
                     //待支付的用户id
                     $user_id = $unpaiduser['userinfo'][$unpaid_id]['ID'];
-
+                    //总价
+                    $total_price = 0;
                     foreach( $unpaiduser['datainfo'][$unpaid_id] as $each){
                         array_push($paper_id,$each['id']);
+                        if($unpaiduser['userinfo'][$unpaid_id]['Type']==0)
+                        {
+                            $total_price+=$each['price'];
+                        }
+                        else  $total_price+=$each['auditorprice'];
                     }
                     $this->assign('unpaiduser',$unpaiduser['userinfo'][$unpaid_id]);
                     $this->assign('unpaiduserid',$user_id);
@@ -33,6 +39,7 @@ class Paydetail extends Controller{
                     $paper_id = implode(',',$paper_id);
                     $this->assign('ids',$paper_id);
                     $this->assign("user",$data);
+                    $this->assign("total",$total_price);
                     return $this->fetch('paydetail');
                 }
             }

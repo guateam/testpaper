@@ -67,8 +67,9 @@
                                         <th>学校</th>
                                         <th>支付金额</th>
                                         <th>支付时间</th>
-                                        <th>支付对象用户名</th>
-                                        <th>支付对象手机号</th>
+                                        <th>对象支付宝账号</th>
+                                        <th>对象用户名</th>
+                                        <th>对象手机号</th>
                                         <th>对象身份</th>
                                     </tr>
                                 </thead>
@@ -81,6 +82,7 @@
                                         <td>{$vo.PaperSchool}</td>
                                         <td>{$vo.PayValue}元</td>
                                         <td>{$vo.PayTime}</td>
+                                        <td>{$vo.PayTargetAlipay}</td>
                                         <td>{$vo.PayTargetName}</td>
                                         <td>{$vo.PayTargetPhoneNumber}</td>
                                         <td>

@@ -35,6 +35,7 @@
                     $bill->PayTargetID = $paper->Auditor;
                 }
                 $target =\app\api\Model\User::get(['ID'=> $bill->PayTargetID]);
+                $bill->PayTargetAlipay = $target->Alipay;
                 $bill->PayTargetName = $target->Username;
                 $bill->PayTargetPhoneNumber = $target->PhoneNumber;
                 $bill->save();

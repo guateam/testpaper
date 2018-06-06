@@ -147,6 +147,7 @@
             $user=UserModel::get(['ID'=>$userid]);
             if($user){
                 $user->Wallet-=$amount;
+                if($user->Wallet <0)$user->Wallet = 0;
                 $user->save();
                 return 1;
             }else{

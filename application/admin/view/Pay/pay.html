@@ -65,7 +65,13 @@
                                         待支付人员
                                     </th>
                                     <th>
+                                        身份
+                                    </th>
+                                    <th>
                                         待支付金额
+                                    </th>
+                                    <th>
+                                        欠款时间
                                     </th>
                                     <th>
                                         操作
@@ -79,7 +85,13 @@
                                         {$it.Username}
                                     </td>
                                     <td>
-                                        {$it.Wallet}
+                                        {if condition = "$it.Type == 0 "}录入人{else /}审核人{/if}
+                                    </td>
+                                    <td>
+                                        {$total[$key]}元
+                                    </td>
+                                    <td>
+                                        {$time[$key]}天
                                     </td>
                                     <td>
                                         <a class="btn btn-default" href="/testpaper/public/index.php/admin/Paydetail/index/unpaid_id/{$key}">

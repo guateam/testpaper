@@ -45,7 +45,7 @@
                 'Note'=>$note,
                 'State'=>0,
                 'Testpaper'=>$testpaper,
-                'Date'=>date('Y-m-d H:s')
+                'Date'=>date('Y-m-d H:i')
             ]);
             $log->save();
         }
