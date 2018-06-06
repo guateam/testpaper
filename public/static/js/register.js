@@ -21,9 +21,12 @@ $(document).ready(function () {
             error_item("form-type");
         } else pass_item("form-type");
 
-
+ 
         if (password.val() == '') {
             swal("错误", "密码不能为空", "error");
+            error_item("form-password");
+        }else if(password.val().length <6){
+            swal("错误", "密码需要大于6位", "error");
             error_item("form-password");
         } else {
             pass_item("form-password");
