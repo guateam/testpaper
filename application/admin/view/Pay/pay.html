@@ -7,6 +7,8 @@
     <title>管理员</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/DataTables/datatables.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/DataTables/dataTables.bootstrap.css" />
     <!--<link rel="stylesheet" type="text/css" media="screen" href="__STATIC__/vendor/bootstrap/css/bootstrap-theme.min.css" />-->
 </head>
 
@@ -110,6 +112,36 @@
     <script src="__STATIC__/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="__STATIC__/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="__STATIC__/vendor/jquery-cookie/jquery.cookie.js"></script>
+    <script src="__STATIC__/vendor/DataTables/datatables.js"></script>
+    <script src="__STATIC__/vendor/DataTables/dataTables.bootstrap.js"></script>
     <script src="__STATIC__/vendor/sweetalert/sweetalert.js"></script>
     <script src="__STATIC__/js/quit.js"></script>
+    <script>
+        $('.table').dataTable({
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        })
+    </script>
 </body>
