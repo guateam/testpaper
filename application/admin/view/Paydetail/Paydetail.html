@@ -34,7 +34,6 @@
                         </div>
                     </div>
                     <ul class="pricing-content">
-
                         <table class="table" id='table'>
                             <thead>
                                 <tr>
@@ -80,6 +79,7 @@
                                 {/volist}
                             </tbody>
                         </table>
+                        <li><b>您将支付到对方的支付宝账号:{$unpaiduser['Alipay']}</b></li>
                     </ul>
                     {if condition = "$unpaiduser['Type']==0"}
                     <a  class="pricingTable-signup" onclick = "confirmpayuploader('{$unpaiduserid}','{$ids}')">支付</a>

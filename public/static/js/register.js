@@ -7,37 +7,44 @@ $(document).ready(function () {
     var alipay =  $("#alipay");
     var back = $("#back-button");
     var captcha = false
+    var pass = true;
     jigsaw.init(document.getElementById('captcha'), function () {
         captcha = true
     })
     register.on("click", function () {
-
+        pass = true;
         if (!captcha) {
             swal('错误', '请先完成验证识别', 'error');
+            pass = false;
         }
 
         if ($("input:radio[name='type']:checked").val() == null) {
             swal("错误", "请选择注册的身份", "error");
             error_item("form-type");
+            pass = false;
         } else pass_item("form-type");
 
  
         if (password.val() == '') {
             swal("错误", "密码不能为空", "error");
             error_item("form-password");
+            pass = false;
         }else if(password.val().length <6){
             swal("错误", "密码需要大于6位", "error");
             error_item("form-password");
+            pass = false;
         } else {
             pass_item("form-password");
             if (repassword.val() != password.val()) {
                 swal("错误", "两次输入的密码不一致", "error");
                 error_item("form-repassword")
+                pass = false;
             } else pass_item("form-repassword");
         }
         if (alipay.val() == '') {
             swal("错误", "支付宝账号不能为空", "error");
             error_item("form-alipay")
+            pass = false;
         } else {
             pass_item("form-alipay");
         }
@@ -45,6 +52,7 @@ $(document).ready(function () {
         if (phonenumber.val() == '') {
             swal("错误", "手机号不能为空", "error");
             error_item("form-phonenumber")
+            pass = false;
         } else {
             pass_item("form-phonenumber");
         }
@@ -52,9 +60,10 @@ $(document).ready(function () {
         if (username.val() == '') {
             swal("错误", "用户名不能为空", "error");
             error_item("form-username");
+            pass = false;
         } else pass_item("form-username");
 
-        if (captcha && password.val() != '' && username.val() != '' && alipay.val() != '' && phonenumber.val() != '' && $("input[name='type']:checked").val() != '') {
+        if (pass && $("input[name='type']:checked").val() != '') {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
                 Password: password.val(),
