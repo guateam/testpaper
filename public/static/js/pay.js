@@ -46,8 +46,8 @@ function confirmpayauditor(uid,id){
                 uid:uid
             }).done((result)=>{
                 if(result == 1){
-                    swal("完成",'已经确认收款','success').then((ok)=>{
-                        window.location.href = "/testpaper/public/index.php/admin/Pay/index";
+                    swal("完成",'已经确认收款','success').then((re)=>{
+                        if(re)window.location.href = "/testpaper/public/index.php/admin/Pay/index";
                     });
                 }
             })

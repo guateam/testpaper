@@ -63,7 +63,7 @@ $(document).ready(function () {
             pass = false;
         } else pass_item("form-username");
 
-        if (pass && $("input[name='type']:checked").val() != '') {
+        if (captcha && pass && $("input[name='type']:checked").val() != '') {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
                 Password: password.val(),
