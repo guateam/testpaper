@@ -66,7 +66,7 @@
         }
 
         /**
-         * 登陆方法
+         * 登录方法
          */
         public function login(){
             $name = $_POST['Username'];
