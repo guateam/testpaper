@@ -149,7 +149,10 @@ $(document).ready(function () {
                 Num: 0
             }).done(function (result) {
                 if (result.status == 1) {
-                    swal("成功", "注册成功!", "success").then((ok) => {
+                    swal("成功", "注册成功!", "success",{
+                        closeOnClickOutside: false,
+                        closeOnEsc: false,
+                    }).then((ok) => {
                         if (ok) {
                             window.location.href = "/testpaper/public/index.php/index/Index/index";
                         }
