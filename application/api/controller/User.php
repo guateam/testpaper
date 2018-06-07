@@ -107,6 +107,26 @@
             return $data;
         }
         /**
+         * 验证该用户名是否重复
+         */
+        public function checkrepeatname($new_name){
+            $list = UserModel::all();
+            foreach($list as $each){
+                if($each->Username == $new_name)return false;
+            }
+            return true;
+        }
+        /**
+         * 验证该手机号是否重复
+         */
+        public function checkrepeatphone($new_phone){
+            $list = UserModel::all();
+            foreach($list as $each){
+                if($each->PhoneNumber == $new_phone)return false;
+            }
+            return true;
+        }
+        /**
          * 获取所有上传人信息
          */
         public function getuserlist(){
