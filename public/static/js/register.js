@@ -1,3 +1,7 @@
+    var captcha = false
+    var username_pass = false, password_pass = false, repassword_pass = false;
+    var alipay_pass = false , phone_pass = false, radio_pass = false ;
+
 $(document).ready(function () {
     var password = $("#password");
     var repassword = $("#repassword");
@@ -6,64 +10,119 @@ $(document).ready(function () {
     var phonenumber = $("#phonenumber");
     var alipay =  $("#alipay");
     var back = $("#back-button");
-    var captcha = false
-    var pass = true;
     jigsaw.init(document.getElementById('captcha'), function () {
         captcha = true
     })
+    alipay.on("change",function(){
+        if(alipay.val().length<=0){
+            error_item("form-alipay");
+            $("#error-alipay").html("支付宝账号不能为空");
+            alipay_pass = false;
+        }else{
+            alipay_pass = true;
+            $("#error-alipay").html("");
+            pass_item("form-alipay");
+        }
+    })
+    password.on("change",function(){
+        if(password.val().length<6)
+        {
+            error_item("form-password");
+            $("#error-password").html("密码长度不能小于6位");
+            password_pass = false;
+        }else{
+            pass_item("form-password");
+            $("#error-password").html("");
+            password_pass = true;
+        }
+    })
+
+    repassword.on("change",function(){
+        if(repassword.val() != password.val())
+        {
+            error_item("form-repassword");
+            $("#error-repassword").html("两次输入的密码不一致");
+            repassword_pass = false;
+        }else{
+            pass_item("form-repassword");
+            $("#error-repassword").html("");
+            repassword_pass = true;
+        }
+    })
+    
+    username.on("change",function(){
+        $.post("/testpaper/public/index.php/api/user/checkrepeatname",{
+            new_name:username.val()
+        }).done((result)=>{
+            if(result == false)
+            {
+                error_item("form-username");
+                $("#error-username").html("用户名已重复");
+                username_pass = false;
+            }else{
+                pass_item("form-username");
+                $("#error-username").html("");
+                username_pass = true;
+            }
+        })
+    })
+
+    phonenumber.on("change",function(){
+        $.post("/testpaper/public/index.php/api/user/checkrepeatphone",{
+            new_phone:phonenumber.val()
+        }).done((result)=>{
+            if(result == false)
+            {
+                error_item("form-phonenumber");
+                $("#error-phonenumber").html("手机号已重复");
+                phone_pass = false;
+            }else{
+                pass_item("form-phonenumber");
+                $("#error-phonenumber").html("");
+                phone_pass = true;
+            }
+        })
+    })
+
     register.on("click", function () {
-        pass = true;
         if (!captcha) {
             swal('错误', '请先完成验证识别', 'error');
-            pass = false;
         }
 
         if ($("input:radio[name='type']:checked").val() == null) {
             swal("错误", "请选择注册的身份", "error");
             error_item("form-type");
-            pass = false;
-        } else pass_item("form-type");
+            radio_pass = false;
+        } else{
+            pass_item("form-type");
+            radio_pass = true;
+        } 
 
  
         if (password.val() == '') {
             swal("错误", "密码不能为空", "error");
             error_item("form-password");
-            pass = false;
-        }else if(password.val().length <6){
-            swal("错误", "密码需要大于6位", "error");
-            error_item("form-password");
-            pass = false;
-        } else {
-            pass_item("form-password");
-            if (repassword.val() != password.val()) {
-                swal("错误", "两次输入的密码不一致", "error");
-                error_item("form-repassword")
-                pass = false;
-            } else pass_item("form-repassword");
-        }
+            password_pass = false;
+        } 
         if (alipay.val() == '') {
             swal("错误", "支付宝账号不能为空", "error");
             error_item("form-alipay")
-            pass = false;
-        } else {
-            pass_item("form-alipay");
-        }
+            alipay_pass = false;
+        }  
 
         if (phonenumber.val() == '') {
             swal("错误", "手机号不能为空", "error");
             error_item("form-phonenumber")
-            pass = false;
-        } else {
-            pass_item("form-phonenumber");
-        }
+            phone_pass = false;
+        } 
         
         if (username.val() == '') {
             swal("错误", "用户名不能为空", "error");
             error_item("form-username");
-            pass = false;
-        } else pass_item("form-username");
+            username_pass = false;
+        }
 
-        if (captcha && pass && $("input[name='type']:checked").val() != '') {
+        if (isPass()) {
             $.post("/testpaper/public/index.php/api/user/register", {
                 Username: username.val(),
                 Password: password.val(),
@@ -90,7 +149,10 @@ $(document).ready(function () {
         window.location.href = "/testpaper/public/index.php/index/Index/index";
     })
 });
-
+function isPass(){
+    if(username_pass && password_pass && repassword_pass && alipay_pass && phone_pass && radio_pass && captcha)return true;
+    else return false;
+}
 function error_item(str) {
     $("#" + str).addClass("has-error");
 }
