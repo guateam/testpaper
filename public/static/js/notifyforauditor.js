@@ -37,7 +37,7 @@ $(document).ready(() => {
                 $.notify(element.name, {
                     style: 'alert',
                     className: element.style,
-                    position: 'right top',
+                    position: 'top center',
                     showDuration: 600
                 })
             });
